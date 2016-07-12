@@ -17,7 +17,7 @@ $.getJSON('http://139.224.73.50/api/user/0/measures', function(data) {
                             '<td class="text-center text-danger"><h4><strong>{0}</strong></h4></td>'+
                         '</tr>'+
                     '</tbody>'+
-                '</table>';
+                '</table></div>';
     var mycontent = startcontent.replace('{0}',children[0]);
 
     var results = $.parseJSON(data);
@@ -42,7 +42,7 @@ $.getJSON('http://139.224.73.50/api/user/0/measures', function(data) {
                                 '<td class="col-md-3 text-center">'+results[key]["whicheye"] + '</td>' +
                                 '<td class="col-md-3 text-center">'+ results[key]["createdate"] + '</td></tr>'
     }
-    mycontent +=    endcontent.replace('{0}','右眼视力比较稳定') + '</div>';
+    mycontent +=    endcontent.replace('{0}','右眼视力比较稳定') ;
 
     document.getElementById("patientDiv").innerHTML = mycontent;   
 
