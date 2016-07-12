@@ -4,11 +4,27 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
-
 from flask_restful import Api
-
 from flask_restful import Resource, reqparse, abort
 import json
+import sys
+import os
+import site
+
+# if is on ecs server 
+if sys.platform == 'linux':
+    # Add the site-packages of the chosen virtualenv to work with
+    site.addsitedir('/var/www/env1/lib/python3.4/site-packages')
+    # Activate your virtual env
+    activate_env=os.path.expanduser("/var/www/env1/bin/activate_this.py")
+    # execfile(activate_env, dict(__file__=activate_env))
+    # exec(compile(open(activate_env, "r").read(), activate_env, 'exec'), dict(__file__=activate_env))
+    with open(activate_env) as f:
+        code = compile(f.read(), activate_env, 'exec')
+        exec(code, dict(__file__=activate_env))
+
+#----------------------
+
 
 app = Flask(__name__)
 
