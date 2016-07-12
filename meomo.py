@@ -106,7 +106,7 @@ def login():
     password = request.form.get("password")
     print('#',email,password)
 
-    if  email  and  password and (email == "abel") :
+    if  email  and  password:
         return redirect(url_for('measure'))
     return home()
 
