@@ -1,3 +1,4 @@
+create database meomo;
 use meomo;
 
 CREATE TABLE IF NOT EXISTS meomo.Measure (
