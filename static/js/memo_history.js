@@ -13,7 +13,7 @@ $.getJSON('http://139.224.73.50/api/user/0/measures', function(data) {
                         '</tr></thead>'+
                    '<tbody>' ;
     var endcontent = '<tr><td></td>'+                          
-                            '<td class="text-right"><h4><strong>综合: </strong></h4></td>' +
+                            '<td class="text-right"><h4><strong>综合:</strong></h4></td>' +
                             '<td class="text-center text-danger"><h4><strong>{0}</strong></h4></td>'+
                         '</tr>'+
                     '</tbody>'+
