@@ -1,5 +1,5 @@
 
-$.getJSON('http://139.224.73.50:5000/api/user/0/measures', function(data) {
+$.getJSON('http://139.224.73.50/api/user/0/measures', function(data) {
     children = ['梦遥','冬冬']
     //data is the JSON string
     var startcontent =  '<div class="row">' +
