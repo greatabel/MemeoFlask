@@ -239,9 +239,6 @@ function ol() {
 //   console.log('start');
 // });
 
-
-
-
 };
 
 //------------------------
@@ -251,11 +248,31 @@ var temp = 0;
             document.addEventListener('touchmove', handleTouchMove, false);
 
             var xDown = null;                                                        
-            var yDown = null;                                                        
+            var yDown = null;   
+
+            var clickTimer = null;                                                     
 
             function handleTouchStart(evt) {                                         
                 xDown = evt.touches[0].clientX;                                      
-                yDown = evt.touches[0].clientY;                                      
+                yDown = evt.touches[0].clientY;   
+
+                if (clickTimer == null) {
+                    clickTimer = setTimeout(function () {
+                        clickTimer = null;
+                        // alert("single");
+
+                    }, 300)
+                } else {
+                    clearTimeout(clickTimer);
+                    clickTimer = null;
+                    // alert("double"+ evt.touches.length);
+                    if(evt.touches.length == 1 ) {
+                      var e = document.getElementById('resultDiv');
+                      e.style.display = 'block';
+                    }
+
+                }
+
             };                                                
 
             function handleTouchMove(evt) {
@@ -271,6 +288,11 @@ var temp = 0;
                   update(touches)
                   drawScreen()
                 }
+
+               if(evt.touches.length == 1 ) {
+                var e = document.getElementById('resultDiv');
+                e.style.display = 'none';
+              }
                 // document.getElementById("content").innerHTML = 'len:'+touches.length + '|'+xDown +'|'+ yDown;
                 // alert('in handleTouchMove')
                 if ( ! xDown || ! yDown ) {
@@ -308,3 +330,7 @@ var temp = 0;
                 xDown = null;
                 yDown = null;                                             
             };
+
+function saveMeasure() {
+  alert('保存数据成功！')
+}
