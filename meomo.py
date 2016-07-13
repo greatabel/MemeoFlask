@@ -11,6 +11,7 @@ import json
 import sys
 import os
 import site
+import datetime
 
 # if is on ecs server 
 if sys.platform == 'linux':
@@ -145,7 +146,14 @@ def register():
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    email = get_value_with_fallback("email")
+    password = get_value_with_fallback("password")
+    if  email  and  password:
+        return redirect(url_for('measure'))
+    # save cookies and return template
+    response = make_response(render_template("home.html", email=email,
+                                             password=password))
+    return response
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
