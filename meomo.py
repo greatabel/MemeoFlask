@@ -155,6 +155,9 @@ def home():
     password = get_value_with_fallback("password")
     if  email  and  password:
         return redirect(url_for('measure'))
+    expires = datetime.datetime.now() + datetime.timedelta(days=365)
+    response.set_cookie("email", email, expires=expires)
+    response.set_cookie("password", password, expires=expires)
     # save cookies and return template
     response = make_response(render_template("home.html", email=email,
                                              password=password))
