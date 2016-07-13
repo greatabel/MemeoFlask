@@ -42,7 +42,7 @@ var previous_touches = [];
 
    
       // context.drawImage(tileSheet, 0, 0,32,32,50,50,32,32);
-    ctx.drawImage(tileSheetL, centerX-31, yA - 60);
+    ctx.drawImage(tileSheetL, centerX-26, yA - 50);
     ctx.drawImage(tileSheetR, centerX+3, yB);
     // // ctx.drawImage(tileSheet, 0, 0,32,32,centerX-64,centerY-64,32,32);
     // // ctx.drawImage(tileSheet, 0, 0,32,32,centerX+32,centerY+32,32,32);
