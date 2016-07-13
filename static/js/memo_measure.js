@@ -131,7 +131,7 @@ var cx = document.querySelector("canvas").getContext("2d");
       centerX = centerX/3;
       centerY = centerY/3;
     }
-    cx.strokeStyle = "rgba(255,0,255,0.3)";
+    cx.strokeStyle = "rgba(255, 0, 0, 1)";
     cx.stroke();
 
     
