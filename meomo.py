@@ -2,6 +2,7 @@ from dbhelper import DBHelper
 from flask import Flask
 from flask import redirect
 from flask import render_template
+from flask import make_response
 from flask import request
 from flask import url_for
 from flask_restful import Api
@@ -37,6 +38,8 @@ Userids = {
     1,
     2
 }
+
+
 
 def abort_if_todo_doesnt_exist(userid):
     if userid not in Userids:
@@ -100,12 +103,17 @@ def clear():
     return home()
 
 # --------------website-----------------
+def get_value_with_fallback(key):
+    if request.args.get(key):
+        return request.args.get(key)
+    if request.cookies.get(key):
+        return request.cookies.get(key)
+    return DEFAULTS[key]
+
 @app.route("/login", methods=["POST"])
 def login():
-    email = request.form.get("email")
-    password = request.form.get("password")
-    print('#',email,password)
-
+    email = get_value_with_fallback("email")
+    password = get_value_with_fallback("password")
     if  email  and  password:
         return redirect(url_for('measure'))
     return home()
