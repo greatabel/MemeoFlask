@@ -128,8 +128,8 @@ var cx = document.querySelector("canvas").getContext("2d");
     if (len > 0) {
       // cx.moveTo(touches[0].pageX, touches[0].pageY);
       cx.lineTo(touches[0].pageX, touches[0].pageY);
-      centerX = centerX/window.devicePixelRatio;
-      centerY = centerY/window.devicePixelRatio;
+      centerX = centerX/3;
+      centerY = centerY/3;
     }
     cx.strokeStyle = "rgba(255,0,255,0.3)";
     cx.stroke();
