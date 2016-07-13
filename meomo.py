@@ -104,6 +104,11 @@ def clear():
     return home()
 
 # --------------website-----------------
+
+DEFAULTS = {'email': 'abel',
+            'password': 'test1024'
+            }
+
 def get_value_with_fallback(key):
     if request.args.get(key):
         return request.args.get(key)
