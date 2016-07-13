@@ -287,13 +287,13 @@ var temp = 0;
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1
-                        document.getElementById("content").innerHTML = "move:" + temp;
+                        document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
                         moveTop();
 
                     } else { 
                         /* down swipe */
                         temp -= 1
-                        document.getElementById("content").innerHTML = "move:" + temp;
+                        document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
                         moveDown();
 
                     }                                                                 
