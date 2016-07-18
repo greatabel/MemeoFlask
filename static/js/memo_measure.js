@@ -9,6 +9,7 @@ var updateStarted = false;
 var touches = [];
 var previous_touches = [];
 
+var threecount = 0;
 var previous_Y_bound = 0;
 // whether to decting 3 touches to refresh UI
 var isDetecting = true;
