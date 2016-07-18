@@ -1,3 +1,4 @@
+
 var canvas;
 var ctx;
 // var tileSheet;
@@ -7,8 +8,12 @@ var timer;
 var updateStarted = false;
 var touches = [];
 var previous_touches = [];
-  var centerX = 0;
-  var centerY = 0;
+
+var previous_Y_bound = 0;
+// whether to decting 3 touches to refresh UI
+var isDetecting = true;
+var centerX = 0;
+var centerY = 0;
 
    
     // var x=50;
@@ -149,7 +154,7 @@ var cx = document.querySelector("canvas").getContext("2d");
     var c = Math.sqrt(((x1-x3) * (x1-x3)) + ((y1-y3) * (y1-y3)));
 
     var r =   Math.sqrt(3) * (a + b + c) / 9;
-
+    previous_Y_bound = centerY + r;
 
     // draw center 
     ctx.fillRect(centerX, centerY, 2,2);
@@ -221,8 +226,8 @@ function ol() {
   ctx = canvas.getContext('2d');
        // tileSheet=new Image();
        //   tileSheet.src="ships.png";
-         tileSheetL = document.getElementById('left_img');
-         tileSheetR = document.getElementById('right_img');
+   tileSheetL = document.getElementById('left_img');
+   tileSheetR = document.getElementById('right_img');
   update(touches);
   // timer = setInterval(update, 200);
   // var timer1 = setInterval(drawScreen, 200);
@@ -243,18 +248,34 @@ function ol() {
 
 //------------------------
 var temp = 0;
+function myfilter(evt) {
+  var filteredTouches = [];
 
+  for (var i = 0; i < evt.touches.length ; i++) {
+    if ( evt.touches[i].clientY >= previous_Y_bound) {
+        filteredTouches.push(evt.touches[i]);
+    }
+  }
+  return filteredTouches;
+}
+  
             document.addEventListener('touchstart', handleTouchStart, false);        
             document.addEventListener('touchmove', handleTouchMove, false);
 
             var xDown = null;                                                        
             var yDown = null;   
 
-            var clickTimer = null;                                                     
+            var clickTimer = null;            
+            var moveTimer = null;                                         
 
             function handleTouchStart(evt) {                                         
+                if (!isDetecting) {
+                xDown = myfilter(evt)[0].clientX;
+                yDown = myfilter(evt)[0].clientY;
+                } else {
                 xDown = evt.touches[0].clientX;                                      
-                yDown = evt.touches[0].clientY;   
+                yDown = evt.touches[0].clientY;
+                }  
 
                 if (clickTimer == null) {
                     clickTimer = setTimeout(function () {
@@ -280,13 +301,33 @@ var temp = 0;
                 evt.preventDefault();
 
                 touches = evt.touches;
-                if(touches.length == 3) {
-                  temp = 0;
-                  previous_touches = touches
-                  yA = centerY;
-                  yB = centerY;
-                  update(touches)
-                  drawScreen()
+                if(isDetecting && evt.touches.length == 3) {
+                   threecount += 1;
+                  document.getElementById("content").innerHTML = "threecount:"+threecount+"isDetecting:"+isDetecting;
+
+
+
+
+                if (moveTimer == null) {
+                      moveTimer = setTimeout(function () {
+                          moveTimer = null;
+                          // alert("single");
+                            isDetecting = false;
+                     previous_touches = evt.touches;
+                  // alert('a:'+JSON.stringify(previous_touches))
+                    update(previous_touches)
+                    yA = centerY;
+                    yB = centerY;
+                    drawScreen()
+                      }, 300)
+                  } else {
+                      clearTimeout(moveTimer);
+                      moveTimer = null;
+                      isDetecting = true;
+                      // alert("double"+ evt.touches.length);                  
+
+                  }  
+                
                 }
 
                if(evt.touches.length == 1 ) {
@@ -332,5 +373,12 @@ var temp = 0;
             };
 
 function saveMeasure() {
+    isDetecting = true;
+
+     update(previous_touches);
+    yA = centerY;
+    yB = centerY;
+   drawScreen();
+    temp = 0;
   alert('保存数据成功！')
 }
