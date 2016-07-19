@@ -267,9 +267,42 @@ function myfilter(evt) {
             var yDown = null;   
 
             var clickTimer = null;            
-            var moveTimer = null;                                         
+            var moveTimer = null; 
 
-            function handleTouchStart(evt) {  
+            function draw_measure(evt) {
+                touches = evt.touches;
+                if(isDetecting && evt.touches.length == 3) {
+                   threecount += 1;
+                  document.getElementById("content").innerHTML = "threecount:"+threecount+"isDetecting:"+isDetecting;
+
+
+
+
+                if (moveTimer == null) {
+                      moveTimer = setTimeout(function () {
+                          moveTimer = null;
+                          // alert("single");
+                            isDetecting = false;
+                     previous_touches = evt.touches;
+                  // alert('a:'+JSON.stringify(previous_touches))
+                    update(previous_touches)
+                    yA = centerY;
+                    yB = centerY;
+                    drawScreen()
+                      }, 200)
+                  } else {
+                      clearTimeout(moveTimer);
+                      moveTimer = null;
+                      isDetecting = true;
+                      // alert("double"+ evt.touches.length);                  
+
+                  }  
+                
+                }
+            }
+
+            function handleTouchStart(evt) { 
+                       draw_measure(evt); 
                 var innerTouches = [];                                       
                 if (!isDetecting) {
                 innerTouches = myfilter(evt);
@@ -308,35 +341,7 @@ function myfilter(evt) {
               
                 evt.preventDefault();
 
-                touches = evt.touches;
-                if(isDetecting && evt.touches.length == 3) {
-                   threecount += 1;
-                  document.getElementById("content").innerHTML = "threecount:"+threecount+"isDetecting:"+isDetecting;
-
-
-
-
-                if (moveTimer == null) {
-                      moveTimer = setTimeout(function () {
-                          moveTimer = null;
-                          // alert("single");
-                            isDetecting = false;
-                     previous_touches = evt.touches;
-                  // alert('a:'+JSON.stringify(previous_touches))
-                    update(previous_touches)
-                    yA = centerY;
-                    yB = centerY;
-                    drawScreen()
-                      }, 300)
-                  } else {
-                      clearTimeout(moveTimer);
-                      moveTimer = null;
-                      isDetecting = true;
-                      // alert("double"+ evt.touches.length);                  
-
-                  }  
-                
-                }
+                draw_measure(evt);
 
                if(evt.touches.length == 1 ) {
                 var e = document.getElementById('resultDiv');
