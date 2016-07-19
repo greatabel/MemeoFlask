@@ -155,7 +155,7 @@ var cx = document.querySelector("canvas").getContext("2d");
     var c = Math.sqrt(((x1-x3) * (x1-x3)) + ((y1-y3) * (y1-y3)));
 
     var r =   Math.sqrt(3) * (a + b + c) / 9;
-    previous_Y_bound = centerY + r;
+    previous_Y_bound = centerY + r + 10;
 
     // draw center 
     ctx.fillRect(centerX, centerY, 2,2);
@@ -269,16 +269,19 @@ function myfilter(evt) {
             var clickTimer = null;            
             var moveTimer = null;                                         
 
-            function handleTouchStart(evt) {                                         
+            function handleTouchStart(evt) {  
+                var innerTouches = [];                                       
                 if (!isDetecting) {
-                xDown = myfilter(evt)[0].clientX;
-                yDown = myfilter(evt)[0].clientY;
-                } else {
-                xDown = evt.touches[0].clientX;                                      
-                yDown = evt.touches[0].clientY;
-                }  
-
-                if (clickTimer == null) {
+                innerTouches = myfilter(evt);
+                } 
+                else {
+                innerTouches = evt.touches;
+                }
+                xDown = innerTouches[0].clientX;                                      
+                yDown = innerTouches[0].clientY;
+        // only area bellow measure need double touch
+        if ( yDown >= previous_Y_bound) {
+              if (clickTimer == null) {
                     clickTimer = setTimeout(function () {
                         clickTimer = null;
                         // alert("single");
@@ -288,12 +291,16 @@ function myfilter(evt) {
                     clearTimeout(clickTimer);
                     clickTimer = null;
                     // alert("double"+ evt.touches.length);
-                    if(evt.touches.length == 1 ) {
+                    if(innerTouches.length == 1 ) {
                       var e = document.getElementById('resultDiv');
                       e.style.display = 'block';
                     }
 
                 }
+        }
+
+
+
 
             };                                                
 
