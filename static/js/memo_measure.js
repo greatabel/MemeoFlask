@@ -289,7 +289,7 @@ function myfilter(evt) {
                     yA = centerY;
                     yB = centerY;
                     drawScreen()
-                      }, 200)
+                      }, 100)
                   } else {
                       clearTimeout(moveTimer);
                       moveTimer = null;
