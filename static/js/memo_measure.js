@@ -262,8 +262,9 @@ function ol() {
   if(whicheye < 0) {
   $('#saveButton').prop('disabled', true);
   }
-  temp = Math.floor((Math.random() * 100) + 1);
-   document.getElementById("measureResult").innerHTML = temp;
+  // temp = Math.floor((Math.random() * 100) + 1);
+  //  document.getElementById("measureResult").innerHTML = temp;
+  
   // timer = setInterval(update, 200);
   // var timer1 = setInterval(drawScreen, 200);
 
