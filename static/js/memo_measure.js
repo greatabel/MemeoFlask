@@ -264,7 +264,7 @@ function ol() {
   }
   // temp = Math.floor((Math.random() * 100) + 1);
   //  document.getElementById("measureResult").innerHTML = temp;
-  
+
   // timer = setInterval(update, 200);
   // var timer1 = setInterval(drawScreen, 200);
 
@@ -415,14 +415,14 @@ function myfilter(evt) {
                         /* up swipe */ 
                         temp += 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("resultDiv").innerHTML = temp;
+                        document.getElementById("measureResult").innerHTML = temp;
                         moveTop();
 
                     } else { 
                         /* down swipe */
                         temp -= 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("resultDiv").innerHTML = temp;
+                        document.getElementById("measureResult").innerHTML = temp;
                         moveDown();
 
                     }                                                                 
