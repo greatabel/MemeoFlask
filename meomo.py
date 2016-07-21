@@ -49,6 +49,7 @@ def abort_if_todo_doesnt_exist(userid):
 parser = reqparse.RequestParser()
 parser.add_argument('rawdata')
 parser.add_argument('whicheye')
+parser.add_argument('patientid')
 
 class UserApi(Resource):
         def get(self, userid=None):
@@ -73,7 +74,7 @@ class UserApi(Resource):
            # Create a new product
             args = parser.parse_args()
             print('#',args)
-            print(args['rawdata'],'@@',args['whicheye'],'#',args)
+            print(args['patientid'],'@@',args['rawdata'],'@@',args['whicheye'],'#',args)
             DB.add_rawmeasure(args)
             abort_if_todo_doesnt_exist(userid)
             return 201
@@ -121,7 +122,7 @@ def login():
     email = get_value_with_fallback("email")
     password = get_value_with_fallback("password")
     if  email  and  password:
-        return redirect(url_for('measure'))
+        return redirect(url_for('childrenlist'))
     return home()
 
 @app.route("/logout")
@@ -134,6 +135,10 @@ def logout():
 @app.route("/measure")
 def measure():
     return render_template("measure.html")
+
+@app.route("/childrenlist")
+def childrenlist():
+    return render_template("childrenlist.html")
 
 @app.route("/history")
 def history():
@@ -154,7 +159,7 @@ def home():
     email = get_value_with_fallback("email")
     password = get_value_with_fallback("password")
     if  email  and  password:
-        return redirect(url_for('measure'))
+        return redirect(url_for('childrenlist'))
     expires = datetime.datetime.now() + datetime.timedelta(days=365)
     response.set_cookie("email", email, expires=expires)
     response.set_cookie("password", password, expires=expires)

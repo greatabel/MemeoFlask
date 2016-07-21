@@ -1,3 +1,5 @@
+var api_url = "http://139.224.73.50"
+// api_url = "http://127.0.0.1:5000"
 
 var canvas;
 var ctx;
@@ -35,8 +37,9 @@ var centerY = 0;
   // var imagepath = '{{ url_for('static', filename = '/images/ships.png') }}';
   // document.getElementById("test").innerHTML = "test:" + imagepath;
   // tileSheet.src= imagepath;
+var whicheye = -1;
+var temp = 0;
 
-   
 
 
   function drawScreen() {
@@ -64,7 +67,28 @@ var centerY = 0;
     //     drawScreen();
     // };
 
+// fix : when 2 points on canvas then click savebutton , it will draw wrong picture
+function isAppropriateThreePoint(touches) {
+  var limit = 10;
+  var flag = true;
+  if (touches.length == 3) {
+    x1 = touches[0].pageX 
+    y1 = touches[0].pageY 
+    x2 = touches[1].pageX 
+    y2 = touches[1].pageY 
+    x3 = touches[2].pageX 
+    y3 = touches[2].pageY 
+    var a = Math.sqrt(((x2-x1) * (x2-x1)) + ((y2-y1) * (y2-y1)));
+    var b = Math.sqrt(((x3-x2) * (x3-x2)) + ((y3-y2) * (y3-y2)));
+    var c = Math.sqrt(((x1-x3) * (x1-x3)) + ((y1-y3) * (y1-y3)));
+      if(Math.abs(a-b) > limit || Math.abs(a-c) > limit || Math.abs(b-c) > limit) {
+      // the 3 points is not right
+      flag = false
 
+    }    
+ }
+ return flag ;
+}
 
 function update(touches) {
   if (updateStarted) return;
@@ -73,7 +97,7 @@ function update(touches) {
   var nh = window.innerHeight;
   if ((w != nw) || (h != nh)) {
     w = nw ;
-    h = nh - 120;
+    h = nh - 150;
     canvas.style.width = w+'px';
     canvas.style.height = h+'px';
     canvas.width = w;
@@ -154,6 +178,7 @@ var cx = document.querySelector("canvas").getContext("2d");
     var b = Math.sqrt(((x3-x2) * (x3-x2)) + ((y3-y2) * (y3-y2)));
     var c = Math.sqrt(((x1-x3) * (x1-x3)) + ((y1-y3) * (y1-y3)));
 
+
     var r =   Math.sqrt(3) * (a + b + c) / 9;
     previous_Y_bound = centerY + r + 10;
 
@@ -174,6 +199,10 @@ var cx = document.querySelector("canvas").getContext("2d");
       yA = centerY;
       yB = centerY;
      }
+
+
+  
+
 
     // drawScreen();
     
@@ -221,7 +250,6 @@ function moveDown(){
 }
 
 
-
 function ol() {
   canvas = document.getElementById('canvas');
   ctx = canvas.getContext('2d');
@@ -230,6 +258,12 @@ function ol() {
    tileSheetL = document.getElementById('left_img');
    tileSheetR = document.getElementById('right_img');
   update(touches);
+
+  if(whicheye < 0) {
+  $('#saveButton').prop('disabled', true);
+  }
+  temp = Math.floor((Math.random() * 100) + 1);
+   document.getElementById("measureResult").innerHTML = temp;
   // timer = setInterval(update, 200);
   // var timer1 = setInterval(drawScreen, 200);
 
@@ -248,7 +282,7 @@ function ol() {
 };
 
 //------------------------
-var temp = 0;
+
 function myfilter(evt) {
   var filteredTouches = [];
 
@@ -259,6 +293,9 @@ function myfilter(evt) {
   }
   return filteredTouches;
 }
+
+
+
   
             document.addEventListener('touchstart', handleTouchStart, false);        
             document.addEventListener('touchmove', handleTouchMove, false);
@@ -273,6 +310,10 @@ function myfilter(evt) {
                 touches = evt.touches;
                 if(isDetecting && evt.touches.length == 3) {
                    threecount += 1;
+                   if (isAppropriateThreePoint(evt.touches))
+                   {
+
+                   
                   document.getElementById("content").innerHTML = "threecount:"+threecount+"isDetecting:"+isDetecting;
 
 
@@ -289,7 +330,7 @@ function myfilter(evt) {
                     yA = centerY;
                     yB = centerY;
                     drawScreen()
-                      }, 100)
+                      }, 200)
                   } else {
                       clearTimeout(moveTimer);
                       moveTimer = null;
@@ -297,6 +338,9 @@ function myfilter(evt) {
                       // alert("double"+ evt.touches.length);                  
 
                   }  
+
+                }
+
                 
                 }
             }
@@ -325,7 +369,7 @@ function myfilter(evt) {
                     clickTimer = null;
                     // alert("double"+ evt.touches.length);
                     if(innerTouches.length == 1 ) {
-                      var e = document.getElementById('resultDiv');
+                      var e = document.getElementById('showArea');
                       e.style.display = 'block';
                     }
 
@@ -344,7 +388,7 @@ function myfilter(evt) {
                 draw_measure(evt);
 
                if(evt.touches.length == 1 ) {
-                var e = document.getElementById('resultDiv');
+                var e = document.getElementById('showArea');
                 e.style.display = 'none';
               }
                 // document.getElementById("content").innerHTML = 'len:'+touches.length + '|'+xDown +'|'+ yDown;
@@ -369,13 +413,15 @@ function myfilter(evt) {
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1
-                        document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
+                        // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
+                        document.getElementById("resultDiv").innerHTML = temp;
                         moveTop();
 
                     } else { 
                         /* down swipe */
                         temp -= 1
-                        document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
+                        // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
+                        document.getElementById("resultDiv").innerHTML = temp;
                         moveDown();
 
                     }                                                                 
@@ -385,13 +431,107 @@ function myfilter(evt) {
                 yDown = null;                                             
             };
 
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+    function(m,key,value) {
+      vars[key] = value;
+    });
+    return vars;
+  }
+
+var bootstrap_alert = function() {}
+bootstrap_alert.warning = function(message) {
+        $('#alert_placeholder').html('<div class="alert alert-info" role="alert"><a class="close" data-dismiss="alert">×</a><span>'+message+'</span></div>')
+        }
+
 function saveMeasure() {
     isDetecting = true;
 
-     update(previous_touches);
+    update(previous_touches);
     yA = centerY;
     yB = centerY;
    drawScreen();
-    temp = 0;
-  alert('保存数据成功！')
+   
+    
+  var patientid= getUrlVars()["patientid"];
+  // document.getElementById("content").innerHTML= patientid +"保存成功！"
+
+
+
+$.post( api_url + "/api/user/0/measures", { patientid: patientid, rawdata:temp, whicheye: whicheye })
+  .done(function( data ) {
+
+    if(data == 201) {
+      // document.getElementById("content").innerHTML= patientid +"保存成功！"
+  bootstrap_alert.warning('保存成功！');
+  whicheye = -1;
+   temp = 0;
+    }
+  });
+
 }
+
+function cancelMeasure() {
+    // isDetecting = true;
+
+    // document.getElementById("content").innerHTML= "取消成功！"
+      // document.getElementById("content").innerHTML= patientid +"保存成功！"
+     bootstrap_alert.warning('取消成功！');
+  
+}
+
+// for fix bug : when multi-touch on screen ,the button is not received select/touch event
+function touchStart_saveButton(event) {
+  var  saveTouches = myfilter(event);
+  if (saveTouches.length != event.touches.length && saveTouches.length == 1) {
+     saveMeasure();
+  }
+ 
+}
+function touchStart_cancelButton(event) {
+  var  saveTouches = myfilter(event);
+  if (saveTouches.length != event.touches.length && saveTouches.length == 1) {
+     cancelMeasure();
+  }
+ 
+}
+
+
+
+function setRadio(radioId, classvalue) {
+    var radio = document.getElementById(radioId);
+    radio.setAttribute("class", classvalue);
+    radio.setAttribute("className", classvalue);
+    $('#saveButton').prop('disabled', false);
+}
+function L() {
+    setRadio("radioL", "btn btn-primary");
+    setRadio("radioR", "btn btn-primary notActive");
+    whicheye = 0;
+}
+
+function R(){
+    setRadio("radioR", "btn btn-primary");
+    setRadio("radioL", "btn btn-primary notActive");
+    whicheye = 1;
+
+}
+
+function touchStart_L(event){
+  L();
+}
+
+function touchStart_R(event){
+  R();
+}
+
+// // $('#radioBtn a').on('click', function(){
+//     alert('haha')
+//     var sel = $(this).data('title');
+//     var tog = $(this).data('toggle');
+//     // $('#'+tog).prop('value', sel);
+    
+//     $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+//     $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+// // })

@@ -16,7 +16,7 @@ class DBHelper:
             query = "SELECT * FROM MeasureRaw;"
             if userid is not None:
                 query = "SELECT MeasureRaw.* FROM MeasureRaw,Patient_User " \
-                        "where MeasureRaw.patientid = Patient_User.patientid and Patient_User.userid=" + userid + ";"
+                        "where MeasureRaw.patientid = Patient_User.patientid and Patient_User.userid=" + userid + " order by createdate desc limit 100 ;"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()
@@ -28,7 +28,7 @@ class DBHelper:
         try:
             query = "insert MeasureRaw( rawdata, patientid, whicheye, createdate) values(%s, %s, %s, now());"
             with connection.cursor() as cursor:
-                cursor.execute(query, ( args['rawdata'], 0,args['whicheye']))
+                cursor.execute(query, ( args['rawdata'], args['patientid'],args['whicheye']))
                 connection.commit()
         finally:
             connection.close()
