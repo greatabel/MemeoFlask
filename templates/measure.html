@@ -79,19 +79,20 @@
 <!-- <canvas id="canvas" width="300" height="300" style="top:0px; left:0px; width: 300px; height: 300px; border: 1px solid #ff3366;"></canvas> -->
 
 
-<div class="container" id="showArea">
-<!-- <div id="showArea" >  -->
+<div class="container" id="showArea" style="display: none;">
+<!-- <div class="container" id="showArea"> -->
+
 <div id="content" style="display: none;"></div>
   <div class="row">
 
-     <div class="btn custom col-sm-4">
+     <div class="btn custom col-sm-3">
       <small>测量值:</small> <strong><span id="measureResult"></span></strong>
   </div>
-  <div id="radioBtn" class="btn-group col-sm-4"">
+  <div id="radioBtn" class="btn-group col-sm-6"">
     <button class="btn btn-primary  notActive" id="radioL"    onClick="L()" ontouchstart="touchStart_L(event);" >左眼</button>
     <button class="btn btn-primary  notActive" id="radioR"  onClick="R()"   ontouchstart="touchStart_R(event);" >右眼</button>
   </div>
-      <div class="options btn-group col-sm-4" >
+      <div class="options btn-group col-sm-3" >
   <button id='saveButton' type="button" class="btn btn-success" onClick="saveMeasure()" ontouchstart="touchStart_saveButton(event);">保存</button>
   <button id='cancelButton' type="button" class="btn btn-info" onClick="cancelMeasure()" ontouchstart="touchStart_cancelButton(event);" style="margin-left: 5px;">取消</button>
   </div>
