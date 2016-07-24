@@ -510,13 +510,13 @@ function setRadio(radioId, classvalue) {
 }
 function L() {
     setRadio("radioL", "btn btn-primary btn-sm pull-right");
-    setRadio("radioR", "btn btn-primary btn-sm pull-right notActive");
+    setRadio("radioR", "btn btn-primary btn-sm pull-left notActive");
     whicheye = 0;
 }
 
 function R(){
     setRadio("radioR", "btn btn-primary btn-sm pull-left");
-    setRadio("radioL", "btn btn-primary btn-sm pull-left notActive");
+    setRadio("radioL", "btn btn-primary btn-sm pull-right notActive");
     whicheye = 1;
 
 }
