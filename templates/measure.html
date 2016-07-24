@@ -15,6 +15,28 @@
     color: #3276b1;
     background-color: #fff;
 }
+
+/*div.row { 
+  border: 1px solid;
+  border-bottom: 0px;
+}
+
+div.col-xs-2 { 
+  border: 1px solid;
+  border-bottom: 0px;
+}
+div.col-xs-4 { 
+  border: 1px solid;
+  border-bottom: 0px;
+}
+.container div.row:last-child {
+  border-bottom: 1px solid;
+}*/
+
+.centered
+{
+    text-align:center;
+}
     </style>
 
     <script src="../static/js/memo_measure.js"></script>
@@ -83,27 +105,30 @@
 <!-- <div class="container" id="showArea"> -->
 
 <div id="content" style="display: none;"></div>
-  <div class="row">
 
-     <div class="btn custom col-xs-6 col-md-4">
-      <small>测量值:</small> <strong><span id="measureResult"></span></strong>
-  </div>
-  <div id="radioBtn" class="btn-group col-xs-6 col-md-4">
-    <button class="btn btn-primary  notActive" id="radioL"    onClick="L()" ontouchstart="touchStart_L(event);" >左眼</button>
-    <button class="btn btn-primary  notActive" id="radioR"  onClick="R()"   ontouchstart="touchStart_R(event);" >右眼</button>
-  </div>
-      <div class="options btn-group col-xs-6 col-md-4"  style="margin-top:3px;">
-  <button id='saveButton' type="button" class="btn btn-success" onClick="saveMeasure()" ontouchstart="touchStart_saveButton(event);">保存</button>
-  <button id='cancelButton' type="button" class="btn btn-info" onClick="cancelMeasure()" ontouchstart="touchStart_cancelButton(event);" style="margin-left: 5px;">取消</button>
-  </div>
+<div class="row">
 
-  </div>
-
-  <div class="row">
-    <div class="col-sm-12">
-    <div id = "alert_placeholder" style="margin-top:3px;"></div>
+    <div class="alert alert-info col-xs-12 text-center" role="alert" >
+     <span id="measureResult"><small>测量值:</small> <strong>320</strong> </span>
     </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-4">
+    <button id='cancelButton' type="button" class="btn btn-info btn-lg pull-right" onClick="cancelMeasure()" ontouchstart="touchStart_cancelButton(event);" >取消</button>
   </div>
+  <div class="col-xs-2 centered" style="margin-top:10px;">
+    <button class="btn btn-primary btn-sm notActive pull-right" id="radioL"    onClick="L()" ontouchstart="touchStart_L(event);" >左眼</button>
+  </div>
+  <div class="col-xs-2 centered" style="margin-top:10px;">
+    <button class="btn btn-primary  btn-sm notActive pull-left"  id="radioR"  onClick="R()"   ontouchstart="touchStart_R(event);"  >右眼</button>
+  </div>
+    <div class="col-xs-4" >
+    <button id='saveButton' type="button" class="btn btn-success btn-lg pull-left" onClick="saveMeasure()" ontouchstart="touchStart_saveButton(event);">保存</button>
+  </div>
+</div>
+
+
 
 </div>
 
