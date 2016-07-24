@@ -509,14 +509,14 @@ function setRadio(radioId, classvalue) {
     $('#saveButton').prop('disabled', false);
 }
 function L() {
-    setRadio("radioL", "btn btn-primary btn-sm");
-    setRadio("radioR", "btn btn-primary btn-sm notActive");
+    setRadio("radioL", "btn btn-primary btn-sm pull-right");
+    setRadio("radioR", "btn btn-primary btn-sm pull-right notActive");
     whicheye = 0;
 }
 
 function R(){
-    setRadio("radioR", "btn btn-primary btn-sm");
-    setRadio("radioL", "btn btn-primary btn-sm notActive");
+    setRadio("radioR", "btn btn-primary btn-sm pull-left");
+    setRadio("radioL", "btn btn-primary btn-sm pull-left notActive");
     whicheye = 1;
 
 }
