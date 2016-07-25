@@ -420,7 +420,7 @@ function myfilter(evt) {
 
                      if(innerTouches.length == 1 && ( yUp >= previous_Y_bound) ) {
                       var e = document.getElementById('showArea');
-                      e.style.display = 'none';
+                      // e.style.display = 'none';
                     }
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
