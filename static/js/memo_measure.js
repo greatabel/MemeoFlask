@@ -442,7 +442,7 @@ function myfilter(evt) {
                               break;
                           }
                         }
-                        sightValue = temp / myPPI;                     
+                        sightValue = temp * 25400 / myPPI;                     
                         
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
                         document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI;
