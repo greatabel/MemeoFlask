@@ -429,21 +429,24 @@ function myfilter(evt) {
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1
-                        switch(window.devicePixelRatio) {
-                          case 1:
-                            sightValue = temp / 264
-                            break;
-                          case 2:
-                            sightValue = temp / 326
-                            break;
-                          case 3:
-                            sightValue = temp / 401
-                            break;
-
+                        if (navigator.userAgent.match('/iPhone')) {
+                          switch(window.devicePixelRatio)
+                          {
+                            case 1:
+                              break;
+                            case 2:
+                              myPPI = 326;
+                              break;
+                            case 3:
+                              myPPI = 401;
+                              break;
+                          }
                         }
+                        sightValue = temp / myPPI;                     
                         
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI + "#"+navigator.userAgent;
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI;
+
                         moveTop();
 
                     } else { 
