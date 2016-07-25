@@ -426,7 +426,7 @@ function myfilter(evt) {
                         /* up swipe */ 
                         temp += 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>'+yDiff +'#'+innerTouches.length;
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>'+'#'+yDiff +'#'+innerTouches.length;
                         moveTop();
 
                     } else { 
