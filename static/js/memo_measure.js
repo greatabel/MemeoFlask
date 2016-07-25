@@ -426,10 +426,8 @@ function myfilter(evt) {
                       var e = document.getElementById('showArea');
                       e.style.display = 'none';
                     }
-                    if ( yDiff > 0 ) {
-                        /* up swipe */ 
-                        temp += 1
-                        if (navigator.userAgent.indexOf('iPhone')) {
+
+                    if (navigator.userAgent.indexOf('iPhone')) {
                           switch(window.devicePixelRatio)
                           {
                             case 1:
@@ -442,7 +440,12 @@ function myfilter(evt) {
                               break;
                           }
                         }
-                        sightValue = temp * 25400 / myPPI;                     
+                        sightValue = temp * 25400 / myPPI;
+                        
+                    if ( yDiff > 0 ) {
+                        /* up swipe */ 
+                        temp += 1
+                     
                         
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
                         document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI;
