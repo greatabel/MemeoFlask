@@ -417,8 +417,8 @@ function myfilter(evt) {
                         /* right swipe */
                     }                       
                 } else {
-                  
-                     if(innerTouches.length == 1 ) {
+
+                     if(innerTouches.length == 1 && ( yUp >= previous_Y_bound) ) {
                       var e = document.getElementById('showArea');
                       e.style.display = 'none';
                     }
