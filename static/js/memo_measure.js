@@ -447,8 +447,9 @@ function myfilter(evt) {
                         temp += 1                    
                         sightValue = temp * 25400 / myPPI;
                         sightValue = 403 + 1.513 * sightValue;
-                        // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
+
+                        // document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>';
 
                         moveTop();
 
@@ -457,8 +458,9 @@ function myfilter(evt) {
                         temp -= 1
                         sightValue = temp * 25400 / myPPI;
                         sightValue = 403 + 1.513 * sightValue;
-                        // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
+
+                        // document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
+                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>';
                         moveDown();
 
                     }                                                                 
@@ -491,7 +493,7 @@ function saveMeasure() {
 
 
 
-$.post( api_url + "/api/user/0/measures", { patientid: patientid, rawdata:temp, whicheye: whicheye })
+$.post( api_url + "/api/user/0/measures", { patientid: patientid, rawdata:sightValue, whicheye: whicheye })
   .done(function( data ) {
     reset();
     if(data == 201) {
