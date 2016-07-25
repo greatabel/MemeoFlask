@@ -388,7 +388,17 @@ function myfilter(evt) {
 
                 draw_measure(evt);
 
-               if(evt.touches.length == 1 ) {
+                var innerTouches = [];                                       
+                if (!isDetecting) {
+                innerTouches = myfilter(evt);
+                } 
+                else {
+                innerTouches = evt.touches;
+                }
+
+
+
+               if(innerTouches.length == 1 ) {
                 var e = document.getElementById('showArea');
                 e.style.display = 'none';
               }
@@ -398,8 +408,8 @@ function myfilter(evt) {
                     return;
                 }
 
-                var xUp = evt.touches[0].clientX;                                    
-                var yUp = evt.touches[0].clientY;
+                var xUp = innerTouches[0].clientX;                                    
+                var yUp = innerTouches[0].clientY;
 
                 var xDiff = xDown - xUp;
                 var yDiff = yDown - yUp;
