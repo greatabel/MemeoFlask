@@ -39,7 +39,8 @@ var centerY = 0;
   // tileSheet.src= imagepath;
 var whicheye = -1;
 var temp = 0;
-
+var sightValue = 0;
+var myPPI = 0;
 
 
   function drawScreen() {
@@ -180,6 +181,7 @@ var cx = document.querySelector("canvas").getContext("2d");
 
 
     var r =   Math.sqrt(3) * (a + b + c) / 9;
+    myPPI = r * 25.4/ 19;
     previous_Y_bound = centerY + r + 10;
 
     // draw center 
@@ -425,15 +427,28 @@ function myfilter(evt) {
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1
+                        switch(window.devicePixelRatio) {
+                          case 1:
+                            sightValue = temp / 264
+                            break;
+                          case 2:
+                            sightValue = temp / 326
+                            break;
+                          case 3:
+                            sightValue = temp / 401
+                            break;
+
+                        }
+                        
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>';
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>'+"#ppi:"+myPPI;
                         moveTop();
 
                     } else { 
                         /* down swipe */
                         temp -= 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+temp +'</strong>';
+                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+temp +'</strong>'+"#ppi:"+myPPI;
                         moveDown();
 
                     }                                                                 
