@@ -429,7 +429,7 @@ function myfilter(evt) {
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1
-                        if (navigator.userAgent.match('/iPhone')) {
+                        if (navigator.userAgent.indexOf('iPhone')) {
                           switch(window.devicePixelRatio)
                           {
                             case 1:
