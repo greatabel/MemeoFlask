@@ -51,8 +51,8 @@ var temp = 0;
 
    
       // context.drawImage(tileSheet, 0, 0,32,32,50,50,32,32);
-    ctx.drawImage(tileSheetL, centerX-26, yA - 50);
-    ctx.drawImage(tileSheetR, centerX+3, yB);
+    ctx.drawImage(tileSheetL, centerX-27, yA - 25);
+    ctx.drawImage(tileSheetR, centerX+2, yB - 25);
     // // ctx.drawImage(tileSheet, 0, 0,32,32,centerX-64,centerY-64,32,32);
     // // ctx.drawImage(tileSheet, 0, 0,32,32,centerX+32,centerY+32,32,32);
          counter++;
@@ -480,6 +480,12 @@ function cancelMeasure() {
     // document.getElementById("content").innerHTML= "取消成功！"
       // document.getElementById("content").innerHTML= patientid +"保存成功！"
      // bootstrap_alert.warning('取消成功！');
+    update(previous_touches);
+    yA = centerY;
+    yB = centerY;
+   drawScreen();
+     whicheye = -1;
+   temp = 0;
          document.getElementById("measureResult").innerHTML = '取消成功！';
   
 }
