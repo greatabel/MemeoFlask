@@ -426,14 +426,14 @@ function myfilter(evt) {
                         /* up swipe */ 
                         temp += 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>';
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>'+innerTouches.length;
                         moveTop();
 
                     } else { 
                         /* down swipe */
                         temp -= 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+temp +'</strong>';
+                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+temp +'</strong>'+innerTouches.length;
                         moveDown();
 
                     }                                                                 
