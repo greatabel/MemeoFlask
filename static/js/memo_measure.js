@@ -440,23 +440,23 @@ function myfilter(evt) {
                               break;
                           }
                         }
-                        sightValue = temp * 25400 / myPPI;
                         
+
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
-                        temp += 1
-                     
-                        
+                        temp += 1                    
+                        sightValue = temp * 25400 / myPPI;
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI;
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
 
                         moveTop();
 
                     } else { 
                         /* down swipe */
                         temp -= 1
+                        sightValue = temp * 25400 / myPPI;
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI;
+                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
                         moveDown();
 
                     }                                                                 
