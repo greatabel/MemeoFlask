@@ -418,7 +418,7 @@ function myfilter(evt) {
                     }                       
                 } else {
 
-                     if(innerTouches.length == 1 && ( yUp >= previous_Y_bound) && Math.abs( yDiff ) > 1 ) {
+                     if(innerTouches.length == 1 && ( yUp >= previous_Y_bound) && Math.abs( yDiff ) > 2 ) {
                       var e = document.getElementById('showArea');
                       e.style.display = 'none';
                     }
