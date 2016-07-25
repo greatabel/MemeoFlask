@@ -424,7 +424,7 @@ function myfilter(evt) {
 
                      if(innerTouches.length == 1 && ( yUp >= previous_Y_bound) && (Math.abs( yDiff ) > 1) ) {
                       var e = document.getElementById('showArea');
-                      e.style.display = 'none';
+                      // e.style.display = 'none';
                     }
 
                     if (navigator.userAgent.indexOf('iPhone')) {
