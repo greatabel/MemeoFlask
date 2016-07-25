@@ -445,7 +445,7 @@ function myfilter(evt) {
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1                    
-                        sightValue = temp * 25400 / myPPI;
+                        sightValue = temp * 25400 *2.54 / myPPI;
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
                         document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
 
@@ -454,7 +454,7 @@ function myfilter(evt) {
                     } else { 
                         /* down swipe */
                         temp -= 1
-                        sightValue = temp * 25400 / myPPI;
+                        sightValue = temp * 25400 *2.54 / myPPI;
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
                         document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
                         moveDown();
