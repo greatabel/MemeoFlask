@@ -489,6 +489,9 @@ function reset() {
    temp = 0;
    setRadio("radioR", "btn btn-primary btn-sm pull-left notActive");
    setRadio("radioL", "btn btn-primary btn-sm pull-right notActive");
+     if(whicheye < 0) {
+  $('#saveButton').prop('disabled', true);
+  }
 }
 
 function cancelMeasure() {
