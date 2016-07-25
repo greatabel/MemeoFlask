@@ -426,14 +426,14 @@ function myfilter(evt) {
                         /* up swipe */ 
                         temp += 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>'+'#'+yDiff +'#'+innerTouches.length;
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>';
                         moveTop();
 
                     } else { 
                         /* down swipe */
                         temp -= 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+temp +'</strong>'+'#'+yDiff;
+                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+temp +'</strong>';
                         moveDown();
 
                     }                                                                 
@@ -458,12 +458,7 @@ function getUrlVars() {
 //         }
 
 function saveMeasure() {
-    isDetecting = true;
 
-    update(previous_touches);
-    yA = centerY;
-    yB = centerY;
-   drawScreen();
    
     
   var patientid= getUrlVars()["patientid"];
@@ -473,16 +468,27 @@ function saveMeasure() {
 
 $.post( api_url + "/api/user/0/measures", { patientid: patientid, rawdata:temp, whicheye: whicheye })
   .done(function( data ) {
-
+    reset();
     if(data == 201) {
       // document.getElementById("content").innerHTML= patientid +"保存成功！"
   // bootstrap_alert.warning('保存成功！');
     document.getElementById("measureResult").innerHTML = '保存成功！';
-  whicheye = -1;
-   temp = 0;
+
     }
   });
 
+}
+function reset() {
+    isDetecting = true;
+
+    update(previous_touches);
+    yA = centerY;
+    yB = centerY;
+   drawScreen();
+     whicheye = -1;
+   temp = 0;
+   setRadio("radioR", "btn btn-primary btn-sm pull-left notActive");
+   setRadio("radioL", "btn btn-primary btn-sm pull-right notActive");
 }
 
 function cancelMeasure() {
@@ -491,12 +497,7 @@ function cancelMeasure() {
     // document.getElementById("content").innerHTML= "取消成功！"
       // document.getElementById("content").innerHTML= patientid +"保存成功！"
      // bootstrap_alert.warning('取消成功！');
-    update(previous_touches);
-    yA = centerY;
-    yB = centerY;
-   drawScreen();
-     whicheye = -1;
-   temp = 0;
+    reset();
          document.getElementById("measureResult").innerHTML = '取消成功！';
   
 }
