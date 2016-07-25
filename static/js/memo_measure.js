@@ -398,10 +398,6 @@ function myfilter(evt) {
 
 
 
-               if(innerTouches.length == 1 ) {
-                var e = document.getElementById('showArea');
-                e.style.display = 'none';
-              }
                 // document.getElementById("content").innerHTML = 'len:'+touches.length + '|'+xDown +'|'+ yDown;
                 // alert('in handleTouchMove')
                 if ( ! xDown || ! yDown ) {
@@ -421,6 +417,11 @@ function myfilter(evt) {
                         /* right swipe */
                     }                       
                 } else {
+                  
+                     if(innerTouches.length == 1 ) {
+                      var e = document.getElementById('showArea');
+                      e.style.display = 'none';
+                    }
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1
