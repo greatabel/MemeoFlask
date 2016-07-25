@@ -181,7 +181,9 @@ var cx = document.querySelector("canvas").getContext("2d");
 
 
     var r =   Math.sqrt(3) * (a + b + c) / 9;
-    myPPI = r * 25.4/ 19;
+
+    
+    myPPI = r * window.devicePixelRatio * 25.4/ 19;
     previous_Y_bound = centerY + r + 10;
 
     // draw center 
