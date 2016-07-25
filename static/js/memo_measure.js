@@ -441,14 +441,14 @@ function myfilter(evt) {
                         }
                         
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>'+"#ppi:"+myPPI;
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI;
                         moveTop();
 
                     } else { 
                         /* down swipe */
                         temp -= 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+temp +'</strong>'+"#ppi:"+myPPI;
+                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI;
                         moveDown();
 
                     }                                                                 
