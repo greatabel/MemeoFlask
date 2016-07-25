@@ -419,14 +419,14 @@ function myfilter(evt) {
                 } else {
 
                      if(innerTouches.length == 1 && ( yUp >= previous_Y_bound) ) {
-                      var e = document.getElementById('showArea');
-                      e.style.display = 'none';
+                      // var e = document.getElementById('showArea');
+                      // e.style.display = 'none';
                     }
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1
                         // document.getElementById("content").innerHTML = "move:" + temp + 'radio:' + window.devicePixelRatio;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>'+innerTouches.length;
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+temp +'</strong>'+innerTouches +'#'+innerTouches.length;
                         moveTop();
 
                     } else { 
