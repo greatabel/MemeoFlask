@@ -302,12 +302,12 @@ function myfilter(evt) {
 function circulateMeasure(p) {
     var returnValue = p * 25400 / myPPI;
     returnValue = 403 + 1.513 * returnValue;
-    var quotient = returnValue/25;
-    var remainder = returnValue % 25;
-    if(remainder >= 13){
-      quotient += 1;
-    } 
-    returnValue = 25 * quotient;
+    var floatingPointPart = (returnValue/25) % 1;
+    var integerPart = Math.floor(returnValue/25);
+    if(floatingPointPart >= 0.5){
+      integerPart += 1;
+    }
+    returnValue = 25 * integerPart;
     return returnValue;
 }
 
