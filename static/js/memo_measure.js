@@ -302,7 +302,7 @@ function myfilter(evt) {
 function circulateMeasure(p) {
     var returnValue = p * 25400 / myPPI;
     returnValue = 403 + 1.513 * returnValue;
-    var quotient = returnValue/25,
+    var quotient = returnValue/25;
     var remainder = returnValue % 25;
     if(remainder >= 13){
       quotient += 1;
