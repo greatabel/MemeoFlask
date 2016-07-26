@@ -299,7 +299,17 @@ function myfilter(evt) {
   return filteredTouches;
 }
 
-
+function circulateMeasure(p) {
+    var returnValue = p * 25400 / myPPI;
+    returnValue = 403 + 1.513 * returnValue;
+    var quotient = returnValue/25,
+    var remainder = returnValue % 25;
+    if(remainder >= 13){
+      quotient += 1;
+    } 
+    returnValue = 25 * quotient;
+    return returnValue;
+}
 
   
             document.addEventListener('touchstart', handleTouchStart, false);        
@@ -445,8 +455,7 @@ function myfilter(evt) {
                     if ( yDiff > 0 ) {
                         /* up swipe */ 
                         temp += 1                    
-                        sightValue = temp * 25400 / myPPI;
-                        sightValue = 403 + 1.513 * sightValue;
+                        sightValue = circulateMeasure(temp);
 
                         // document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
                         document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>';
@@ -456,8 +465,7 @@ function myfilter(evt) {
                     } else { 
                         /* down swipe */
                         temp -= 1
-                        sightValue = temp * 25400 / myPPI;
-                        sightValue = 403 + 1.513 * sightValue;
+                       sightValue = circulateMeasure(temp);
 
                         // document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
                         document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>';
