@@ -52,7 +52,7 @@ var myPPI = 0;
 
    
       // context.drawImage(tileSheet, 0, 0,32,32,50,50,32,32);
-    ctx.drawImage(tileSheetL, centerX-27, yA - 25);
+    ctx.drawImage(tileSheetL, centerX-25, yA - 25);
     ctx.drawImage(tileSheetR, centerX+2, yB - 25);
     // // ctx.drawImage(tileSheet, 0, 0,32,32,centerX-64,centerY-64,32,32);
     // // ctx.drawImage(tileSheet, 0, 0,32,32,centerX+32,centerY+32,32,32);
