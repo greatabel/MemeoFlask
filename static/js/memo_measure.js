@@ -205,7 +205,9 @@ var cx = document.querySelector("canvas").getContext("2d");
 
     var r =   Math.sqrt(3) * (a + b + c) / 9;
 
-    
+     
+
+
     myPPI = r * window.devicePixelRatio * 25.4/ 19;
     previous_Y_bound = centerY + r + 10;
 
@@ -333,7 +335,7 @@ function myfilter(evt) {
 function circulateMeasure(p) {
     // var returnValue = p * 25400 / myPPI;
     // returnValue = 403 + 1.513 * returnValue;
-    var returnValue = 225 + 25 * p;
+    var returnValue = 196 ＋ 21.5 * p;
 
     var floatingPointPart = (returnValue/25) % 1;
     var integerPart = Math.floor(returnValue/25);
