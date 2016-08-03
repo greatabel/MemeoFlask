@@ -331,8 +331,10 @@ function myfilter(evt) {
 }
 
 function circulateMeasure(p) {
-    var returnValue = p * 25400 / myPPI;
-    returnValue = 403 + 1.513 * returnValue;
+    // var returnValue = p * 25400 / myPPI;
+    // returnValue = 403 + 1.513 * returnValue;
+    var returnValue = 225 + 25 * p;
+
     var floatingPointPart = (returnValue/25) % 1;
     var integerPart = Math.floor(returnValue/25);
     if(floatingPointPart >= 0.5){
@@ -506,7 +508,7 @@ function circulateMeasure(p) {
                        sightValue = circulateMeasure(temp);
 
                         // document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>';
+                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>' +window.devicePixelRatio+":"+temp;
                         moveDown();
 
                     }                                                                 
