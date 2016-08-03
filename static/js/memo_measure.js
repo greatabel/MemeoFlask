@@ -331,7 +331,7 @@ function myfilter(evt) {
 function circulateMeasure(p) {
     // var returnValue = p * 25400 / myPPI;
     // returnValue = 403 + 1.513 * returnValue;
-    var returnValue = 196 + 21.5 * p;
+    var returnValue = 196 + 21.5 * p * 401 / myPPI;
 
     var floatingPointPart = (returnValue/25) % 1;
     var integerPart = Math.floor(returnValue/25);
