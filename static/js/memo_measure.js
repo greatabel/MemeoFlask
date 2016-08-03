@@ -497,8 +497,9 @@ function circulateMeasure(p) {
                         sightValue = circulateMeasure(temp);
 
 
-                        // document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>' +window.devicePixelRatio+":"+temp;
+
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
+                        +window.devicePixelRatio+":"+temp;
 
                         moveTop();
 
@@ -507,8 +508,9 @@ function circulateMeasure(p) {
                         temp -= 1
                        sightValue = circulateMeasure(temp);
 
-                        // document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>' +window.devicePixelRatio+":"+temp;
+
+                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
+                        +window.devicePixelRatio+":"+temp;
                         moveDown();
 
                     }                                                                 
@@ -527,10 +529,7 @@ function getUrlVars() {
     return vars;
   }
 
-// var bootstrap_alert = function() {}
-// bootstrap_alert.warning = function(message) {
-//         $('#alert_placeholder').html('<div class="alert alert-info" role="alert"><a class="close" data-dismiss="alert">×</a><span>'+message+'</span></div>')
-//         }
+
 
 function saveMeasure() {
 
