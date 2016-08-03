@@ -31,8 +31,9 @@ var centerY = 0;
 
     var counter=0;
   // var tileSheet=new Image();
-  var tileSheetL = document.getElementById('left_img');
-  var tileSheetR = document.getElementById('right_img');
+  // var tileSheetL = document.getElementById('left_img');
+  // var tileSheetR = document.getElementById('right_img');
+
   // tileSheet.addEventListener('load', eventSheetLoaded , false);
   // var imagepath = '{{ url_for('static', filename = '/images/ships.png') }}';
   // document.getElementById("test").innerHTML = "test:" + imagepath;
@@ -42,18 +43,40 @@ var temp = 0;
 var sightValue = 0;
 var myPPI = 0;
 
+var myElementL = document.querySelector("#div_left_img");
+var myElementR = document.querySelector("#div_right_img");
+// for 1/3 pixel , 1/3 pixel
+var counterTurn = 0;
+var stepPx = 0;
 
   function drawScreen() {
       // y = y + dy;
       // x = x + dx;
      //draw a background so we can wee the Canvas edges
                
-       
+       // tileSheetL = document.getElementById('left_img');
 
-   
+
+   // myElement.style.backgroundColor = "#D93600";
+   myElementL.style.top = (yA - 25 ) +"px";
+   myElementL.style.left = (centerX - 25) + "px";
+   myElementL.style.display = 'block';
+
+   // myElementR.style.backgroundColor = "#D93600";
+   myElementR.style.top = (yB - 25 ) +"px";
+   myElementR.style.left = (centerX +2) + "px";
+   myElementR.style.display = 'block';
+
+
+
+
+    // myElement.style.top = yA - 25;
+
       // context.drawImage(tileSheet, 0, 0,32,32,50,50,32,32);
-    ctx.drawImage(tileSheetL, centerX-25, yA - 25);
-    ctx.drawImage(tileSheetR, centerX+2, yB - 25);
+
+    // ctx.drawImage(tileSheetL, centerX-25, yA - 25);
+    // ctx.drawImage(tileSheetR, centerX+2, yB - 25);
+
     // // ctx.drawImage(tileSheet, 0, 0,32,32,centerX-64,centerY-64,32,32);
     // // ctx.drawImage(tileSheet, 0, 0,32,32,centerX+32,centerY+32,32,32);
          counter++;
@@ -70,7 +93,7 @@ var myPPI = 0;
 
 // fix : when 2 points on canvas then click savebutton , it will draw wrong picture
 function isAppropriateThreePoint(touches) {
-  var limit = 10;
+  var limit = 50;
   var flag = true;
   if (touches.length == 3) {
     x1 = touches[0].pageX 
@@ -228,11 +251,14 @@ var cx = document.querySelector("canvas").getContext("2d");
 
     
    function moveTop(){ 
+
       if (temp % 2 === 0) {
-         yA = yA + 1;
+         yA = yA + stepPx;  
       } else {
-        yB = yB - 1;
+         yB = yB - stepPx;
       }
+
+
       // x = x + 2;
       update(previous_touches);
       drawScreen();
@@ -242,15 +268,15 @@ var cx = document.querySelector("canvas").getContext("2d");
 
 function moveDown(){
       if (temp % 2 === 0) {
-          yA = yA - 1;
+          yA = yA - stepPx;
       } else {
-          yB = yB + 1;
+          yB = yB + stepPx;
       }
           // x = x + 2;
      update(previous_touches);
      drawScreen();
 
-      window.setTimeout(drawScreen, 200);
+    window.setTimeout(drawScreen, 200);
 }
 
 
@@ -259,8 +285,13 @@ function ol() {
   ctx = canvas.getContext('2d');
        // tileSheet=new Image();
        //   tileSheet.src="ships.png";
-   tileSheetL = document.getElementById('left_img');
-   tileSheetR = document.getElementById('right_img');
+   // tileSheetL = document.getElementById('left_img');
+   // tileSheetR = document.getElementById('right_img');
+
+    myElementL = document.querySelector("#div_left_img");
+    myElementR = document.querySelector("#div_right_img");
+    counterTurn = window.devicePixelRatio;
+
   update(touches);
 
   if(whicheye < 0) {
@@ -441,12 +472,18 @@ function circulateMeasure(p) {
                           switch(window.devicePixelRatio)
                           {
                             case 1:
+                              stepPx = 1;
                               break;
                             case 2:
                               myPPI = 326;
+                              stepPx = 0.5;
                               break;
                             case 3:
                               myPPI = 401;
+                              stepPx = 0.3333333;
+                              break;
+                            case 4:
+                              stepPx = 0.25;
                               break;
                           }
                         }
@@ -457,8 +494,9 @@ function circulateMeasure(p) {
                         temp += 1                    
                         sightValue = circulateMeasure(temp);
 
+
                         // document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>'+"#ppi:"+myPPI+":"+temp;
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>';
+                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>' +window.devicePixelRatio;
 
                         moveTop();
 
@@ -515,7 +553,7 @@ $.post( api_url + "/api/user/0/measures", { patientid: patientid, rawdata:sightV
 }
 function reset() {
     isDetecting = true;
-
+      myElementL.classList.remove("retina-border-scale");
     update(previous_touches);
     yA = centerY;
     yB = centerY;
@@ -526,6 +564,7 @@ function reset() {
    setRadio("radioL", "btn btn-primary btn-sm pull-right notActive");
      if(whicheye < 0) {
   $('#saveButton').prop('disabled', true);
+
   }
 }
 
