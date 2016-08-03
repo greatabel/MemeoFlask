@@ -58,12 +58,12 @@ var stepPx = 0;
 
 
    // myElement.style.backgroundColor = "#D93600";
-   myElementL.style.top = (yA - 25 ) +"px";
-   myElementL.style.left = (centerX - 25) + "px";
+   myElementL.style.top = (yA - 50 ) +"px";
+   myElementL.style.left = (centerX - 50) + "px";
    myElementL.style.display = 'block';
 
    // myElementR.style.backgroundColor = "#D93600";
-   myElementR.style.top = (yB - 25 ) +"px";
+   myElementR.style.top = (yB - 50 ) +"px";
    myElementR.style.left = (centerX +2) + "px";
    myElementR.style.display = 'block';
 
