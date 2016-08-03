@@ -93,7 +93,7 @@ var stepPx = 0;
 
 // fix : when 2 points on canvas then click savebutton , it will draw wrong picture
 function isAppropriateThreePoint(touches) {
-  var limit = 50;
+  var limit = 10;
   var flag = true;
   if (touches.length == 3) {
     x1 = touches[0].pageX 
