@@ -143,6 +143,10 @@ def childrenlist():
 @app.route("/history")
 def history():
     return render_template("history.html")
+    
+@app.route("/appdownload")
+def appdownload():
+    return render_template("appdownload.html")
 
 
 @app.route("/register", methods=["POST"])
