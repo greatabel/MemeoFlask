@@ -269,8 +269,8 @@ function changeImage(side, step) {
       }
       floatingPointPartA = yA % 1;
       floatingPointPartB = yB % 1;
-      alert(navigator.userAgent)
-       if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
+
+       if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
 document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
           // alert(floatingPointPartA+':# '+floatingPointPartB)
          switch(stepPx){
@@ -324,7 +324,7 @@ function moveDown(){
       } else {
           yB = yB + stepPx;
       }
-       if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
+       if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
 
         var floatingPointPartA = yA % 1;
         var floatingPointPartB = yB % 1;
@@ -387,7 +387,7 @@ function get_ppi() {
               break;
           }
     }
-    if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
+    if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
           switch(window.devicePixelRatio)
           {
             case 1:
