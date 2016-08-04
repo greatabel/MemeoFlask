@@ -274,7 +274,7 @@ function changeImage(side, step) {
 
           // alert(floatingPointPartA+':# '+floatingPointPartB)
          switch(stepPx){
-          case 0.5:
+          case 2:
             if(floatingPointPartA == 0.5)
             {
               changeImage('left','-1');
@@ -288,7 +288,7 @@ function changeImage(side, step) {
              changeImage('right','');
             }
             break;
-          case 0.3333334:
+          case 3:
             if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
             {
               changeImage('left','-1');
@@ -329,7 +329,7 @@ function moveDown(){
         var floatingPointPartA = yA % 1;
         var floatingPointPartB = yB % 1;
        switch(window.devicePixelRatio){
-        case 0.5:
+        case 2:
           if(floatingPointPartA == 0.5)
           {
             changeImage('left','1');
@@ -339,7 +339,7 @@ function moveDown(){
             changeImage('right','-1');
           }
           break;
-        case 0.3333334:
+        case 3:
           if(floatingPointPartA >= 0.3 && floatingPointPartA <= 0.6)
           {
             changeImage('left','2');
@@ -428,14 +428,21 @@ function get_ppi() {
           }
     }
     if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
-        myPPI = r * window.devicePixelRatio * 25.4/ 19;
-        if (myPPI < 300) {
-            stepPx = 1;
-        } else if (myPPI > 300 && myPPI < 450) {
-            stepPx = 0.5;
-        } else if (myPPI > 450 ) {
-            stepPx = 0.3333334;
-        }
+          switch(window.devicePixelRatio)
+          {
+            case 1:
+              stepPx = 1;
+              break;
+            case 2:
+              stepPx = 0.5;
+              break;
+            case 3:
+              stepPx = 0.3333334;
+              break;
+            case 4:
+              stepPx = 0.25;
+              break;
+          }
 
     }
 }
