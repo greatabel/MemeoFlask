@@ -269,46 +269,46 @@ function changeImage(side, step) {
       }
       floatingPointPartA = yA % 1;
       floatingPointPartB = yB % 1;
-      // document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
-       // if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
-
-       //    // alert(floatingPointPartA+':# '+floatingPointPartB)
-       //   switch(stepPx){
-       //    case 2:
-       //      if(floatingPointPartA == 0.5)
-       //      {
-       //        changeImage('left','-1');
-       //      } else if(floatingPointPartA == 0){
-       //       changeImage('left','');
-       //      }
-       //      if(floatingPointPartB == 0.5)
-       //      {
-       //        changeImage('right','1');
-       //      }else if(floatingPointPartB == 0){
-       //       changeImage('right','');
-       //      }
-       //      break;
-       //    case 3:
-       //      if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
-       //      {
-       //        changeImage('left','-1');
+      
+       if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
+document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
+          // alert(floatingPointPartA+':# '+floatingPointPartB)
+         switch(stepPx){
+          case 2:
+            if(floatingPointPartA == 0.5)
+            {
+              changeImage('left','-1');
+            } else if(floatingPointPartA == 0){
+             changeImage('left','');
+            }
+            if(floatingPointPartB == 0.5)
+            {
+              changeImage('right','1');
+            }else if(floatingPointPartB == 0){
+             changeImage('right','');
+            }
+            break;
+          case 3:
+            if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
+            {
+              changeImage('left','-1');
               
-       //      } else if((floatingPointPartA >= 0.6) && (floatingPointPartA <= 0.9) ){
-       //        changeImage('left','-2');              
-       //      } else if (floatingPointPartA < 0.3) {
-       //        changeImage('left','');
-       //      }
+            } else if((floatingPointPartA >= 0.6) && (floatingPointPartA <= 0.9) ){
+              changeImage('left','-2');              
+            } else if (floatingPointPartA < 0.3) {
+              changeImage('left','');
+            }
             
-       //     if( (floatingPointPartB >= 0.3) && (floatingPointPartB <= 0.6))
-       //      {
-       //        changeImage('right','1');
-       //      } else if( (floatingPointPartB >= 0.6) && (floatingPointPartB <= 0.9)){
-       //        changeImage('right','2');              
-       //      }
-       //      break;
+           if( (floatingPointPartB >= 0.3) && (floatingPointPartB <= 0.6))
+            {
+              changeImage('right','1');
+            } else if( (floatingPointPartB >= 0.6) && (floatingPointPartB <= 0.9)){
+              changeImage('right','2');              
+            }
+            break;
 
-       //   }
-       // }
+         }
+       }
 
 
       // x = x + 2;
@@ -356,7 +356,7 @@ function moveDown(){
           }
           break;
 
-       }
+           }
        }
           // x = x + 2;
      update(previous_touches);
@@ -365,46 +365,6 @@ function moveDown(){
     window.setTimeout(drawScreen, 200);
 }
 
-
-function ol() {
-  canvas = document.getElementById('canvas');
-  ctx = canvas.getContext('2d');
-       // tileSheet=new Image();
-       //   tileSheet.src="ships.png";
-   // tileSheetL = document.getElementById('left_img');
-   // tileSheetR = document.getElementById('right_img');
-
-    myElementL = document.querySelector("#div_left_img");
-    myElementR = document.querySelector("#div_right_img");
-    counterTurn = window.devicePixelRatio;
-
-  update(touches);
-
-  if(whicheye < 0) {
-  $('#saveButton').prop('disabled', true);
-  }
-  get_ppi();
-  // temp = Math.floor((Math.random() * 100) + 1);
-  //  document.getElementById("measureResult").innerHTML = temp;
-
-  // timer = setInterval(update, 200);
-  // var timer1 = setInterval(drawScreen, 200);
-
-// canvas.addEventListener('touchend', function() {
-//   // ctx.clearRect(0, 0, w, h);
-//   // drawScreen()
-// });
-// canvas.addEventListener('touchmove', function(event) {
-//   event.preventDefault();
-//   touches = event.touches;
-// });
-// canvas.addEventListener('touchstart', function(event) {
-//   console.log('start');
-// });
-
-};
-
-//------------------------
 function get_ppi() {
     var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (iOS) {
@@ -446,6 +406,47 @@ function get_ppi() {
 
     }
 }
+
+function ol() {
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
+       // tileSheet=new Image();
+       //   tileSheet.src="ships.png";
+   // tileSheetL = document.getElementById('left_img');
+   // tileSheetR = document.getElementById('right_img');
+
+    myElementL = document.querySelector("#div_left_img");
+    myElementR = document.querySelector("#div_right_img");
+    counterTurn = window.devicePixelRatio;
+
+  update(touches);
+
+  if(whicheye < 0) {
+  $('#saveButton').prop('disabled', true);
+  }
+  get_ppi();
+  // temp = Math.floor((Math.random() * 100) + 1);
+  //  document.getElementById("measureResult").innerHTML = temp;
+
+  // timer = setInterval(update, 200);
+  // var timer1 = setInterval(drawScreen, 200);
+
+// canvas.addEventListener('touchend', function() {
+//   // ctx.clearRect(0, 0, w, h);
+//   // drawScreen()
+// });
+// canvas.addEventListener('touchmove', function(event) {
+//   event.preventDefault();
+//   touches = event.touches;
+// });
+// canvas.addEventListener('touchstart', function(event) {
+//   console.log('start');
+// });
+
+};
+
+//------------------------
+
 
 function myfilter(evt) {
   var filteredTouches = [];
