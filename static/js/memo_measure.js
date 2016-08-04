@@ -273,8 +273,8 @@ function changeImage(side, step) {
        if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
 
           // alert(floatingPointPartA+':# '+floatingPointPartB)
-         switch(window.devicePixelRatio){
-          case 2:
+         switch(stepPx){
+          case 0.5:
             if(floatingPointPartA == 0.5)
             {
               changeImage('left','-1');
@@ -288,7 +288,7 @@ function changeImage(side, step) {
              changeImage('right','');
             }
             break;
-          case 3:
+          case 0.3333334:
             if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
             {
               changeImage('left','-1');
@@ -329,7 +329,7 @@ function moveDown(){
         var floatingPointPartA = yA % 1;
         var floatingPointPartB = yB % 1;
        switch(window.devicePixelRatio){
-        case 2:
+        case 0.5:
           if(floatingPointPartA == 0.5)
           {
             changeImage('left','1');
@@ -339,7 +339,7 @@ function moveDown(){
             changeImage('right','-1');
           }
           break;
-        case 3:
+        case 0.3333334:
           if(floatingPointPartA >= 0.3 && floatingPointPartA <= 0.6)
           {
             changeImage('left','2');
@@ -383,6 +383,7 @@ function ol() {
   if(whicheye < 0) {
   $('#saveButton').prop('disabled', true);
   }
+  get_ppi();
   // temp = Math.floor((Math.random() * 100) + 1);
   //  document.getElementById("measureResult").innerHTML = temp;
 
@@ -404,6 +405,40 @@ function ol() {
 };
 
 //------------------------
+function get_ppi() {
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (iOS) {
+
+          switch(window.devicePixelRatio)
+          {
+            case 1:
+              stepPx = 1;
+              break;
+            case 2:
+              myPPI = 326;
+              stepPx = 0.5;
+              break;
+            case 3:
+              myPPI = 401;
+              stepPx = 0.3333334;
+              break;
+            case 4:
+              stepPx = 0.25;
+              break;
+          }
+    }
+    if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
+        myPPI = r * window.devicePixelRatio * 25.4/ 19;
+        if (myPPI < 300) {
+            stepPx = 1;
+        } else if (myPPI > 300 && myPPI < 450) {
+            stepPx = 0.5;
+        } else if (myPPI > 450 ) {
+            stepPx = 0.3333334;
+        }
+
+    }
+}
 
 function myfilter(evt) {
   var filteredTouches = [];
@@ -555,27 +590,7 @@ function circulateMeasure(p) {
                       var e = document.getElementById('showArea');
                       // e.style.display = 'none';
                     }
-                    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                    if (iOS) {
 
-                          switch(window.devicePixelRatio)
-                          {
-                            case 1:
-                              stepPx = 1;
-                              break;
-                            case 2:
-                              myPPI = 326;
-                              stepPx = 0.5;
-                              break;
-                            case 3:
-                              myPPI = 401;
-                              stepPx = 0.3333334;
-                              break;
-                            case 4:
-                              stepPx = 0.25;
-                              break;
-                          }
-                        }
                         
 
                     if ( yDiff > 0 ) {
@@ -586,7 +601,7 @@ function circulateMeasure(p) {
 
                         moveTop();
                         document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
-                        +window.devicePixelRatio+":"+temp + "#"+yA +"@"+yB;
+                        +window.devicePixelRatio+":"+temp + "#ppi:"+myPPI;
 
 
 
@@ -597,7 +612,7 @@ function circulateMeasure(p) {
 
                         moveDown();
                         document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
-                        +window.devicePixelRatio+":"+temp;
+                        +window.devicePixelRatio+":"+temp+ "#ppi:"+myPPI;
 
 
                     }                                                                 
