@@ -394,7 +394,7 @@ function get_ppi() {
               stepPx = 1;
               break;
             case 2:
-              stepPx = 0.5;
+              stepPx = 0.75;
               break;
             case 3:
               stepPx = 0.3333334;
