@@ -270,45 +270,45 @@ function changeImage(side, step) {
       floatingPointPartA = yA % 1;
       floatingPointPartB = yB % 1;
       // document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
-       if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
+       // if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
 
-          // alert(floatingPointPartA+':# '+floatingPointPartB)
-         switch(stepPx){
-          case 2:
-            if(floatingPointPartA == 0.5)
-            {
-              changeImage('left','-1');
-            } else if(floatingPointPartA == 0){
-             changeImage('left','');
-            }
-            if(floatingPointPartB == 0.5)
-            {
-              changeImage('right','1');
-            }else if(floatingPointPartB == 0){
-             changeImage('right','');
-            }
-            break;
-          case 3:
-            if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
-            {
-              changeImage('left','-1');
+       //    // alert(floatingPointPartA+':# '+floatingPointPartB)
+       //   switch(stepPx){
+       //    case 2:
+       //      if(floatingPointPartA == 0.5)
+       //      {
+       //        changeImage('left','-1');
+       //      } else if(floatingPointPartA == 0){
+       //       changeImage('left','');
+       //      }
+       //      if(floatingPointPartB == 0.5)
+       //      {
+       //        changeImage('right','1');
+       //      }else if(floatingPointPartB == 0){
+       //       changeImage('right','');
+       //      }
+       //      break;
+       //    case 3:
+       //      if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
+       //      {
+       //        changeImage('left','-1');
               
-            } else if((floatingPointPartA >= 0.6) && (floatingPointPartA <= 0.9) ){
-              changeImage('left','-2');              
-            } else if (floatingPointPartA < 0.3) {
-              changeImage('left','');
-            }
+       //      } else if((floatingPointPartA >= 0.6) && (floatingPointPartA <= 0.9) ){
+       //        changeImage('left','-2');              
+       //      } else if (floatingPointPartA < 0.3) {
+       //        changeImage('left','');
+       //      }
             
-           if( (floatingPointPartB >= 0.3) && (floatingPointPartB <= 0.6))
-            {
-              changeImage('right','1');
-            } else if( (floatingPointPartB >= 0.6) && (floatingPointPartB <= 0.9)){
-              changeImage('right','2');              
-            }
-            break;
+       //     if( (floatingPointPartB >= 0.3) && (floatingPointPartB <= 0.6))
+       //      {
+       //        changeImage('right','1');
+       //      } else if( (floatingPointPartB >= 0.6) && (floatingPointPartB <= 0.9)){
+       //        changeImage('right','2');              
+       //      }
+       //      break;
 
-         }
-       }
+       //   }
+       // }
 
 
       // x = x + 2;
