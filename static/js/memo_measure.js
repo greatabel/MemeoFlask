@@ -273,7 +273,7 @@ function changeImage(side, step) {
        if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
 document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
           // alert(floatingPointPartA+':# '+floatingPointPartB)
-         switch(stepPx){
+         switch(window.devicePixelRatio){
           case 2:
             if(floatingPointPartA == 0.5)
             {
