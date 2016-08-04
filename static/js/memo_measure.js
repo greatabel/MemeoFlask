@@ -269,7 +269,7 @@ function changeImage(side, step) {
       }
       floatingPointPartA = yA % 1;
       floatingPointPartB = yB % 1;
-      
+      alert(navigator.userAgent)
        if (navigator.userAgent.toLowerCase().indexOf('Android') > -1) {
 document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
           // alert(floatingPointPartA+':# '+floatingPointPartB)
