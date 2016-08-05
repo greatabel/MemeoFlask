@@ -280,20 +280,23 @@ function changeImage(side, step) {
           // alert(floatingPointPartA+':# '+floatingPointPartB)
          switch(window.devicePixelRatio){
           case 2:
-            if(floatingPointPartA == 0.5)
-            {
-              changeImage('left','-1');
-            } else if(floatingPointPartA == 0){
-             changeImage('left','');
-             yA = yA + stepPx;
-            }
-            if(floatingPointPartB == 0.5)
-            {
-              changeImage('right','1');
-            }else if(floatingPointPartB == 0){
-             changeImage('right','');
-             yB = yB - stepPx;
+            if (temp % 2 === 0) {
+                if(floatingPointPartA == 0.5)
+                {
+                  changeImage('left','-1');
+                } else if(floatingPointPartA == 0){
+                 changeImage('left','');
+                  yA = yA + stepPx;
+                }
+            } else {
+                if(floatingPointPartB == 0.5)
+                {
+                  changeImage('right','1');
+                }else if(floatingPointPartB == 0){
+                 changeImage('right','');
+                  yB = yB - stepPx;
 
+                }
             }
             break;
           case 3:
