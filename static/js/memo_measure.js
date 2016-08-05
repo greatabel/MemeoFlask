@@ -280,13 +280,13 @@ document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
           // alert(floatingPointPartA+':# '+floatingPointPartB)
          switch(window.devicePixelRatio){
           case 2:
-            if(floatingPointPartA == 0.75)
+            if(floatingPointPartA == 0.5)
             {
               changeImage('left','-1');
             } else if(floatingPointPartA == 0){
              changeImage('left','');
             }
-            if(floatingPointPartB == 0.75)
+            if(floatingPointPartB == 0.5)
             {
               changeImage('right','1');
             }else if(floatingPointPartB == 0){
