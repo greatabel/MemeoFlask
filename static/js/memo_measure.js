@@ -319,7 +319,7 @@ function changeImage(side, step) {
             break;
 
          }
-         document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
+         document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA+"#b"+yB;
        }
 
 
