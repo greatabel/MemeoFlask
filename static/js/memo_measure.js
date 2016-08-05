@@ -338,7 +338,7 @@ function changeImage(side, step) {
          compensationA = false;
          window.setTimeout(function() {
             myElementL.style.display = 'block';  
-         }, 200);
+         }, 2000);
 
       }
       if(compensationB) {
