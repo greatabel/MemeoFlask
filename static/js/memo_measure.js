@@ -226,6 +226,11 @@ var cx = document.querySelector("canvas").getContext("2d");
      if (  yA > centerY + r || yA < centerY - r || yB > centerY + r || yB < centerY - r) {
       yA = centerY;
       yB = centerY;
+    if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
+          yA = Math.floor(yA);
+          yB = Math.floor(yB);
+      }
+
      }
 
 
