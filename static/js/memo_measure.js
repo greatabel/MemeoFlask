@@ -274,6 +274,8 @@ function changeImage(side, step) {
       }
       floatingPointPartA = yA % 1;
       floatingPointPartB = yB % 1;
+      var compensationA = false;
+      var compensationB = false;
 
        if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
 
@@ -287,6 +289,7 @@ function changeImage(side, step) {
                 } else if(floatingPointPartA == 0){
                  changeImage('left','');
                   yA = yA + stepPx;
+                  compensationA = true;
                 }
             } else {
                 if(floatingPointPartB == 0.5)
@@ -295,6 +298,7 @@ function changeImage(side, step) {
                 }else if(floatingPointPartB == 0){
                  changeImage('right','');
                   yB = yB - stepPx;
+                  compensationB = true;
 
                 }
             }
@@ -320,12 +324,20 @@ function changeImage(side, step) {
 
          }
          document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA+"#b"+yB;
-       }
+       } 
 
 
       // x = x + 2;
       update(previous_touches);
       drawScreen();
+      if (compensationA) {
+         yA = yA - stepPx;
+         compensationA = false;
+      }
+      if(compensationB) {
+          yB = yB + stepPx;
+          compensationB = false;
+      }
       window.setTimeout(drawScreen, 200);
 
 };
