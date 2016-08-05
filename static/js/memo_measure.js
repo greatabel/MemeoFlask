@@ -291,7 +291,7 @@ document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
               changeImage('right','1');
             }else if(floatingPointPartB == 0){
              changeImage('right','');
-             
+
             }
             break;
           case 3:
@@ -400,7 +400,7 @@ function get_ppi() {
               stepPx = 1;
               break;
             case 2:
-              stepPx = 1;
+              stepPx = 0.5;
               break;
             case 3:
               stepPx = 0.3333334;
