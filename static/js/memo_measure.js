@@ -339,13 +339,13 @@ function changeImage(side, step) {
          yA = yA - 6*stepPx;
          compensationA = false;
          window.setTimeout(function() {
-
+            var element1 = document.getElementById('div_left_img');                
+            element1.style.visibility = 'visible'; 
      
             
 
-         }, 300);
-                var element1 = document.getElementById('div_left_img');                
-            element1.style.visibility = 'visible'; 
+         }, 50);
+
 
       }
       if(compensationB) {
