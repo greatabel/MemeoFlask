@@ -285,12 +285,14 @@ document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
               changeImage('left','-1');
             } else if(floatingPointPartA == 0){
              changeImage('left','');
+             yA = yA + stepPx;
             }
             if(floatingPointPartB == 0.5)
             {
               changeImage('right','1');
             }else if(floatingPointPartB == 0){
              changeImage('right','');
+             yB = yB - stepPx;
 
             }
             break;
@@ -506,7 +508,7 @@ function circulateMeasure(p) {
                       moveTimer = setTimeout(function () {
                           moveTimer = null;
                           // alert("single");
-                            isDetecting = false;
+
                      previous_touches = evt.touches;
                   // alert('a:'+JSON.stringify(previous_touches))
                     update(previous_touches)
@@ -516,7 +518,7 @@ function circulateMeasure(p) {
                         yA = Math.floor(yA);
                         yB = Math.floor(yB);
                     }
-
+                    isDetecting = false;
                     drawScreen()
                       }, 200)
                   } else {
