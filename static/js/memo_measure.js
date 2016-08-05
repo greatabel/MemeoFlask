@@ -288,7 +288,7 @@ function changeImage(side, step) {
                   changeImage('left','-1');
                 } else if(floatingPointPartA == 0){
                  changeImage('left','');
-                  yA = yA + stepPx;
+                  yA = yA + 2*stepPx;
                   compensationA = true;
                 }
             } else {
@@ -297,7 +297,7 @@ function changeImage(side, step) {
                   changeImage('right','1');
                 }else if(floatingPointPartB == 0){
                  changeImage('right','');
-                  yB = yB - stepPx;
+                  yB = yB - 2*stepPx;
                   compensationB = true;
 
                 }
@@ -331,11 +331,11 @@ function changeImage(side, step) {
       update(previous_touches);
       drawScreen();
       if (compensationA) {
-         yA = yA - stepPx;
+         yA = yA - 2*stepPx;
          compensationA = false;
       }
       if(compensationB) {
-          yB = yB + stepPx;
+          yB = yB + 2*stepPx;
           compensationB = false;
       }
       window.setTimeout(drawScreen, 200);
