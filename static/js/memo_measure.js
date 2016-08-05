@@ -340,11 +340,12 @@ function changeImage(side, step) {
          compensationA = false;
          window.setTimeout(function() {
 
-            var element1 = document.getElementById('div_left_img');                
-            element1.style.visibility = 'visible'; 
+     
             
 
          }, 300);
+                var element1 = document.getElementById('div_left_img');                
+            element1.style.visibility = 'visible'; 
 
       }
       if(compensationB) {
