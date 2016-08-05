@@ -336,7 +336,10 @@ function changeImage(side, step) {
       if (compensationA) {
          yA = yA - 6*stepPx;
          compensationA = false;
-        myElementL.style.display = 'block';  
+         window.setTimeout({
+            myElementL.style.display = 'block';  
+         }, 200);
+
       }
       if(compensationB) {
           yB = yB + 6*stepPx;
