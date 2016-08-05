@@ -399,7 +399,7 @@ function get_ppi() {
               stepPx = 1;
               break;
             case 2:
-              stepPx = 0.75;
+              stepPx = 0.5;
               break;
             case 3:
               stepPx = 0.3333334;
@@ -673,6 +673,10 @@ function reset() {
     update(previous_touches);
     yA = centerY;
     yB = centerY;
+    if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
+      yA = Math.floor(yA);
+      yB = Math.floor(yB);
+    }
    drawScreen();
      whicheye = -1;
    temp = 0;
@@ -682,6 +686,7 @@ function reset() {
   $('#saveButton').prop('disabled', true);
   changeImage('left','');
   changeImage('right','');
+
 
   }
 }
