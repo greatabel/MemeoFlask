@@ -276,7 +276,7 @@ function changeImage(side, step) {
       floatingPointPartB = yB % 1;
 
        if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
-document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
+
           // alert(floatingPointPartA+':# '+floatingPointPartB)
          switch(window.devicePixelRatio){
           case 2:
@@ -316,6 +316,7 @@ document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
             break;
 
          }
+         document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
        }
 
 
