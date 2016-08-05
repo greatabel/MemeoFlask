@@ -344,7 +344,7 @@ function changeImage(side, step) {
      
             
 
-         }, 120);
+         }, 135);
 
 
       }
