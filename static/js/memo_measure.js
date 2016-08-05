@@ -291,6 +291,7 @@ document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA;
               changeImage('right','1');
             }else if(floatingPointPartB == 0){
              changeImage('right','');
+             
             }
             break;
           case 3:
@@ -511,7 +512,7 @@ function circulateMeasure(p) {
                     update(previous_touches)
                     yA = centerY;
                     yB = centerY;
-                    if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
+                    if (navigator.userAgent.toLowerCase().indexOf('android') > -1 && isDetecting) {
                         yA = Math.floor(yA);
                         yB = Math.floor(yB);
                     }
