@@ -337,7 +337,9 @@ function changeImage(side, step) {
          yA = yA - 6*stepPx;
          compensationA = false;
          window.setTimeout(function() {
-            myElementL.style.display = 'block';  
+            alert('t')
+            myElementL.style.display = 'block'; 
+
          }, 2000);
 
       }
