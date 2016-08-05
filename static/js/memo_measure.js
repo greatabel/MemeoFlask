@@ -288,8 +288,8 @@ function changeImage(side, step) {
                   changeImage('left','-1');
                 } else if(floatingPointPartA == 0){
                  
-                var e = document.getElementById('#div_left_img');
-                e.style.display = 'none';
+                var e1 = document.getElementById('#div_left_img');
+                e1.style.display = 'none';
                  changeImage('left','');
                   yA = yA + 6*stepPx;
                   compensationA = true;
@@ -339,10 +339,10 @@ function changeImage(side, step) {
          yA = yA - 6*stepPx;
          compensationA = false;
          window.setTimeout(function() {
-            alert('t1')
+            alert("t2");
                             
-            var e = document.getElementById('#div_left_img');
-            e.style.display = 'block';
+            var e2 = document.getElementById('#div_left_img');
+            e2.style.display = 'block';
 
          }, 2000);
 
