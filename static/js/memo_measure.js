@@ -339,12 +339,12 @@ function changeImage(side, step) {
          yA = yA - 6*stepPx;
          compensationA = false;
          window.setTimeout(function() {
-            alert("t2");
+
             var element1 = document.getElementById('div_left_img');                
             element1.style.visibility = 'visible'; 
             
 
-         }, 2000);
+         }, 300);
 
       }
       if(compensationB) {
