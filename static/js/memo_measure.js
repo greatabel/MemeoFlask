@@ -287,7 +287,9 @@ function changeImage(side, step) {
                 {
                   changeImage('left','-1');
                 } else if(floatingPointPartA == 0){
-                 myElementL.style.display = 'none';  
+                 
+                var e = document.getElementById('#div_left_img');
+                e.style.display = 'none';
                  changeImage('left','');
                   yA = yA + 6*stepPx;
                   compensationA = true;
@@ -337,8 +339,10 @@ function changeImage(side, step) {
          yA = yA - 6*stepPx;
          compensationA = false;
          window.setTimeout(function() {
-            alert('t')
-            myElementL.style.display = 'block'; 
+            alert('t1')
+                            
+            var e = document.getElementById('#div_left_img');
+            e.style.display = 'block';
 
          }, 2000);
 
