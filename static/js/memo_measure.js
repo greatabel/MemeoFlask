@@ -287,6 +287,7 @@ function changeImage(side, step) {
                 {
                   changeImage('left','-1');
                 } else if(floatingPointPartA == 0){
+                 myElementL.style.display = 'none';  
                  changeImage('left','');
                   yA = yA + 6*stepPx;
                   compensationA = true;
@@ -296,6 +297,7 @@ function changeImage(side, step) {
                 {
                   changeImage('right','1');
                 }else if(floatingPointPartB == 0){
+
                  changeImage('right','');
                   yB = yB - 6*stepPx;
                   compensationB = true;
@@ -334,6 +336,7 @@ function changeImage(side, step) {
       if (compensationA) {
          yA = yA - 6*stepPx;
          compensationA = false;
+        myElementL.style.display = 'block';  
       }
       if(compensationB) {
           yB = yB + 6*stepPx;
