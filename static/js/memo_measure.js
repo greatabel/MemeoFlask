@@ -256,11 +256,15 @@ var cx = document.querySelector("canvas").getContext("2d");
 
 function changeImage(side, step) {
 
-         var imgDiv = document.getElementById(side+'_img');
+         var imgDiv = document.getElementById('div_'+side+'_img');
        
-         var imagepath = '../static/images/pig/'+(side+step)+'.png';
-         // alert(imagepath)
-        imgDiv.src= imagepath;
+        //  var imagepath = '../static/images/pig/'+(side+step)+'.png';
+        //  // alert(imagepath)
+        // imgDiv.src= imagepath;
+
+
+    imgDivimgDiv.setAttribute("class", 'sample'+step);
+    imgDiv.setAttribute("className", 'sample'+step);
        
   
 }
@@ -289,7 +293,7 @@ function changeImage(side, step) {
                 } else if(floatingPointPartA == 0){
                  
                 var element = document.getElementById('div_left_img');
-                element.style.visibility = 'hidden';   
+                // element.style.visibility = 'hidden';   
                  changeImage('left','');
                   yA = yA + 6*stepPx;
                   compensationA = true;
@@ -340,7 +344,7 @@ function changeImage(side, step) {
          compensationA = false;
          window.setTimeout(function() {
             var element1 = document.getElementById('div_left_img');                
-            element1.style.visibility = 'visible'; 
+            // element1.style.visibility = 'visible'; 
      
             
 
