@@ -301,10 +301,10 @@ function changeImage(side, step) {
             } else {
                 if(floatingPointPartB == 0.5)
                 {
-                  changeImage('right','1');
+                  // changeImage('right','1');
                 }else if(floatingPointPartB == 0){
 
-                 changeImage('right','');
+                 // changeImage('right','');
                   yB = yB - 6*stepPx;
                   compensationB = true;
 
