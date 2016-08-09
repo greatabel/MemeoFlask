@@ -263,7 +263,7 @@ function changeImage(side, step) {
         // imgDiv.src= imagepath;
 
 
-    imgDivimgDiv.setAttribute("class", side+step);
+    imgDiv.setAttribute("class", side+step);
     imgDiv.setAttribute("className", side+step);
        
   
