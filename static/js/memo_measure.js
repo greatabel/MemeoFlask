@@ -256,16 +256,21 @@ var cx = document.querySelector("canvas").getContext("2d");
 
 function changeImage(side, step) {
 
-         var imgDiv = document.getElementById('div_'+side+'_img');
+         
+      if(side == "left") {
+        myElementL.setAttribute("class", side+step);
+        myElementL.setAttribute("className", side+step);
+      } else if(side == "right"){
+
+        myElementR.setAttribute("class", side+step);
+        myElementR.setAttribute("className", side+step);
+      }
+       
        
         //  var imagepath = '../static/images/pig/'+(side+step)+'.png';
         //  // alert(imagepath)
         // imgDiv.src= imagepath;
-
-
-    imgDiv.setAttribute("class", side+step);
-    imgDiv.setAttribute("className", side+step);
-       
+      
   
 }
     
