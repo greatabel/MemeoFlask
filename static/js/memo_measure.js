@@ -297,9 +297,9 @@ function changeImage(side, step) {
                   changeImage('left','-1');
                 } else if(floatingPointPartA == 0){
                  
-                var element = document.getElementById('div_left_img');
+                // var element = document.getElementById('div_left_img');
                 // element.style.visibility = 'hidden';   
-                 changeImage('left','');
+                 changeImage('left','0');
                   yA = yA + 6*stepPx;
                   compensationA = true;
                 }
@@ -309,7 +309,7 @@ function changeImage(side, step) {
                   changeImage('right','1');
                 }else if(floatingPointPartB == 0){
 
-                 changeImage('right','');
+                 changeImage('right','0');
                   yB = yB - 6*stepPx;
                   compensationB = true;
 
