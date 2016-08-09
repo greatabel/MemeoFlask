@@ -348,21 +348,16 @@ function changeImage(side, step) {
       if (compensationA) {
          yA = yA - 6*stepPx;
          compensationA = false;
-         window.setTimeout(function() {
-            var element1 = document.getElementById('div_left_img');                
-            // element1.style.visibility = 'visible'; 
-     
-            
-
-         }, 250);
-
-
+         // window.setTimeout(function() {
+         //    var element1 = document.getElementById('div_left_img');                
+         //    // element1.style.visibility = 'visible';     
+         // }, 250);
       }
       if(compensationB) {
           yB = yB + 6*stepPx;
           compensationB = false;
       }
-      document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA+"#b"+yB;
+      document.getElementById("content").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
   }
 
       // window.setTimeout(drawScreen, 200);
