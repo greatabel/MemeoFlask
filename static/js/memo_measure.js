@@ -263,8 +263,8 @@ function changeImage(side, step) {
         // imgDiv.src= imagepath;
 
 
-    imgDivimgDiv.setAttribute("class", 'sample'+step);
-    imgDiv.setAttribute("className", 'sample'+step);
+    imgDivimgDiv.setAttribute("class", side+step);
+    imgDiv.setAttribute("className", side+step);
        
   
 }
@@ -301,10 +301,10 @@ function changeImage(side, step) {
             } else {
                 if(floatingPointPartB == 0.5)
                 {
-                  // changeImage('right','1');
+                  changeImage('right','1');
                 }else if(floatingPointPartB == 0){
 
-                 // changeImage('right','');
+                 changeImage('right','');
                   yB = yB - 6*stepPx;
                   compensationB = true;
 
