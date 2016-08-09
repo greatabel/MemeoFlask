@@ -342,7 +342,7 @@ function changeImage(side, step) {
 
       // x = x + 2;
       update(previous_touches);
-               window.setTimeout(drawScreen, 250);
+      drawScreen();
       
       if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       if (compensationA) {
@@ -413,7 +413,7 @@ function moveDown(){
      update(previous_touches);
      drawScreen();
 
-    window.setTimeout(drawScreen, 200);
+    // window.setTimeout(drawScreen, 200);
 }
 
 function get_ppi() {
