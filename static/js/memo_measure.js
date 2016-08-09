@@ -342,7 +342,8 @@ function changeImage(side, step) {
 
       // x = x + 2;
       update(previous_touches);
-      drawScreen();
+               window.setTimeout(drawScreen(), 250);
+      
       if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       if (compensationA) {
          yA = yA - 6*stepPx;
