@@ -342,7 +342,7 @@ function changeImage(side, step) {
 
       // x = x + 2;
       update(previous_touches);
-               window.setTimeout(drawScreen(), 250);
+               window.setTimeout(drawScreen, 250);
       
       if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       if (compensationA) {
@@ -365,7 +365,7 @@ function changeImage(side, step) {
       document.getElementById("content").innerHTML = floatingPointPartA +'#'+ yA+"#b"+yB;
   }
 
-      window.setTimeout(drawScreen, 200);
+      // window.setTimeout(drawScreen, 200);
 
 };
 
