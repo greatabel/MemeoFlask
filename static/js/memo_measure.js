@@ -300,7 +300,7 @@ function changeImage(side, step) {
                 // var element = document.getElementById('div_left_img');
                 // element.style.visibility = 'hidden';   
                  changeImage('left','0');
-                  // yA = yA + 6*stepPx;
+                  yA = yA + 6*stepPx;
                   // compensationA = true;
                 }
             } else {
