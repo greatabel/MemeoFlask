@@ -275,7 +275,7 @@ function changeImage(side, step) {
 }
     
    function moveTop(){ 
-
+      document.getElementById("content").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
       if (temp % 2 === 0) {
          yA = yA + stepPx;  
       } else {
@@ -285,7 +285,7 @@ function changeImage(side, step) {
       floatingPointPartB = yB % 1;
       var compensationA = false;
       var compensationB = false;
-      document.getElementById("content").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
+
        if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
 
           // alert(floatingPointPartA+':# '+floatingPointPartB)
