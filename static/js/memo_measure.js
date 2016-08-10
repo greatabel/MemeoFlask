@@ -285,7 +285,7 @@ function changeImage(side, step) {
       floatingPointPartB = yB % 1;
       var compensationA = false;
       var compensationB = false;
-
+      document.getElementById("content").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
        if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
 
           // alert(floatingPointPartA+':# '+floatingPointPartB)
@@ -357,7 +357,7 @@ function changeImage(side, step) {
           yB = yB + 6*stepPx;
           compensationB = false;
       }
-      document.getElementById("content").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
+
   }
 
       // window.setTimeout(drawScreen, 200);
