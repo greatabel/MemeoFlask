@@ -300,8 +300,8 @@ function changeImage(side, step) {
                 // var element = document.getElementById('div_left_img');
                 // element.style.visibility = 'hidden';   
                  changeImage('left','0');
-                  yA = yA + 6*stepPx;
-                  compensationA = true;
+                  // yA = yA + 6*stepPx;
+                  // compensationA = true;
                 }
             } else {
                 if(floatingPointPartB == 0.5)
@@ -310,8 +310,8 @@ function changeImage(side, step) {
                 }else if(floatingPointPartB == 0){
 
                  changeImage('right','0');
-                  yB = yB - 6*stepPx;
-                  compensationB = true;
+                  // yB = yB - 6*stepPx;
+                  // compensationB = true;
 
                 }
             }
@@ -344,23 +344,23 @@ function changeImage(side, step) {
       update(previous_touches);
       drawScreen();
       
-      if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
-      if (compensationA) {
-        document.getElementById("content1").innerHTML = 'compensationA';
-         yA = yA - 6*stepPx;
-         compensationA = false;
-         // window.setTimeout(function() {
-         //    var element1 = document.getElementById('div_left_img');                
-         //    // element1.style.visibility = 'visible';     
-         // }, 250);
-      }
-      if(compensationB) {
-        document.getElementById("content1").innerHTML = 'compensationB';
-          yB = yB + 6*stepPx;
-          compensationB = false;
-      }
+  //     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
+  //     if (compensationA) {
+  //       document.getElementById("content1").innerHTML = 'compensationA';
+  //        yA = yA - 6*stepPx;
+  //        compensationA = false;
+  //        // window.setTimeout(function() {
+  //        //    var element1 = document.getElementById('div_left_img');                
+  //        //    // element1.style.visibility = 'visible';     
+  //        // }, 250);
+  //     }
+  //     if(compensationB) {
+  //       document.getElementById("content1").innerHTML = 'compensationB';
+  //         yB = yB + 6*stepPx;
+  //         compensationB = false;
+  //     }
 
-  }
+  // }
         document.getElementById("contentE").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
 
       // window.setTimeout(drawScreen, 200);
