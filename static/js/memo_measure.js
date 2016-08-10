@@ -301,7 +301,7 @@ function changeImage(side, step) {
                 // element.style.visibility = 'hidden';   
                  changeImage('left','0');
                   yA = yA + 4*stepPx;
-                  // compensationA = true;
+                  compensationA = true;
                 }
             } else {
                 if(floatingPointPartB == 0.5)
@@ -311,7 +311,7 @@ function changeImage(side, step) {
 
                  changeImage('right','0');
                   yB = yB - 4*stepPx;
-                  // compensationB = true;
+                  compensationB = true;
 
                 }
             }
@@ -343,7 +343,18 @@ function changeImage(side, step) {
       // x = x + 2;
       update(previous_touches);
       drawScreen();
-      
+      if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
+        if (temp % 2 === 0) {
+        if( compensationA ) {
+          yA = yA - 4*stepPx;
+        }
+      } else {
+        if( compensationB) {
+          yB = yB + 4*stepPx;
+        }
+
+      }
+    }
   //     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
   //     if (compensationA) {
   //       document.getElementById("content1").innerHTML = 'compensationA';
