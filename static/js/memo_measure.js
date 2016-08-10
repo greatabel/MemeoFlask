@@ -310,7 +310,7 @@ function changeImage(side, step) {
                 }else if(floatingPointPartB == 0){
 
                  changeImage('right','0');
-                  yB = yB - 4*stepPx;
+                  // yB = yB - 4*stepPx;
                   // compensationB = true;
 
                 }
