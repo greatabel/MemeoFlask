@@ -359,6 +359,7 @@ function changeImage(side, step) {
       }
 
   }
+        document.getElementById("contentE").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
 
       // window.setTimeout(drawScreen, 200);
 
