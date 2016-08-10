@@ -346,6 +346,7 @@ function changeImage(side, step) {
       
       if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       if (compensationA) {
+        document.getElementById("content1").innerHTML = 'compensationA';
          yA = yA - 6*stepPx;
          compensationA = false;
          // window.setTimeout(function() {
@@ -354,6 +355,7 @@ function changeImage(side, step) {
          // }, 250);
       }
       if(compensationB) {
+        document.getElementById("content1").innerHTML = 'compensationB';
           yB = yB + 6*stepPx;
           compensationB = false;
       }
