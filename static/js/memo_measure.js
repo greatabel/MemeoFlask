@@ -308,6 +308,7 @@ function changeImage(side, step) {
                 if(floatingPointPartB == 0.5)
                 {
                   changeImage('right','1');
+                   yB = yB + 2*stepPx;
                 }else if(floatingPointPartB == 0){
 
                  changeImage('right','0');
