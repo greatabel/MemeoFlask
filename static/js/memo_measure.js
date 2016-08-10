@@ -295,6 +295,7 @@ function changeImage(side, step) {
                 if(floatingPointPartA == 0.5)
                 {
                   changeImage('left','-1');
+                  yA = yA - 2*stepPx;
                 } else if(floatingPointPartA == 0){
                  
                 // var element = document.getElementById('div_left_img');
