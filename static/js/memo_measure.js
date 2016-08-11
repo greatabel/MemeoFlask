@@ -211,15 +211,14 @@ var cx = document.querySelector("canvas").getContext("2d");
     previous_Y_bound = centerY + r + 10;
 
     // // draw center 
-    // ctx.fillRect(centerX, centerY, 1,1);
+    ctx.fillRect(centerX, centerY, 1,1);
 
     ctx.beginPath();
     ctx.arc(centerX, centerY, r, 0, 2*Math.PI, true);
-    ctx.fillStyle = "rgba(255,255,255, 0.9)";
+    ctx.fillStyle = "rgba(255,255,255, 0)";
     ctx.fill();
-        // draw center 
-    ctx.fillRect(centerX, centerY, 1,1);
-    
+
+
     ctx.lineWidth = 2.0;
     ctx.strokeStyle = "rgba(0, 0, 200, 0.8)";
     ctx.stroke();
