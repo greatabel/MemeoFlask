@@ -596,6 +596,10 @@ function circulateMeasure(p) {
                     if (navigator.userAgent.toLowerCase().indexOf('android') > -1 && isDetecting) {
                         yA = Math.floor(yA);
                         yB = Math.floor(yB);
+                        if(window.devicePixelRatio == 3) {
+                         changeImage('left3x','0');
+                         changeImage('right3x','0');
+                       }
                     }
                     isDetecting = false;
                     drawScreen()
@@ -763,6 +767,15 @@ function reset() {
     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       yA = Math.floor(yA);
       yB = Math.floor(yB);
+      if(window.devicePixelRatio == 3) {
+          changeImage('left3x','0');
+          changeImage('right3x','0');
+      }              
+
+                    
+    } else {
+       changeImage('left','0');
+       changeImage('right','0');
     }
    drawScreen();
      whicheye = -1;
@@ -771,8 +784,7 @@ function reset() {
    setRadio("radioL", "btn btn-primary btn-sm pull-right notActive");
      if(whicheye < 0) {
   $('#saveButton').prop('disabled', true);
-  changeImage('left','0');
-  changeImage('right','0');
+
 
 
   }
