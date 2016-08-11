@@ -260,10 +260,10 @@ var cx = document.querySelector("canvas").getContext("2d");
 function changeImage(side, step) {
 
          
-      if(side == "left") {
+      if(side == "left" || side == "left3x") {
         myElementL.setAttribute("class", side+step);
         myElementL.setAttribute("className", side+step);
-      } else if(side == "right"){
+      } else if(side == "right" || side == "right3x"){
 
         myElementR.setAttribute("class", side+step);
         myElementR.setAttribute("className", side+step);
