@@ -215,7 +215,7 @@ var cx = document.querySelector("canvas").getContext("2d");
 
     ctx.beginPath();
     ctx.arc(centerX, centerY, r, 0, 2*Math.PI, true);
-    ctx.fillStyle = "rgba(255,255,255, 0)";
+    // ctx.fillStyle = "rgba(255,255,255, 0)";
     ctx.fill();
 
 
