@@ -325,19 +325,21 @@ function changeImage(side, step) {
           case 3:
             if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
             {
-              changeImage('left','-1');
+              changeImage('left3x','-1');
               
             } else if((floatingPointPartA >= 0.6) && (floatingPointPartA <= 0.9) ){
-              changeImage('left','-2');              
+              changeImage('left3x','-2');              
             } else if (floatingPointPartA < 0.3) {
-              changeImage('left','');
+              changeImage('left3x','0');
             }
             
            if( (floatingPointPartB >= 0.3) && (floatingPointPartB <= 0.6))
             {
-              changeImage('right','1');
+              changeImage('right3x','1');
             } else if( (floatingPointPartB >= 0.6) && (floatingPointPartB <= 0.9)){
-              changeImage('right','2');              
+              changeImage('right3x','2');              
+            }else if (floatingPointPartA < 0.3) {
+              changeImage('right3x','0');
             }
             break;
 
