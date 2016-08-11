@@ -385,14 +385,33 @@ function moveDown(){
         var floatingPointPartB = yB % 1;
        switch(window.devicePixelRatio){
         case 2:
-          if(floatingPointPartA == 0.75)
-          {
-            changeImage('left','1');
-          }
-          if(floatingPointPartB == 0.75)
-          {
-            changeImage('right','-1');
-          }
+            if (temp % 2 === 0) {
+                if(floatingPointPartA == 0.5)
+                {
+                  changeImage('left','1');
+                  // yA = yA - 2*stepPx;
+                } else if(floatingPointPartA == 0){
+                 
+                // var element = document.getElementById('div_left_img');
+                // element.style.visibility = 'hidden';   
+                 changeImage('left','0');
+                  // yA = yA + 4*stepPx;
+                  // compensationA = true;
+                }
+            } else {
+                if(floatingPointPartB == 0.5)
+                {
+                  changeImage('right','-1');
+                   // yB = yB + 2*stepPx;
+                }else if(floatingPointPartB == 0){
+
+                 changeImage('right','0');
+                  // yB = yB - 2*stepPx;
+
+                  // compensationB = true;
+
+                }
+            }
           break;
         case 3:
           if(floatingPointPartA >= 0.3 && floatingPointPartA <= 0.6)
