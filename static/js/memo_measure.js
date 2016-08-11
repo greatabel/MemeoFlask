@@ -215,10 +215,11 @@ var cx = document.querySelector("canvas").getContext("2d");
 
     ctx.beginPath();
     ctx.arc(centerX, centerY, r, 0, 2*Math.PI, true);
-    ctx.fillStyle = "rgba(255,255,255, 1)";
+    ctx.fillStyle = "rgba(255,255,255, 0)";
     ctx.fill();
 
-
+    ctx.fillRect(centerX, centerY, 1,1);
+    
     ctx.lineWidth = 2.0;
     ctx.strokeStyle = "rgba(0, 0, 200, 0.8)";
     ctx.stroke();
