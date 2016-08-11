@@ -210,13 +210,16 @@ var cx = document.querySelector("canvas").getContext("2d");
     myPPI = r * window.devicePixelRatio * 25.4/ 19;
     previous_Y_bound = centerY + r + 10;
 
-    // draw center 
-    ctx.fillRect(centerX, centerY, 2,2);
+    // // draw center 
+    // ctx.fillRect(centerX, centerY, 1,1);
 
     ctx.beginPath();
     ctx.arc(centerX, centerY, r, 0, 2*Math.PI, true);
     ctx.fillStyle = "rgba(255,255,255, 0.9)";
     ctx.fill();
+        // draw center 
+    ctx.fillRect(centerX, centerY, 1,1);
+    
     ctx.lineWidth = 2.0;
     ctx.strokeStyle = "rgba(0, 0, 200, 0.8)";
     ctx.stroke();
@@ -313,7 +316,7 @@ function changeImage(side, step) {
 
                  changeImage('right','0');
                   yB = yB - 2*stepPx;
-                  
+
                   // compensationB = true;
 
                 }
