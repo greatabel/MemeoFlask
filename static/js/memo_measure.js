@@ -323,25 +323,28 @@ function changeImage(side, step) {
             }
             break;
           case 3:
-            if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
-            {
-              changeImage('left3x','-1');
-              
-            } else if((floatingPointPartA >= 0.6) && (floatingPointPartA <= 0.9) ){
-              changeImage('left3x','-2');              
-            } else if (floatingPointPartA < 0.3) {
-              changeImage('left3x','0');
-            }
+            if (temp % 2 === 0) {
+              if( (floatingPointPartA >= 0.3) && (floatingPointPartA <= 0.4 ))
+              {
+                changeImage('left3x','-1');
+                
+              } else if((floatingPointPartA >= 0.6) && (floatingPointPartA <= 0.9) ){
+                changeImage('left3x','-2');              
+              } else if (floatingPointPartA < 0.3) {
+                changeImage('left3x','0');
+              }
+            }else {
             
-           if( (floatingPointPartB >= 0.3) && (floatingPointPartB <= 0.4))
-            {
-              changeImage('right3x','1');
-            } else if( (floatingPointPartB >= 0.6) && (floatingPointPartB <= 0.9)){
-              changeImage('right3x','2');              
-            }else if (floatingPointPartB < 0.3) {
-              changeImage('right3x','0');
-            }
-            break;
+             if( (floatingPointPartB >= 0.3) && (floatingPointPartB <= 0.4))
+              {
+                changeImage('right3x','1');
+              } else if( (floatingPointPartB >= 0.6) && (floatingPointPartB <= 0.9)){
+                changeImage('right3x','2');              
+              }else if (floatingPointPartB < 0.3) {
+                changeImage('right3x','0');
+              }
+          }
+          break;
 
          }
          
