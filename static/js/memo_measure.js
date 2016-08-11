@@ -298,13 +298,13 @@ function changeImage(side, step) {
                 if(floatingPointPartA == 0.5)
                 {
                   changeImage('left','-1');
-                  yA = yA - 2*stepPx;
+                  // yA = yA - 2*stepPx;
                 } else if(floatingPointPartA == 0){
                  
                 // var element = document.getElementById('div_left_img');
                 // element.style.visibility = 'hidden';   
                  changeImage('left','0');
-                  yA = yA + 4*stepPx;
+                  // yA = yA + 4*stepPx;
                   // compensationA = true;
                 }
             } else {
@@ -315,7 +315,7 @@ function changeImage(side, step) {
                 }else if(floatingPointPartB == 0){
 
                  changeImage('right','0');
-                  yB = yB - 2*stepPx;
+                  // yB = yB - 2*stepPx;
 
                   // compensationB = true;
 
