@@ -132,6 +132,17 @@ function update(touches) {
   }
   
   ctx.clearRect(0, 0, w, h);
+
+  // draw introducting line ,height is at 250, begin from 5 ,to end-5
+  ctx.beginPath();
+  ctx.moveTo(5, 250);
+  ctx.lineTo(w-5, 250);
+  ctx.strokeStyle = "rgba(0, 0, 255, 1)";
+  ctx.stroke();
+  ctx.arc(w/2, 250, 130, 0, 2*Math.PI, true);
+  ctx.fillStyle = "rgba(255,255,0,0.3)";
+  ctx.fill();
+
   var i, len = touches.length;
   if (len > 3) {
     len = 3;
@@ -142,8 +153,8 @@ function update(touches) {
 
 
 
-var cx = document.querySelector("canvas").getContext("2d");
-  cx.beginPath();
+// var cx = document.querySelector("canvas").getContext("2d");
+//   cx.beginPath();
  centerX = 0;
  centerY = 0;
 
@@ -156,10 +167,10 @@ var cx = document.querySelector("canvas").getContext("2d");
    centerX += touch.pageX;
    centerY += touch.pageY;
   
-    cx.moveTo(px, py);
+    ctx.moveTo(px, py);
 
     if (i+1 < len) {
-      cx.lineTo(touches[i+1].pageX, touches[i+1].pageY);
+      ctx.lineTo(touches[i+1].pageX, touches[i+1].pageY);
 
     }
 
@@ -183,13 +194,13 @@ var cx = document.querySelector("canvas").getContext("2d");
   }
 
     if (len > 0) {
-      // cx.moveTo(touches[0].pageX, touches[0].pageY);
-      cx.lineTo(touches[0].pageX, touches[0].pageY);
+      // ctx.moveTo(touches[0].pageX, touches[0].pageY);
+      ctx.lineTo(touches[0].pageX, touches[0].pageY);
       centerX = centerX/3;
       centerY = centerY/3;
     }
-    cx.strokeStyle = "rgba(255, 0, 0, 1)";
-    cx.stroke();
+    ctx.strokeStyle = "rgba(255, 0, 0, 1)";
+    ctx.stroke();
 
     
 
@@ -207,6 +218,7 @@ var cx = document.querySelector("canvas").getContext("2d");
 
 
     var r =   Math.sqrt(3) * (a + b + c) / 9;
+
     // 16 is 32/2 is device 32 mm
     myPPI = r * window.devicePixelRatio * 25.4/ 16;
     previous_Y_bound = centerY + r + 10;
