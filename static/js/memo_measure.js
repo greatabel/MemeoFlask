@@ -62,11 +62,11 @@ var stepPx = 0;
    // var border = document.querySelector("#1_3border");
    // myElementL.prepend(border);
    myElementL.style.top = (yA - 50 ) +"px";
-   myElementL.style.left = (centerX - 50) + "px";
+   myElementL.style.left = (centerX - 51) + "px";
    myElementL.style.display = 'block';
 
    // myElementR.style.backgroundColor = "#D93600";
-   myElementR.style.top = (yB - 51 ) +"px";
+   myElementR.style.top = (yB - 50 ) +"px";
    myElementR.style.left = (centerX + 1) + "px";
    myElementR.style.display = 'block';
 
