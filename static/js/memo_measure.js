@@ -716,7 +716,7 @@ function circulateMeasure(p) {
 
                         moveDown();
                         document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
-                        +window.devicePixelRatio+":"+temp+ "#ppi:"+myPPI;
+                        +window.devicePixelRatio+":"+temp+ "#yDiff:"+yDiff;
 
 
                     }                                                                 
