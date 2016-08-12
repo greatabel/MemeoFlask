@@ -372,7 +372,7 @@ function changeImage(side, step) {
   //     }
 
   // }
-        document.getElementById("contentE").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
+        document.getElementById("contentE").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB+"ppi:"+ myPPI;
 
       // window.setTimeout(drawScreen, 200);
 
@@ -448,6 +448,7 @@ function moveDown(){
           // x = x + 2;
      update(previous_touches);
      drawScreen();
+      document.getElementById("contentE").innerHTML = "ppi:"+ myPPI;
 
     // window.setTimeout(drawScreen, 200);
 }
