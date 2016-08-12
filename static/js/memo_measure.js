@@ -468,7 +468,7 @@ function get_ppi() {
               stepPx = 0.75;
               break;
             case 3:
-              myPPI = 401;
+              myPPI = 461;
               stepPx = 0.3333334;
               break;
             case 4:
@@ -551,7 +551,7 @@ function myfilter(evt) {
 function circulateMeasure(p) {
     // var returnValue = p * 25400 / myPPI;
     // returnValue = 403 + 1.513 * returnValue;
-    var returnValue = 165 + 25 * p * 401 / myPPI;
+    var returnValue = 165 + 25 * p * 461 / myPPI;
 
     var floatingPointPart = (returnValue/25) % 1;
     var integerPart = Math.floor(returnValue/25);
