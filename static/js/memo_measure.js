@@ -124,7 +124,7 @@ function update(touches) {
   var nh = window.innerHeight;
   if ((w != nw) || (h != nh)) {
     w = nw ;
-    h = nh - 225;
+    h = nh - 125;
     canvas.style.width = w+'px';
     canvas.style.height = h+'px';
     canvas.width = w;
@@ -135,11 +135,11 @@ function update(touches) {
 
   // draw introducting line ,height is at 250, begin from 5 ,to end-5
   ctx.beginPath();
-  ctx.moveTo(5, 250);
-  ctx.lineTo(w-5, 250);
+  ctx.moveTo(5, 180);
+  ctx.lineTo(w-5, 180);
   ctx.strokeStyle = "rgba(0, 0, 255, 1)";
   ctx.stroke();
-  ctx.arc(w/2, 250, 130, 0, 2*Math.PI, true);
+  ctx.arc(w/2, 180, 115, 0, 2*Math.PI, true);
   ctx.fillStyle = "rgba(255,255,0,0.3)";
   ctx.fill();
 
