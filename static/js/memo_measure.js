@@ -279,7 +279,7 @@ function changeImage(side, step) {
 }
     
    function moveTop(){ 
-      document.getElementById("content").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
+      // document.getElementById("content").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB;
       if (temp % 2 === 0) {
          yA = yA + stepPx;  
       } else {
@@ -373,7 +373,8 @@ function changeImage(side, step) {
   //     }
 
   // }
-        document.getElementById("contentE").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB+"ppi:"+ myPPI;
+        // document.getElementById("contentE").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB+"ppi:"+ myPPI;
+
 
       // window.setTimeout(drawScreen, 200);
 
@@ -449,35 +450,52 @@ function moveDown(){
           // x = x + 2;
      update(previous_touches);
      drawScreen();
-      document.getElementById("contentE").innerHTML = "ppi:"+ myPPI;
+      // document.getElementById("contentE").innerHTML = "ppi:"+ myPPI;
 
     // window.setTimeout(drawScreen, 200);
 }
 
 function get_ppi() {
-    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if (iOS) {
+    // var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    // if (iOS) {
 
-          switch(window.devicePixelRatio)
-          {
-            case 1:
-              stepPx = 1;
-              break;
-            case 2:
-              myPPI = 326;
-              stepPx = 0.75;
-              break;
-            case 3:
-              myPPI = 461;
-              stepPx = 0.3333334;
-              break;
-            case 4:
-              stepPx = 0.25;
-              break;
-          }
-    }
-    if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
-          switch(window.devicePixelRatio)
+    //       switch(window.devicePixelRatio)
+    //       {
+    //         case 1:
+    //           stepPx = 1;
+    //           break;
+    //         case 2:
+    //           // myPPI = 326;
+    //           stepPx = 0.5;
+    //           break;
+    //         case 3:
+    //           // myPPI = 461;
+    //           stepPx = 0.3333334;
+    //           break;
+    //         case 4:
+    //           stepPx = 0.25;
+    //           break;
+    //       }
+    // }
+    // if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
+    //       switch(window.devicePixelRatio)
+    //       {
+    //         case 1:
+    //           stepPx = 1;
+    //           break;
+    //         case 2:
+    //           stepPx = 0.5;
+    //           break;
+    //         case 3:
+    //           stepPx = 0.3333334;
+    //           break;
+    //         case 4:
+    //           stepPx = 0.25;
+    //           break;
+    //       }
+
+    // }
+    switch(window.devicePixelRatio)
           {
             case 1:
               stepPx = 1;
@@ -492,8 +510,6 @@ function get_ppi() {
               stepPx = 0.25;
               break;
           }
-
-    }
 }
 
 function ol() {
