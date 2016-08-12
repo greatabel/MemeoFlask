@@ -690,36 +690,39 @@ function circulateMeasure(p) {
                     }                       
                 } else {
 
-                     if(innerTouches.length == 1 && ( yUp >= previous_Y_bound) && (Math.abs( yDiff ) > 1) ) {
-                      var e = document.getElementById('showArea');
-                      // e.style.display = 'none';
-                    }
-
-                        
-
-                    if ( yDiff > 0 ) {
-                        /* up swipe */ 
-                        temp += 1                    
-                        sightValue = circulateMeasure(temp);
+                  if(  ( yUp >= previous_Y_bound) && (Math.abs( yDiff ) > 1) ) {
+                      if(innerTouches.length == 1) {
+                          var e = document.getElementById('showArea');
+                              // e.style.display = 'none';
+                      }
+                      if ( yDiff > 0 ) {
+                          /* up swipe */ 
+                          temp += 1                    
+                          sightValue = circulateMeasure(temp);
 
 
-                        moveTop();
-                        document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
-                        +window.devicePixelRatio+":"+temp + "#yDiff:"+yDiff;
+                          moveTop();
+                          document.getElementById("measureResult").innerHTML =  '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
+                          +window.devicePixelRatio+":"+temp + "#yDiff:"+yDiff;
 
 
 
-                    } else { 
-                        /* down swipe */
-                        temp -= 1
-                       sightValue = circulateMeasure(temp);
+                      } else { 
+                          /* down swipe */
+                          temp -= 1
+                         sightValue = circulateMeasure(temp);
 
-                        moveDown();
-                        document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
-                        +window.devicePixelRatio+":"+temp+ "#yDiff:"+yDiff;
+                          moveDown();
+                          document.getElementById("measureResult").innerHTML = '<small>测量值:</small> <strong>'+sightValue +'</strong>' 
+                          +window.devicePixelRatio+":"+temp+ "#yDiff:"+yDiff;
 
 
-                    }                                                                 
+                          }
+
+                  
+                    }                       
+
+                                                                 
                 }
                 /* reset values */
                 xDown = null;
