@@ -549,7 +549,7 @@ function myfilter(evt) {
 function circulateMeasure(p) {
     // var returnValue = p * 25400 / myPPI;
     // returnValue = 403 + 1.513 * returnValue;
-    var returnValue = 196 + 21.5 * p * 401 / myPPI;
+    var returnValue = 163.64 + 23.86 * p * 401 / myPPI;
 
     var floatingPointPart = (returnValue/25) % 1;
     var integerPart = Math.floor(returnValue/25);
@@ -690,8 +690,8 @@ function circulateMeasure(p) {
                     }                       
                 } else {
 
-                  if(  ( yUp >= previous_Y_bound) && (Math.abs( yDiff ) > 1) ) {
-                      if(innerTouches.length == 1) {
+                  if(   yUp >= previous_Y_bound  ) {
+                      if(innerTouches.length == 1 && (Math.abs( yDiff ) > 1)) {
                           var e = document.getElementById('showArea');
                               // e.style.display = 'none';
                       }
