@@ -238,7 +238,7 @@ function update(touches) {
     ctx.fillStyle = "rgba(0, 0, 0, 1)";
     ctx.fill();
 
-    ctx.fillRect(centerX, centerY, 1,1);
+    // ctx.fillRect(centerX, centerY, 1,1);
     
     ctx.lineWidth = 2.0;
     ctx.strokeStyle = "rgba(0, 0, 200, 0.8)";
