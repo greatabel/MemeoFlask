@@ -137,8 +137,10 @@ function update(touches) {
   ctx.beginPath();
   ctx.moveTo(5, 180);
   ctx.lineTo(w-5, 180);
+  ctx.lineWidth = 2;
   ctx.strokeStyle = "rgba(0, 0, 255, 1)";
   ctx.stroke();
+  ctx.lineWidth = 1;
   ctx.arc(w/2, 180, 115, 0, 2*Math.PI, true);
   ctx.fillStyle = "rgba(255,255,0,0.3)";
   ctx.fill();
