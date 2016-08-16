@@ -168,7 +168,8 @@ def receive_putao_user():
         DEFAULTS['receive_putao_user'] = str(request.values)
         return 'ok' 
     if request.method == "GET":
-        return 'show:'+  DEFAULTS['receive_putao_user']
+        print('#in get:',request.values )
+        return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
 
 
 @app.route("/")
