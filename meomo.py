@@ -107,7 +107,8 @@ def clear():
 # --------------website-----------------
 
 DEFAULTS = {'email': 'abel',
-            'password': 'test1024'
+            'password': 'test1024',
+            'receive_putao_user':''
             }
 
 def get_value_with_fallback(key):
@@ -157,6 +158,18 @@ def register():
     if not pw1 == pw2:
         return redirect(url_for('home'))
     return redirect(url_for('home'))
+
+ 
+@app.route("/receive_putao_user", methods=["GET","POST"])
+def receive_putao_user():
+    if request.method == "POST":
+        # from flask import jsonify
+        print("receive_putao_user/ I am printing: " ,request.values)
+        DEFAULTS['receive_putao_user'] = str(request.values)
+        return 'ok' 
+    if request.method == "GET":
+        return 'show:'+  DEFAULTS['receive_putao_user']
+
 
 @app.route("/")
 def home():
