@@ -733,7 +733,8 @@ function circulateMeasure(p) {
 
                   if(   yUp >= previous_Y_bound  ) {
                       if(innerTouches.length == 1 && (Math.abs( yDiff ) > 1)) {
-
+                          var e = document.getElementById('showArea');
+                          e.style.display = 'none';
                           var show_up_downn = document.getElementById('show_up_down');
                           show_up_downn.style.display = 'none';
                           var show_double_click = document.getElementById('show_double_click');
