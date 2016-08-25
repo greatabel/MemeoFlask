@@ -679,12 +679,12 @@ function circulateMeasure(p) {
                     clickTimer = null;
                     // alert("double"+ evt.touches.length);
                     if(innerTouches.length == 1 ) {
-                      var show_up_downn = document.getElementById('show_up_down');
-                      show_up_downn.style.display = 'none';
-                      var show_double_click = document.getElementById('show_double_click');
-                      show_double_click.style.display = 'none';
-                      var e = document.getElementById('showArea');
-                      e.style.display = 'block';
+                      // var show_up_downn = document.getElementById('show_up_down');
+                      // show_up_downn.style.display = 'none';
+                      // var show_double_click = document.getElementById('show_double_click');
+                      // show_double_click.style.display = 'none';
+                      // var e = document.getElementById('showArea');
+                      // e.style.display = 'block';
                     }
 
                 }
