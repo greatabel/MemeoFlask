@@ -166,7 +166,7 @@ def receive_putao_user():
         # from flask import jsonify
         print("receive_putao_user/ I am printing: " ,request.values)
         DEFAULTS['receive_putao_user'] = str(request.values)
-        return 'ok' 
+        return 200
     if request.method == "GET":
         print('#in get:',request.values )
         return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
