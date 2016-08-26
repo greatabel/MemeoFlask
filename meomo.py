@@ -5,6 +5,7 @@ from flask import render_template
 from flask import make_response
 from flask import request
 from flask import url_for
+from flask import jsonify
 from flask_restful import Api
 from flask_restful import Resource, reqparse, abort
 
@@ -167,7 +168,11 @@ def receive_putao_user():
         # from flask import jsonify
         print("receive_putao_user/ I am printing: " ,request.values)
         DEFAULTS['receive_putao_user'] = str(request.values)
-        return "OK", 200
+        status_dict  = {'http_code': 200,
+            'msg': 'ok',
+            'data':[]
+            }
+        return jsonify(status_dict), 200
     if request.method == "GET":
         print('#in get:',request.values )
         return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
