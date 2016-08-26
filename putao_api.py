@@ -9,7 +9,7 @@ import requests
 url = 'http://api-weidu-test.ptdev.cn'
 
 data = {"app_key":"a9973799e0dbfbb338ea573d5d76dcbd","time":"1472023028"}
-data["time"] = str(int(time.time()))
+data["time"] = str(int(time.time())+180000)
 secret_key = '900ced36ff5fb92abc4a37c95c823b1e'
 
 
@@ -54,25 +54,33 @@ def create_sign(data):
     return m.hexdigest()
 
 def user_by_openid(openid,access_token):
-    user_url = 'http://api-weidu-test.ptdev.cn/server/userinfo/get?access_token='+access_token+'&open_id='+openid+'&service_id=50044'
+    # user_url = 'http://api-weidu-test.ptdev.cn/server/userinfo/get?access_token='+access_token+'&open_id='+openid+'&service_id=50044'
+    user_url = 'http://api-weidu-test.ptdev.cn/server/userinfo/get'
     print("\nuser_url=",user_url)
-    response = requests.get(user_url)
-    print('user_by_openid end=',response.text)
+    # response = requests.get(user_url)
+    data = {"access_token": access_token,"open_id": openid}
+    response = requests.post(url, data=data)
+
+    print('### user_by_openid end=',response.text)
 
 if __name__ == "__main__":
     url +='/server/get/access/token'
     sign = create_sign(data)
-    ts = str(int(time.time()))
+    ts = str(int(time.time())+180000)
     print('current time=', ts)
 
     # ts = "1472023028"
     # sign = "14f671f8e484ef94c65b36b89f6fa041"
-    data = '{"app_key":"a9973799e0dbfbb338ea573d5d76dcbd","time":"1381429600","sign":"'+sign+'" }'
+    data = {"app_key":"a9973799e0dbfbb338ea573d5d76dcbd","time":ts,"sign":sign}
     print('url=',url)
     print('data=',data)
     # post to putao url is not working
-    # response = requests.post(url, data=data)
+    print('post:')
+    response = requests.post(url, data=data)
+    
     url +='?app_key=a9973799e0dbfbb338ea573d5d76dcbd&time='+ts+'&sign='+sign
-    response = requests.get(url)
-    print('end=',response.text)
-    user_by_openid("0870111b0ea9f317465b209071305916e3080cce", "a38699b6108ed9e26fd69a6afbb2df7ba960572c")
+    print('url=',url)
+    print('data=',data)
+    # response = requests.get(url)
+    print('token end=',response.text)
+    user_by_openid("0870111b0ea9f317465b209071305916e3080cce", "3ebf2ccb6a28ef577fce6d4cd2dc6784d4f9213b")
