@@ -124,7 +124,8 @@ function update(touches) {
   var nh = window.innerHeight;
   if ((w != nw) || (h != nh)) {
     w = nw ;
-    h = nh - 125;
+    // h = nh - 125;
+    h = nh - 150;
     canvas.style.width = w+'px';
     canvas.style.height = h+'px';
     canvas.width = w;
