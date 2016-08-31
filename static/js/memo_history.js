@@ -1,5 +1,5 @@
 var api_url = "http://139.224.73.50"
-api_url = "http://127.0.0.1:5000"
+// api_url = "http://127.0.0.1:5000"
 
 $.getJSON(api_url + '/api/user/0/measures', function(data) {
     children = ['梦遥','冬冬']
