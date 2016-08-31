@@ -68,7 +68,9 @@ class UserApi(Resource):
                     'createdate': str(m[4])
                 }
                 res.append(d)
-            myresult = json.dumps(res)
+
+            # myresult = json.dumps(res)
+            myresult = jsonify(res)
             print('abel##:',myresult)
             return myresult
 
