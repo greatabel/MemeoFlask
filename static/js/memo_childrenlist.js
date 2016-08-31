@@ -8,4 +8,4 @@ function getUrlVars() {
   }
 
 
-document.getElementById("content").innerHTML= window.location.href;
+document.getElementById("content").innerHTML= window.location.href + '<br/>'+navigator.userAgent.toLowerCase();
