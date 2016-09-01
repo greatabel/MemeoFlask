@@ -52,10 +52,14 @@ parser = reqparse.RequestParser()
 parser.add_argument('rawdata')
 parser.add_argument('whicheye')
 parser.add_argument('patientid')
+parser.add_argument('callback')
 
 class UserApi(Resource):
         def get(self, userid=None):
             print('userid=', userid)
+            args = parser.parse_args()
+            print('#'*10,args)
+
             data = DB.get_rawmeasure(str(userid))
             print('abel::',data)
             res = []
@@ -69,8 +73,16 @@ class UserApi(Resource):
                 }
                 res.append(d)
 
-            # myresult = json.dumps(res)
+
+            str_myresult = json.dumps(res)
             myresult = jsonify(res)
+            
+            # add this for jsonP 
+            if args['callback']:
+                str_myresult = args['callback']+'('+str_myresult + ');'
+                print('###str_myresult=', str_myresult)
+                return str_myresult
+
             print('abel##:',myresult)
             return myresult
 
