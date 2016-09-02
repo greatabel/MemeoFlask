@@ -8,6 +8,7 @@ from flask import url_for
 from flask import jsonify
 from flask_restful import Api
 from flask_restful import Resource, reqparse, abort
+from flask_cors import CORS, cross_origin
 
 import json
 import sys
