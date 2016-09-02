@@ -32,7 +32,8 @@ if sys.platform == 'linux':
 
 
 app = Flask(__name__)
-CORS(app)
+
+# CORS(app)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 DB = DBHelper()
