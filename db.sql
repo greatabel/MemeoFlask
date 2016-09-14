@@ -19,11 +19,29 @@ CREATE TABLE IF NOT EXISTS meomo.MeasureRaw  (
      PRIMARY KEY (rawdataid)
      );
 
+CREATE TABLE IF NOT EXISTS meomo.Patient  (
+     patientid int NOT NULL AUTO_INCREMENT,
+     name VARCHAR(100),
+     sex  boolean not null default 0,
+     birthday datetime,
+     picture  BLOB, 
+     createdate TIMESTAMP,
+     PRIMARY KEY (patientid)
+     );
+
 CREATE TABLE IF NOT EXISTS meomo.Patient_User   (
      patientid int ,
      userid int,
       createdate TIMESTAMP,
      PRIMARY KEY (patientid, userid)
+     ) 
+
+CREATE TABLE IF NOT EXISTS meomo.MeasureBaseline   (
+     baselineid int NOT NULL AUTO_INCREMENT,
+     patientid int,
+     data VARCHAR(100),
+      createdate TIMESTAMP,
+     PRIMARY KEY (baselineid)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 /* 

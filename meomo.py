@@ -197,6 +197,8 @@ def receive_putao_user():
         return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
 
 
+
+
 @app.route("/")
 def home():
     email = get_value_with_fallback("email")

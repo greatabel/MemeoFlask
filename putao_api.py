@@ -53,15 +53,31 @@ def create_sign(data):
     print(colored('m.hexdigest()=','red'),m.hexdigest())
     return m.hexdigest()
 
-def user_by_openid(openid,access_token):
+def user_by_openid(openid,access_token,service_id):
     # user_url = 'http://api-weidu-test.ptdev.cn/server/userinfo/get?access_token='+access_token+'&open_id='+openid+'&service_id=50044'
     user_url = 'http://api-weidu-test.ptdev.cn/server/userinfo/get'
     print("\nuser_url=",user_url)
     # response = requests.get(user_url)
-    data = {"access_token": access_token,"open_id": openid}
-    response = requests.post(url, data=data)
+    data = {"access_token":access_token,"open_id":openid,"service_id":service_id}
+    response = requests.post(user_url, data=data)
 
-    print('### user_by_openid end=',response.text)
+    print('2:### user_by_openid end=',response.text)
+
+def child_by_openid(openid,access_token,service_id):
+    child_url = 'http://api-weidu-test.ptdev.cn/server/get/child'
+    print("\child_url=",child_url)
+    # response = requests.get(user_url)
+    data = {"access_token":access_token,"open_id":openid,"service_id":service_id}
+    response = requests.post(child_url, data=data)
+
+    print('3:### child_by_openid end=',response.text)
+
+def get_child_picture(imgurl):
+    print('get_child_picture')
+    from urllib.request import urlretrieve 
+    urlretrieve(imgurl, "Abc.jpg")
+
+
 
 if __name__ == "__main__":
     url +='/server/get/access/token'
@@ -78,9 +94,11 @@ if __name__ == "__main__":
     print('post:')
     response = requests.post(url, data=data)
     
-    url +='?app_key=a9973799e0dbfbb338ea573d5d76dcbd&time='+ts+'&sign='+sign
+    # url +='?app_key=a9973799e0dbfbb338ea573d5d76dcbd&time='+ts+'&sign='+sign
     print('url=',url)
     print('data=',data)
     # response = requests.get(url)
-    print('token end=',response.text)
-    user_by_openid("0870111b0ea9f317465b209071305916e3080cce", "3ebf2ccb6a28ef577fce6d4cd2dc6784d4f9213b")
+    print('1:token end=',response.text)
+    user_by_openid("0870111b0ea9f317465b209071305916e3080cce", "8098a705fc949938f8475884762c27d47c6df941","50044")
+    child_by_openid("0870111b0ea9f317465b209071305916e3080cce", "8098a705fc949938f8475884762c27d47c6df941","50044")
+    get_child_picture('http://weidu.file.dev.putaocloud.com/file/66aca9bae95ddd5b8c0cf7ad6e96edfe8fcb29d5.jpg')

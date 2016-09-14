@@ -18,7 +18,7 @@ description VARCHAR(255),
 updated_at TIMESTAMP,
 PRIMARY KEY (id)
 )"""
-        cursor.execute(sql)
+    cursor.execute(sql)
     connection.commit()
 finally:
     connection.close()
