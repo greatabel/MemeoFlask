@@ -57,6 +57,8 @@ insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('255,151,152,1
 insert Patient_User(patientid, userid, createdate) values(0,0,now());
 insert Patient_User(patientid, userid, createdate) values(1,0,now());
 insert Patient_User(patientid, userid, createdate) values(2,1,now());
+insert  Patient(name,sex,birthday, picture,createdate) values('小明',0,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 2 YEAR)  );
+insert  Patient(name,sex,birthday, picture,createdate) values('小红',1,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 3 YEAR)  );
 
 */
 
