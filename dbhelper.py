@@ -10,6 +10,20 @@ class DBHelper:
                                passwd=dbconfig.db_password,
                                db=database)
 
+
+    def get_children(self, userid):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM Patient;"
+            if userid is not None:
+                query = "SELECT Patient.* FROM Patient,Patient_User " \
+                        "where Patient.patientid = Patient_User.patientid and Patient_User.userid=" + userid + " order by createdate desc limit 100 ;"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
+
     def get_rawmeasure(self, userid):
         connection = self.connect()
         try:

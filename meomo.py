@@ -57,10 +57,10 @@ parser = reqparse.RequestParser()
 parser.add_argument('rawdata')
 parser.add_argument('whicheye')
 parser.add_argument('patientid')
-parser.add_argument('callback')
+
 
 class UserApi(Resource):
-        def get(self, userid=None):
+        def get(self, userid):
             print('userid=', userid)
             args = parser.parse_args()
             print('#'*10,args)
@@ -77,17 +77,7 @@ class UserApi(Resource):
                     'createdate': str(m[4])
                 }
                 res.append(d)
-
-
-            str_myresult = json.dumps(res)
-            myresult = jsonify(res)
-            
-            # add this for jsonP 
-            if args['callback']:
-                str_myresult = args['callback']+'('+str_myresult + ');'
-                print('###str_myresult=', str_myresult)
-                return str_myresult
-
+            myresult = jsonify(res)            
             print('abel##:',myresult)
             return myresult
 
@@ -108,13 +98,48 @@ class UserApi(Resource):
            # Delete the product with given id
             return 'This is a DELETE response'
 
+class UserChildApi(Resource):
+        def get(self, userid):
+            print('userid=', userid)
+            args = parser.parse_args()
+            print('#'*5,args)
 
-api.add_resource(
-    UserApi,
-    '/api/user',
-    '/api/user/<int:userid>/measures',
+            data = DB.get_children(str(userid))
+            print('abel child::',type(data[0][4]))
+            # import io
+            # from PIL import Image
+            # imgfile = io.BytesIO(data[0][4])
+            # img = Image.open(imgfile)
+            # print(img,type(img))
+            # img.show()
 
-)
+            # import base64 
+            # image_64_encode = base64.encodestring(data[0][4])
+            from base64 import b64encode
+            ENCODING = 'utf-8'
+            base64_bytes = b64encode(data[0][4])
+            base64_string = base64_bytes.decode(ENCODING)
+            raw_data = {'IMAGE_NAME': base64_string}
+
+
+            # res = []
+            # for m in data:
+            #     d =  {
+            #         'patientid': m[0],
+            #         'name': m[1],
+            #         'sex': m[2],
+            #         'birthday': str(m[3]),
+            #         'picture':base64.encodestring(m[4]),
+            #         'createdate': str(m[5])
+            #     }
+            #     res.append(d)
+
+            # myresult = jsonify(res)            
+            # print('abel child##:',myresult)
+            return raw_data
+
+api.add_resource(UserApi,'/api/user/<int:userid>/measures')
+api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
 
 
 @app.route("/clear")
@@ -160,6 +185,7 @@ def measure():
 
 @app.route("/childrenlist")
 def childrenlist():
+
     return render_template("childrenlist.html")
 
 @app.route("/history")
