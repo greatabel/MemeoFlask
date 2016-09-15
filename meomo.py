@@ -105,7 +105,7 @@ class UserChildApi(Resource):
             print('#'*5,args)
 
             data = DB.get_children(str(userid))
-            print('abel child::',type(data[0][4]))
+            print('abel child::',type(data[2][4]))
             # import io
             # from PIL import Image
             # imgfile = io.BytesIO(data[0][4])
@@ -117,7 +117,7 @@ class UserChildApi(Resource):
             # image_64_encode = base64.encodestring(data[0][4])
             from base64 import b64encode
             ENCODING = 'utf-8'
-            base64_bytes = b64encode(data[0][4])
+            base64_bytes = b64encode(data[2][4])
             base64_string = base64_bytes.decode(ENCODING)
             raw_data = {'IMAGE_NAME': base64_string}
 

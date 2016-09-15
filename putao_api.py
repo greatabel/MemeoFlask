@@ -74,8 +74,16 @@ def child_by_openid(openid,access_token,service_id):
 
 def get_child_picture(imgurl):
     print('get_child_picture')
-    from urllib.request import urlretrieve 
-    urlretrieve(imgurl, "Abc.jpg")
+    data=requests.get(imgurl)
+    photo=data.content
+    # newstring = photo.decode(encoding='UTF-8')
+    args = {'name': 'abel', 'sex': 0, 'birthday': '2015-12-12 00:00:00','picture':''}
+
+    args['picture'] = photo
+    from dbhelper import DBHelper
+    DB = DBHelper()
+    DB.add_children(args)
+    # print('#=',photo)
 
 
 

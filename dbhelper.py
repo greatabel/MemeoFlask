@@ -24,6 +24,16 @@ class DBHelper:
         finally:
             connection.close()
 
+    def add_children(self, args):
+        connection = self.connect()
+        try:
+            query = "insert  Patient(name,sex,birthday, picture,createdate) values(%s,%s,%s,%s, now() );"
+            with connection.cursor() as cursor:
+                cursor.execute(query, ( args['name'], args['sex'],args['birthday'],args['picture'] ))
+                connection.commit()
+        finally:
+            connection.close()
+
     def get_rawmeasure(self, userid):
         connection = self.connect()
         try:
