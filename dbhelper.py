@@ -92,7 +92,7 @@ class DBHelper:
         connection = self.connect()
         try:
             query = "SELECT * FROM MeasureBaseline;"
-            if userid is not None:
+            if patientid is not None:
                 query = "SELECT * FROM meomo.MeasureBaseline where patientid = " + patientid + " order by createdate desc limit 1 ;"
             with connection.cursor() as cursor:
                 cursor.execute(query)

@@ -47,16 +47,29 @@ Userids = {
     2
 }
 
+Patientids = {
+    1,
+    2,
+    3
+}
 
 
 def abort_if_todo_doesnt_exist(userid):
     if userid not in Userids:
         abort(404, message="user's data {} doesn't exist".format(userid))
 
+def abort_if_patient_doesnt_exist(patientid):
+    if patientid not in Patientids:
+        abort(404, message="patients's data {} doesn't exist".format(patientid))
+
 parser = reqparse.RequestParser()
 parser.add_argument('rawdata')
 parser.add_argument('whicheye')
 parser.add_argument('patientid')
+
+parser_baseline = reqparse.RequestParser()
+parser_baseline.add_argument('data')
+parser_baseline.add_argument('patientid')
 
 
 class UserApi(Resource):
@@ -90,13 +103,13 @@ class UserApi(Resource):
             abort_if_todo_doesnt_exist(userid)
             return 201
 
-        def put(self, userid):
-           # Update the product with given id
-            return 'This is a PUT response'
+        # def put(self, userid):
+        #    # Update the product with given id
+        #     return 'This is a PUT response'
 
-        def delete(self, userid):
-           # Delete the product with given id
-            return 'This is a DELETE response'
+        # def delete(self, userid):
+        #    # Delete the product with given id
+        #     return 'This is a DELETE response'
 
 class UserChildApi(Resource):
         def get(self, userid):
@@ -140,9 +153,29 @@ class UserChildApi(Resource):
 
 class ChildBaseline(Resource):
         def get(self, patientid):
-            return 'get'
+
+            # print('ChildBaseline:#patientid=',patientid)
+            data = DB.get_measurebaseline(str(patientid))
+            print('ChildBaseline::',data)
+            d =  {
+                'baselineid': data[0][0],
+                'patientid': data[0][1],
+                'data': data[0][2],
+                'createdate': str(data[0][3])
+            }  
+            myresult = jsonify(d)            
+            print('abel##:',myresult)
+            return myresult
+
+
         def post(self, patientid):
-            return 'post'
+            args = parser_baseline.parse_args()
+            if not args['patientid']:
+                args['patientid'] = patientid
+            print('ChildBaseline #args:',args)
+            DB.add_measurebaseline(args)
+            abort_if_patient_doesnt_exist(patientid)
+            return 201
 
 api.add_resource(UserApi,'/api/user/<int:userid>/measures')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
