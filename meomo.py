@@ -138,8 +138,15 @@ class UserChildApi(Resource):
             # print('abel child##:',myresult)
             return raw_data
 
+class ChildBaseline(Resource):
+        def get(self, patientid):
+            return 'get'
+        def post(self, patientid):
+            return 'post'
+
 api.add_resource(UserApi,'/api/user/<int:userid>/measures')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
+api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')
 
 
 @app.route("/clear")

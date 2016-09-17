@@ -76,6 +76,7 @@ class DBHelper:
     #             connection.commit()
     #     finally:
     #         connection.close()
+
     def add_measurebaseline(self, args):
         connection = self.connect()
         try:
@@ -86,6 +87,18 @@ class DBHelper:
         finally:
             connection.close()
 
+
+    def get_measurebaseline(self, patientid):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM MeasureBaseline;"
+            if userid is not None:
+                query = "SELECT * FROM meomo.MeasureBaseline where patientid = " + patientid + " order by createdate desc limit 1 ;"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
 
     def add_input(self, data):
         connection = self.connect()
