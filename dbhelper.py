@@ -17,7 +17,7 @@ class DBHelper:
             query = "SELECT * FROM Patient;"
             if userid is not None:
                 query = "SELECT Patient.* FROM Patient,Patient_User " \
-                        "where Patient.patientid = Patient_User.patientid and Patient_User.userid=" + userid + " order by createdate desc limit 100 ;"
+                        "where Patient.patientid = Patient_User.patientid and Patient_User.userid=" + userid + " order by createdate desc limit 1 ;"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()
@@ -30,6 +30,18 @@ class DBHelper:
             query = "insert  Patient(name,sex,birthday, picture,createdate) values(%s,%s,%s,%s, now() );"
             with connection.cursor() as cursor:
                 cursor.execute(query, ( args['name'], args['sex'],args['birthday'],args['picture'] ))
+                connection.commit()
+                # print('#cursor.lastrowid=',cursor.lastrowid)
+                return cursor.lastrowid
+        finally:
+            connection.close()
+
+    def  add_patientuser(self,args):
+        connection = self.connect()
+        try:
+            query = "insert Patient_User(patientid, userid, createdate)  values(%s,%s, now() );"
+            with connection.cursor() as cursor:
+                cursor.execute(query, ( args['patientid'], args['userid'] ))
                 connection.commit()
         finally:
             connection.close()

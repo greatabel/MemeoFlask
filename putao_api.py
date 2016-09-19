@@ -5,14 +5,17 @@ import time
 import collections
 from termcolor import colored,cprint
 import requests
+import json
 
 url = 'http://api-weidu-test.ptdev.cn'
 
-data = {"app_key":"a9973799e0dbfbb338ea573d5d76dcbd","time":"1472023028"}
+data = {"app_key":"a9973799e0dbfbb338ea573d5d76dcbd"}
 data["time"] = str(int(time.time())+180000)
 secret_key = '900ced36ff5fb92abc4a37c95c823b1e'
-
-
+service_id =  50044
+openid = "0870111b0ea9f317465b209071305916e3080cce"
+dev_pre_picture_url = 'http://weidu.file.dev.putaocloud.com/file/'
+pro_pre_picture_url = 'http://weidu.file.putaocdn.com/'
 
 def recursive_urlencode(d):
     """URL-encode a multidimensional dictionary.
@@ -69,10 +72,12 @@ def child_by_openid(openid,access_token,service_id):
     # response = requests.get(user_url)
     data = {"access_token":access_token,"open_id":openid,"service_id":service_id}
     response = requests.post(child_url, data=data)
+    d = json.loads(response.text)
 
     print('3:### child_by_openid end=',response.text)
+    return d
 
-def get_child_picture(imgurl):
+def get_child_picture(imgurl,userid):
     print('get_child_picture')
     data=requests.get(imgurl)
     photo=data.content
@@ -82,20 +87,25 @@ def get_child_picture(imgurl):
     args['picture'] = photo
     from dbhelper import DBHelper
     DB = DBHelper()
-    DB.add_children(args)
+    lastid = DB.add_children(args)
+    DB.add_patientuser({'patientid':lastid,'userid':0})
+    print('lastid=',lastid)
     # print('#=',photo)
 
 
 
 if __name__ == "__main__":
+    # print('type:',type(data))
     url +='/server/get/access/token'
     sign = create_sign(data)
-    ts = str(int(time.time())+180000)
-    print('current time=', ts)
+    # ts = str(int(time.time())+180000)
+    # print('current time=', ts)
 
     # ts = "1472023028"
     # sign = "14f671f8e484ef94c65b36b89f6fa041"
-    data = {"app_key":"a9973799e0dbfbb338ea573d5d76dcbd","time":ts,"sign":sign}
+    # data = {"app_key":"a9973799e0dbfbb338ea573d5d76dcbd","time":ts,"sign":sign}
+    data['sign'] = sign
+
     print('url=',url)
     print('data=',data)
     # post to putao url is not working
@@ -106,7 +116,13 @@ if __name__ == "__main__":
     print('url=',url)
     print('data=',data)
     # response = requests.get(url)
-    print('1:token end=',response.text)
-    user_by_openid("0870111b0ea9f317465b209071305916e3080cce", "8098a705fc949938f8475884762c27d47c6df941","50044")
-    child_by_openid("0870111b0ea9f317465b209071305916e3080cce", "8098a705fc949938f8475884762c27d47c6df941","50044")
-    get_child_picture('http://weidu.file.dev.putaocloud.com/file/66aca9bae95ddd5b8c0cf7ad6e96edfe8fcb29d5.jpg')
+    print(colored('1:token end=','red'),response.text)
+    d = json.loads(response.text)
+    access_token = d['data']['access_token']
+    print('*'*10,access_token)
+
+    user_by_openid(openid, access_token,service_id)
+    child_dic = child_by_openid(openid, access_token,service_id)
+    print('child_dic=',child_dic)
+    get_child_picture(dev_pre_picture_url+child_dic['data'][0]['child_avatar'],0)
+    get_child_picture(dev_pre_picture_url+child_dic['data'][1]['child_avatar'],0)
