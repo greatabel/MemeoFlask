@@ -7,13 +7,16 @@ from termcolor import colored,cprint
 import requests
 import json
 
-url = 'http://api-weidu-test.ptdev.cn'
 
-data = {"app_key":"a9973799e0dbfbb338ea573d5d76dcbd"}
-data["time"] = str(int(time.time())+180000)
+app_key = 'a9973799e0dbfbb338ea573d5d76dcbd'
+
 secret_key = '900ced36ff5fb92abc4a37c95c823b1e'
 service_id =  50044
-openid = "0870111b0ea9f317465b209071305916e3080cce"
+openid = '0870111b0ea9f317465b209071305916e3080cce'
+
+
+
+access_token_url = 'http://api-weidu-test.ptdev.cn/server/get/access/token'
 dev_pre_picture_url = 'http://weidu.file.dev.putaocloud.com/file/'
 pro_pre_picture_url = 'http://weidu.file.putaocdn.com/'
 
@@ -92,11 +95,9 @@ def get_child_picture(imgurl,userid):
     print('lastid=',lastid)
     # print('#=',photo)
 
-
-
-if __name__ == "__main__":
-    # print('type:',type(data))
-    url +='/server/get/access/token'
+def get_access_token(url):
+    data = {"app_key": app_key}
+    data["time"] = str(int(time.time())+180000)
     sign = create_sign(data)
     # ts = str(int(time.time())+180000)
     # print('current time=', ts)
@@ -119,6 +120,13 @@ if __name__ == "__main__":
     print(colored('1:token end=','red'),response.text)
     d = json.loads(response.text)
     access_token = d['data']['access_token']
+    return access_token
+
+
+if __name__ == "__main__":
+    # print('type:',type(data))
+
+    access_token = get_access_token(access_token_url)
     print('*'*10,access_token)
 
     user_by_openid(openid, access_token,service_id)
