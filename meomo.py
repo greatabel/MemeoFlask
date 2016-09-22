@@ -49,12 +49,7 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 fh.setFormatter(formatter)
 app.logger.setLevel(logging.INFO)
 app.logger.addHandler(fh)
-app.logger.info('hello world')
-app.logger.debug('debug message')
-app.logger.info('info message')
-app.logger.warn('warn message')
-app.logger.error('error message')
-app.logger.critical('critical message')
+
 
 # CORS(app)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
