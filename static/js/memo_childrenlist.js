@@ -10,7 +10,7 @@ function getUrlVars() {
 
 document.getElementById("content").innerHTML= window.location.href + '<br/>'+navigator.userAgent.toLowerCase();
 
-$.getJSON('http://127.0.0.1:5000/api/userchild/0', function(data) {
-document.getElementById("ItemPreview").src = "data:image/png;base64," + data['IMAGE_NAME'];
+$.getJSON('http://127.0.0.1:5000/api/childpicture/5', function(data) {
+document.getElementById("ItemPreview").src = "data:image/png;base64," + data['IMAGE_DATA'];
 
 });

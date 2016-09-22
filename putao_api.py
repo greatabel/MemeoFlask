@@ -6,7 +6,7 @@ import collections
 from termcolor import colored,cprint
 import requests
 import json
-
+import datetime 
 
 app_key = 'a9973799e0dbfbb338ea573d5d76dcbd'
 
@@ -80,12 +80,12 @@ def child_by_openid(openid,access_token,service_id):
     print('3:### child_by_openid end=',response.text)
     return d
 
-def get_child_picture(imgurl,userid):
+def save_child_data(name,sex,birthday,imgurl,userid):
     print('get_child_picture')
     data=requests.get(imgurl)
     photo=data.content
     # newstring = photo.decode(encoding='UTF-8')
-    args = {'name': 'abel', 'sex': 0, 'birthday': '2015-12-12 00:00:00','picture':''}
+    args = {'name': name, 'sex': sex, 'birthday': birthday,'picture':''}
 
     args['picture'] = photo
     from dbhelper import DBHelper
@@ -122,15 +122,27 @@ def get_access_token(url):
     access_token = d['data']['access_token']
     return access_token
 
+def fetch_user(userid):
+    access_token = get_access_token(access_token_url) 
+    user_by_openid(openid, access_token,service_id)
 
-if __name__ == "__main__":
-    # print('type:',type(data))
-
+def fetch_child(userid):
     access_token = get_access_token(access_token_url)
     print('*'*10,access_token)
 
-    user_by_openid(openid, access_token,service_id)
+    # user_by_openid(openid, access_token,service_id)
     child_dic = child_by_openid(openid, access_token,service_id)
     print('child_dic=',child_dic)
-    get_child_picture(dev_pre_picture_url+child_dic['data'][0]['child_avatar'],0)
-    get_child_picture(dev_pre_picture_url+child_dic['data'][1]['child_avatar'],0)
+    for i,val in enumerate(child_dic['data']):
+        birthday = val['child_birthday']      
+        if '-' not in val['child_birthday']:
+            birthday = datetime.datetime.fromtimestamp(    int(val['child_birthday'])  ).strftime('%Y-%m-%d %H:%M:%S')
+        save_child_data(val['child_nickname'],val['child_gender'],
+            birthday,dev_pre_picture_url+val['child_avatar'],userid)
+
+if __name__ == "__main__":
+    fetch_child(0)
+    # print('type:',type(data))
+
+
+

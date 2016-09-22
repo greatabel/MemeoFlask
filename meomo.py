@@ -150,7 +150,7 @@ class UserChildApi(Resource):
             ENCODING = 'utf-8'
             base64_bytes = b64encode(data[0][4])
             base64_string = base64_bytes.decode(ENCODING)
-            raw_data = {'IMAGE_NAME': base64_string}
+            raw_data = {'IMAGE_DATA': base64_string}
 
 
             # res = []
@@ -172,6 +172,18 @@ class UserChildApi(Resource):
         def post(self, userid):
 
             return 'post child data'
+
+class ChildPicture(Resource):
+        def get(self, patientid):
+            data = DB.get_childrenPicture(str(patientid))
+            print('# in picture:',data)
+            from base64 import b64encode
+            ENCODING = 'utf-8'
+            base64_bytes = b64encode(data[0][0])
+            base64_string = base64_bytes.decode(ENCODING)
+            raw_data = {'IMAGE_DATA': base64_string}
+            return raw_data  
+
 
 class ChildBaseline(Resource):
         def get(self, patientid):
@@ -201,6 +213,7 @@ class ChildBaseline(Resource):
 api.add_resource(UserApi,'/api/user/<int:userid>/measures')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
 api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')
+api.add_resource(ChildPicture,'/api/childpicture/<int:patientid>')
 
 
 @app.route("/clear")

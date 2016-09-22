@@ -10,6 +10,17 @@ class DBHelper:
                                passwd=dbconfig.db_password,
                                db=database)
 
+    def get_childrenPicture(self, patientid):
+        connection = self.connect()
+        try:
+            query = "SELECT picture FROM meomo.Patient;"
+            if patientid is not None:
+                query = "SELECT picture FROM meomo.Patient where patientid=" + patientid+";"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
 
     def get_children(self, userid):
         connection = self.connect()
