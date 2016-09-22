@@ -15,7 +15,7 @@ import sys
 import os
 import site
 import datetime
-
+import logging
 # if is on ecs server 
 if sys.platform == 'linux':
     # Add the site-packages of the chosen virtualenv to work with
@@ -28,7 +28,7 @@ if sys.platform == 'linux':
         code = compile(f.read(), activate_env, 'exec')
         exec(code, dict(__file__=activate_env))
 
-    sys.stdout = sys.stderr
+
 
 #----------------------
 
@@ -76,12 +76,12 @@ parser_baseline.add_argument('patientid')
 
 class UserApi(Resource):
         def get(self, userid):
-            print('userid=', userid)
+            logging.info('userid=', userid)
             args = parser.parse_args()
-            print('#'*10,args)
+            logging.info('#'*10,args)
 
             data = DB.get_rawmeasure(str(userid))
-            print('abel::',data)
+            logging.info(('abel::',data))
             res = []
             for m in data:
                 d =  {
@@ -93,14 +93,14 @@ class UserApi(Resource):
                 }
                 res.append(d)
             myresult = jsonify(res)            
-            print('abel##:',myresult)
+            logging.info('abel##:',myresult)
             return myresult
 
         def post(self, userid):
            # Create a new product
             args = parser.parse_args()
-            print('#',args)
-            print(args['patientid'],'@@',args['rawdata'],'@@',args['whicheye'],'#',args)
+            logging.info('#',args)
+            logging.info(args['patientid'],'@@',args['rawdata'],'@@',args['whicheye'],'#',args)
             DB.add_rawmeasure(args)
             abort_if_todo_doesnt_exist(userid)
             return 201
@@ -115,17 +115,17 @@ class UserApi(Resource):
 
 class UserChildApi(Resource):
         def get(self, userid):
-            print('userid=', userid)
+            logging.info(('userid=', userid))
             args = parser.parse_args()
-            print('#'*5,args)
+            logging.info('#'*5,args)
 
             data = DB.get_children(str(userid))
-            print('abel child::',type(data[0][4]))
+            logging.info(('abel child::',type(data[0][4])))
             # import io
             # from PIL import Image
             # imgfile = io.BytesIO(data[0][4])
             # img = Image.open(imgfile)
-            # print(img,type(img))
+            # logging.info(img,type(img))
             # img.show()
 
             # import base64 
@@ -150,7 +150,7 @@ class UserChildApi(Resource):
             #     res.append(d)
 
             # myresult = jsonify(res)            
-            # print('abel child##:',myresult)
+            # logging.info('abel child##:',myresult)
             return raw_data
 
         def post(self, userid):
@@ -159,9 +159,9 @@ class UserChildApi(Resource):
 
 class ChildBaseline(Resource):
         def get(self, patientid):
-            # print('ChildBaseline:#patientid=',patientid)
+            # logging.info('ChildBaseline:#patientid=',patientid)
             data = DB.get_measurebaseline(str(patientid))
-            print('ChildBaseline::',data)
+            logging.info('ChildBaseline::',data)
             d =  {
                 'baselineid': data[0][0],
                 'patientid': data[0][1],
@@ -169,7 +169,7 @@ class ChildBaseline(Resource):
                 'createdate': str(data[0][3])
             }  
             myresult = jsonify(d)            
-            print('abel##:',myresult)
+            logging.info('abel##:',myresult)
             return myresult
 
 
@@ -177,7 +177,7 @@ class ChildBaseline(Resource):
             args = parser_baseline.parse_args()
             if not args['patientid']:
                 args['patientid'] = patientid
-            print('ChildBaseline #args:',args)
+            logging.info('ChildBaseline #args:',args)
             DB.add_measurebaseline(args)
             abort_if_patient_doesnt_exist(patientid)
             return 201
@@ -192,7 +192,7 @@ def clear():
     try:
         DB.clear_all()
     except Exception as e:
-        print(e)
+        logging.info(e)
     return home()
 
 # --------------website-----------------
@@ -220,7 +220,7 @@ def login():
 @app.route("/logout")
 def logout():
     # logout_user()
-    print('logout')
+    logging.info('logout')
     return redirect(url_for("home"))
 
 
@@ -256,7 +256,7 @@ def register():
 def receive_putao_user():
     if request.method == "POST":
         # from flask import jsonify
-        print("receive_putao_user/ I am printing: " ,request.values)
+        logging.info("receive_putao_user/ I am printing: " ,request.values)
         DEFAULTS['receive_putao_user'] = str(request.values)
         status_dict  = {'http_code': 200,
             'msg': 'ok',
@@ -264,7 +264,7 @@ def receive_putao_user():
             }
         return jsonify(status_dict), 200
     if request.method == "GET":
-        print('#in get:',request.values )
+        logging.info('#in get:',request.values )
         return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
 
 
@@ -285,4 +285,7 @@ def home():
     return response
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG, filename="logfile", filemode="a+",
+                    format="%(asctime)-15s %(levelname)-8s %(message)s")
     app.run(port=5000, debug=True)
+    logging.info("hello")
