@@ -16,6 +16,10 @@ import os
 import site
 import datetime
 import logging
+
+fh = logging.FileHandler('mylogfile')
+fh.setLevel(logging.DEBUG)
+
 # if is on ecs server 
 if sys.platform == 'linux':
     # Add the site-packages of the chosen virtualenv to work with
@@ -27,6 +31,7 @@ if sys.platform == 'linux':
     with open(activate_env) as f:
         code = compile(f.read(), activate_env, 'exec')
         exec(code, dict(__file__=activate_env))
+    app.logger.addHandler(fh)
 
 
 
@@ -76,12 +81,12 @@ parser_baseline.add_argument('patientid')
 
 class UserApi(Resource):
         def get(self, userid):
-            logging.info('userid=', userid)
+            logger.info('userid=', userid)
             args = parser.parse_args()
-            logging.info('#'*10,args)
+            logger.info('#'*10,args)
 
             data = DB.get_rawmeasure(str(userid))
-            logging.info(('abel::',data))
+            logger.info(('abel::',data))
             res = []
             for m in data:
                 d =  {
@@ -93,14 +98,14 @@ class UserApi(Resource):
                 }
                 res.append(d)
             myresult = jsonify(res)            
-            logging.info('abel##:',myresult)
+            logger.info('abel##:',myresult)
             return myresult
 
         def post(self, userid):
            # Create a new product
             args = parser.parse_args()
-            logging.info('#',args)
-            logging.info(args['patientid'],'@@',args['rawdata'],'@@',args['whicheye'],'#',args)
+            logger.info('#',args)
+            logger.info(args['patientid'],'@@',args['rawdata'],'@@',args['whicheye'],'#',args)
             DB.add_rawmeasure(args)
             abort_if_todo_doesnt_exist(userid)
             return 201
@@ -115,17 +120,17 @@ class UserApi(Resource):
 
 class UserChildApi(Resource):
         def get(self, userid):
-            logging.info(('userid=', userid))
+            logger.info(('userid=', userid))
             args = parser.parse_args()
-            logging.info('#'*5,args)
+            logger.info('#'*5,args)
 
             data = DB.get_children(str(userid))
-            logging.info(('abel child::',type(data[0][4])))
+            logger.info(('abel child::',type(data[0][4])))
             # import io
             # from PIL import Image
             # imgfile = io.BytesIO(data[0][4])
             # img = Image.open(imgfile)
-            # logging.info(img,type(img))
+            # logger.info(img,type(img))
             # img.show()
 
             # import base64 
@@ -150,7 +155,7 @@ class UserChildApi(Resource):
             #     res.append(d)
 
             # myresult = jsonify(res)            
-            # logging.info('abel child##:',myresult)
+            # logger.info('abel child##:',myresult)
             return raw_data
 
         def post(self, userid):
@@ -159,9 +164,9 @@ class UserChildApi(Resource):
 
 class ChildBaseline(Resource):
         def get(self, patientid):
-            # logging.info('ChildBaseline:#patientid=',patientid)
+            # logger.info('ChildBaseline:#patientid=',patientid)
             data = DB.get_measurebaseline(str(patientid))
-            logging.info('ChildBaseline::',data)
+            logger.info('ChildBaseline::',data)
             d =  {
                 'baselineid': data[0][0],
                 'patientid': data[0][1],
@@ -169,7 +174,7 @@ class ChildBaseline(Resource):
                 'createdate': str(data[0][3])
             }  
             myresult = jsonify(d)            
-            logging.info('abel##:',myresult)
+            logger.info('abel##:',myresult)
             return myresult
 
 
@@ -177,7 +182,7 @@ class ChildBaseline(Resource):
             args = parser_baseline.parse_args()
             if not args['patientid']:
                 args['patientid'] = patientid
-            logging.info('ChildBaseline #args:',args)
+            logger.info('ChildBaseline #args:',args)
             DB.add_measurebaseline(args)
             abort_if_patient_doesnt_exist(patientid)
             return 201
@@ -192,7 +197,7 @@ def clear():
     try:
         DB.clear_all()
     except Exception as e:
-        logging.info(e)
+        logger.info(e)
     return home()
 
 # --------------website-----------------
@@ -220,7 +225,7 @@ def login():
 @app.route("/logout")
 def logout():
     # logout_user()
-    logging.info('logout')
+    logger.info('logout')
     return redirect(url_for("home"))
 
 
@@ -256,7 +261,7 @@ def register():
 def receive_putao_user():
     if request.method == "POST":
         # from flask import jsonify
-        logging.info("receive_putao_user/ I am printing: " ,request.values)
+        logger.info("receive_putao_user/ I am printing: " ,request.values)
         DEFAULTS['receive_putao_user'] = str(request.values)
         status_dict  = {'http_code': 200,
             'msg': 'ok',
@@ -264,7 +269,7 @@ def receive_putao_user():
             }
         return jsonify(status_dict), 200
     if request.method == "GET":
-        logging.info('#in get:',request.values )
+        logger.info('#in get:',request.values )
         return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
 
 
@@ -285,7 +290,19 @@ def home():
     return response
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG, filename="logfile", filemode="a+",
-                    format="%(asctime)-15s %(levelname)-8s %(message)s")
+    # create logger with 'spam_application'
+    print('app.debug=',app.debug)
+    logger = logging.getLogger('luminagic')
+    logger.setLevel(logging.DEBUG)
+    # create file handler which logs even debug messages
+
+    # create formatter and add it to the handlers
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
+    # add the handlers to the logger
+    logger.addHandler(fh)
+    logger.info('hello world')
+
     app.run(port=5000, debug=True)
-    logging.info("hello")
+
+
