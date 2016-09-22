@@ -122,11 +122,11 @@ def get_access_token(url):
     access_token = d['data']['access_token']
     return access_token
 
-def fetch_user(userid):
+def fetch_user(openid):
     access_token = get_access_token(access_token_url) 
     user_by_openid(openid, access_token,service_id)
 
-def fetch_child(userid):
+def fetch_child(openid,userid):
     access_token = get_access_token(access_token_url)
     print('*'*10,access_token)
 
@@ -141,7 +141,9 @@ def fetch_child(userid):
             birthday,dev_pre_picture_url+val['child_avatar'],userid)
 
 if __name__ == "__main__":
-    fetch_child(0)
+    fetch_child(openid,0)
+    print(colored('-' * 10,'red'))
+    fetch_user(openid)
     # print('type:',type(data))
 
 

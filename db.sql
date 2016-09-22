@@ -1,6 +1,26 @@
 create database meomo;
 use meomo;
 
+CREATE TABLE IF NOT EXISTS meomo.User (
+     userid int NOT NULL AUTO_INCREMENT,
+     name VARCHAR(100),
+     sex boolean not null default 0,
+     birthday datetime,
+     mobilephone  VARCHAR(20),
+     email VARCHAR(20),
+     picture BLOB,
+     roleid int,
+
+     putao_token_uid VARCHAR(100),
+     putao_name VARCHAR(100),
+     putao_sex boolean not null default 0,
+     putao_birthday datetime,
+
+     authtype int,
+     createdate TIMESTAMP,
+     PRIMARY KEY (userid)
+     );
+
 CREATE TABLE IF NOT EXISTS meomo.Measure (
      measureid int NOT NULL AUTO_INCREMENT,
      rawdataid int,
@@ -46,7 +66,9 @@ CREATE TABLE IF NOT EXISTS meomo.MeasureBaseline   (
 
 /* 
 insert test data:
-     
+INSERT INTO User(`roleid`,`putao_token_uid`,`putao_name`,`putao_sex`,`putao_birthday`,`authtype`,`createdate`) 
+VALUES(1,'0870111b0ea9f317465b209071305916e3080cce','putao_abel',0,now(),1,now());
+   
 insert Measure(rawdataid, data, deviceid,createdate) values(0,'250,151,152,153','88DAC8E9-08E5-81E5-D7AB-182B79D30698', now());
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('250,151,152,153',0, false, now());
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('251,151,152,153',0, true, now());
@@ -63,4 +85,5 @@ insert MeasureBaseline(patientid, data, createdate) values(1,150,now())
 insert MeasureBaseline(patientid, data, createdate) values(1,151,now())
 
 */
+
 
