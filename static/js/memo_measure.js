@@ -393,7 +393,7 @@ function changeImage(side, step) {
   //     }
 
   // }
-        // document.getElementById("contentE").innerHTML = floatingPointPartA +'#ya:'+ yA+"#yb:"+yB+"ppi:"+ myPPI;
+        document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio;
 
 
       // window.setTimeout(drawScreen, 200);
