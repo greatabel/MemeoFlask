@@ -37,7 +37,7 @@ if sys.platform == 'linux':
         exec(code, dict(__file__=activate_env))
 
 
-    app.logger.addHandler.addHandler(fh)
+    app.logger.addHandler(fh)
     app.logger.info('on ecs')
 # else:
 #     logger = logging.getLogger('luminagic')
