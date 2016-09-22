@@ -90,13 +90,13 @@ parser_baseline.add_argument('data')
 parser_baseline.add_argument('patientid')
 
 
-class UserApi(Resource):
-        def get(self, userid):
-            app.logger.info('userid=', userid)
+class ChildMeasure(Resource):
+        def get(self, patientid):
+            app.logger.info('patientid=', patientid)
             args = parser.parse_args()
             app.logger.info('#'*10,args)
 
-            data = DB.get_rawmeasure(str(userid))
+            data = DB.get_rawmeasure(str(patientid))
             app.logger.info(('abel::',data))
             res = []
             for m in data:
@@ -112,7 +112,7 @@ class UserApi(Resource):
             app.logger.info('abel##:',myresult)
             return myresult
 
-        def post(self, userid):
+        def post(self, patientid):
            # Create a new product
             args = parser.parse_args()
             app.logger.info('#',args)
@@ -194,8 +194,8 @@ class ChildBaseline(Resource):
             abort_if_patient_doesnt_exist(patientid)
             return 201
 
-api.add_resource(UserApi,'/api/user/<int:userid>/measures')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
+api.add_resource(ChildMeasure,'/api/childmeasure/<int:patientid>')
 api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')
 api.add_resource(ChildPicture,'/api/childpicture/<int:patientid>')
 
