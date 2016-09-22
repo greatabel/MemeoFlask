@@ -33,13 +33,7 @@ if sys.platform == 'linux':
         code = compile(f.read(), activate_env, 'exec')
         exec(code, dict(__file__=activate_env))
 
-fh = logging.FileHandler('/tmp/mylogfile')
-fh.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-fh.setFormatter(formatter)
-app.logger.setLevel(logging.WARNING)
-app.logger.addHandler(fh)
-app.logger.info('hello world')
+
 
 
 
@@ -48,6 +42,14 @@ app.logger.info('hello world')
 
 
 app = Flask(__name__)
+
+fh = logging.FileHandler('/tmp/mylogfile')
+fh.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+app.logger.setLevel(logging.WARNING)
+app.logger.addHandler(fh)
+app.logger.info('hello world')
 
 # CORS(app)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -310,7 +312,7 @@ if __name__ == '__main__':
     # app.logger.setLevel(logging.WARNING)
     # app.logger.addHandler(fh)
     # app.logger.info('hello world')
-    
+
     # create file handler which logs even debug messages
 
     # create formatter and add it to the handlers
