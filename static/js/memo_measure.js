@@ -470,7 +470,7 @@ function moveDown(){
           // x = x + 2;
      update(previous_touches);
      drawScreen();
-      // document.getElementById("contentE").innerHTML = "ppi:"+ myPPI;
+      document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio
 
     // window.setTimeout(drawScreen, 200);
 }
