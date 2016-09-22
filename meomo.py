@@ -17,7 +17,7 @@ import site
 import datetime
 import logging
 
-fh = logging.FileHandler('mylogfile')
+fh = logging.FileHandler('/tmp/mylogfile')
 fh.setLevel(logging.DEBUG)
 
 # if is on ecs server 
