@@ -9,7 +9,7 @@ function getUrlVars() {
 
 
 var url = "http://139.224.73.50"
-url = "http://127.0.0.1:5000"
+// url = "http://127.0.0.1:5000"
 document.getElementById("content").innerHTML= window.location.href + '<br/>'+navigator.userAgent.toLowerCase();
 
 $.getJSON( url+ '/api/childpicture/5', function(data) {
