@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS meomo.Patient_User   (
      userid int,
       createdate TIMESTAMP,
      PRIMARY KEY (patientid, userid)
-     ) 
+     );
 
 CREATE TABLE IF NOT EXISTS meomo.MeasureBaseline   (
      baselineid int NOT NULL AUTO_INCREMENT,
