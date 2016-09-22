@@ -33,15 +33,14 @@ if sys.platform == 'linux':
         code = compile(f.read(), activate_env, 'exec')
         exec(code, dict(__file__=activate_env))
 
+fh = logging.FileHandler('/tmp/mylogfile')
+fh.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+app.logger.setLevel(logging.WARNING)
+app.logger.addHandler(fh)
+app.logger.info('hello world')
 
-    # app.logger.addHandler(fh)
-    # app.logger.info('on ecs')
-    # logger = app.logger
-    # logger.addHandler(fh)
-    # logger.info('test')
-# else:
-#     logger = logging.getLogger('luminagic')
-#     logger.addHandler(fh)
 
 
 
@@ -303,20 +302,22 @@ if __name__ == '__main__':
     # create logger with 'spam_application'
     print('app.debug=',app.debug)
     # logger = logging.getLogger('luminagic')
-    fh = logging.FileHandler('/tmp/mylogfile')
-    fh.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    app.logger.setLevel(logging.WARNING)
-    app.logger.addHandler(fh)
 
+    # fh = logging.FileHandler('/tmp/mylogfile')
+    # fh.setLevel(logging.DEBUG)
+    # formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    # fh.setFormatter(formatter)
+    # app.logger.setLevel(logging.WARNING)
+    # app.logger.addHandler(fh)
+    # app.logger.info('hello world')
+    
     # create file handler which logs even debug messages
 
     # create formatter and add it to the handlers
 
     # add the handlers to the logger
 
-    app.logger.info('hello world')
+
 
     app.run(port=5000, debug=True)
 
