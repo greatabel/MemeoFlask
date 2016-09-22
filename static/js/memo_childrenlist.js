@@ -14,3 +14,8 @@ $.getJSON('http://127.0.0.1:5000/api/childpicture/5', function(data) {
 document.getElementById("ItemPreview").src = "data:image/png;base64," + data['IMAGE_DATA'];
 
 });
+
+
+$.getJSON('http://127.0.0.1:5000/api/userchild/0', function(data) {
+console.log(data);
+});

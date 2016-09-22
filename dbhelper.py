@@ -28,7 +28,7 @@ class DBHelper:
             query = "SELECT * FROM Patient;"
             if userid is not None:
                 query = "SELECT Patient.* FROM Patient,Patient_User " \
-                        "where Patient.patientid = Patient_User.patientid and Patient_User.userid=" + userid + " order by createdate desc limit 1 ;"
+                        "where Patient.patientid = Patient_User.patientid and Patient_User.userid=" + userid + " order by createdate desc  ;"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()

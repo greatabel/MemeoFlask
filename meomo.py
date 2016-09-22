@@ -16,7 +16,7 @@ import os
 import site
 import datetime
 import logging
-
+from base64 import b64encode
 
 
 
@@ -136,38 +136,22 @@ class UserChildApi(Resource):
             app.logger.info('#'*5,args)
 
             data = DB.get_children(str(userid))
-            app.logger.info(('abel child::',type(data[0][4])))
-            # import io
-            # from PIL import Image
-            # imgfile = io.BytesIO(data[0][4])
-            # img = Image.open(imgfile)
-            # app.logger.info(img,type(img))
-            # img.show()
+            # app.logger.info(('abel child::',type(data[0][4])))
+            res = []
+            for m in data:
+                d =  {
+                    'patientid': m[0],
+                    'name': m[1],
+                    'sex': m[2],
+                    'birthday': str(m[3]),
+                    
+                    'createdate': str(m[5])
+                }
+                res.append(d)
 
-            # import base64 
-            # image_64_encode = base64.encodestring(data[0][4])
-            from base64 import b64encode
-            ENCODING = 'utf-8'
-            base64_bytes = b64encode(data[0][4])
-            base64_string = base64_bytes.decode(ENCODING)
-            raw_data = {'IMAGE_DATA': base64_string}
-
-
-            # res = []
-            # for m in data:
-            #     d =  {
-            #         'patientid': m[0],
-            #         'name': m[1],
-            #         'sex': m[2],
-            #         'birthday': str(m[3]),
-            #         'picture':base64.encodestring(m[4]),
-            #         'createdate': str(m[5])
-            #     }
-            #     res.append(d)
-
-            # myresult = jsonify(res)            
+            myresult = jsonify(res)            
             # app.logger.info('abel child##:',myresult)
-            return raw_data
+            return myresult
 
         def post(self, userid):
 
@@ -177,7 +161,7 @@ class ChildPicture(Resource):
         def get(self, patientid):
             data = DB.get_childrenPicture(str(patientid))
             print('# in picture:',data)
-            from base64 import b64encode
+
             ENCODING = 'utf-8'
             base64_bytes = b64encode(data[0][0])
             base64_string = base64_bytes.decode(ENCODING)
