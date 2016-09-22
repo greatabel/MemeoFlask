@@ -34,6 +34,7 @@ if sys.platform == 'linux':
         code = compile(f.read(), activate_env, 'exec')
         exec(code, dict(__file__=activate_env))
     app.logger.addHandler(fh)
+    logger = app.logger
 
 
 
