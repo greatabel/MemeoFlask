@@ -39,6 +39,9 @@ if sys.platform == 'linux':
 
     app.logger.addHandler(fh)
     app.logger.info('on ecs')
+    logger = app.logger
+    logger.addHandler(fh)
+    logger.info('test')
 # else:
 #     logger = logging.getLogger('luminagic')
 #     logger.addHandler(fh)
