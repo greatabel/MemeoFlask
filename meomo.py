@@ -37,8 +37,8 @@ if sys.platform == 'linux':
         exec(code, dict(__file__=activate_env))
 
 
-    app.logger.addHandler(fh)
-    app.logger.info('on ecs')
+    # app.logger.addHandler(fh)
+    # app.logger.info('on ecs')
     # logger = app.logger
     # logger.addHandler(fh)
     # logger.info('test')
@@ -307,7 +307,7 @@ if __name__ == '__main__':
     print('app.debug=',app.debug)
     # logger = logging.getLogger('luminagic')
     app.logger.addHandler(fh)
-    app.logger.setLevel(logging.DEBUG)
+    app.logger.setLevel(logging.WARNING)
     # create file handler which logs even debug messages
 
     # create formatter and add it to the handlers
