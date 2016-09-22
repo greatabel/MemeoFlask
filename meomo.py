@@ -17,12 +17,9 @@ import site
 import datetime
 import logging
 
-fh = logging.FileHandler('/tmp/mylogfile')
-fh.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-fh.setFormatter(formatter)
 
-app = Flask(__name__)
+
+
 
 # if is on ecs server 
 if sys.platform == 'linux':
@@ -51,7 +48,7 @@ if sys.platform == 'linux':
 #----------------------
 
 
-
+app = Flask(__name__)
 
 # CORS(app)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -306,8 +303,13 @@ if __name__ == '__main__':
     # create logger with 'spam_application'
     print('app.debug=',app.debug)
     # logger = logging.getLogger('luminagic')
-    app.logger.addHandler(fh)
+    fh = logging.FileHandler('/tmp/mylogfile')
+    fh.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    fh.setFormatter(formatter)
     app.logger.setLevel(logging.WARNING)
+    app.logger.addHandler(fh)
+
     # create file handler which logs even debug messages
 
     # create formatter and add it to the handlers
