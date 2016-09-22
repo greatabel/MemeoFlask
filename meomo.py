@@ -19,6 +19,8 @@ import logging
 
 fh = logging.FileHandler('/tmp/mylogfile')
 fh.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
 
 app = Flask(__name__)
 
@@ -33,10 +35,12 @@ if sys.platform == 'linux':
     with open(activate_env) as f:
         code = compile(f.read(), activate_env, 'exec')
         exec(code, dict(__file__=activate_env))
-    app.logger.addHandler(fh)
+
     logger = app.logger
+    logger.addHandler(fh)
 else:
     logger = logging.getLogger('luminagic')
+    logger.addHandler(fh)
 
 
 
@@ -302,10 +306,9 @@ if __name__ == '__main__':
     # create file handler which logs even debug messages
 
     # create formatter and add it to the handlers
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
+
     # add the handlers to the logger
-    logger.addHandler(fh)
+
     logger.info('hello world')
 
     app.run(port=5000, debug=True)
