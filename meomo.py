@@ -20,6 +20,8 @@ import logging
 fh = logging.FileHandler('/tmp/mylogfile')
 fh.setLevel(logging.DEBUG)
 
+app = Flask(__name__)
+
 # if is on ecs server 
 if sys.platform == 'linux':
     # Add the site-packages of the chosen virtualenv to work with
@@ -38,7 +40,7 @@ if sys.platform == 'linux':
 #----------------------
 
 
-app = Flask(__name__)
+
 
 # CORS(app)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
