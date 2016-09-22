@@ -229,6 +229,7 @@ function update(touches) {
 
     // 16 is 32/2 is device 32 mm
     myPPI = r * window.devicePixelRatio * 25.4/ 16;
+    document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio;
     previous_Y_bound = centerY + r + 10;
 
     // // draw center 
@@ -618,7 +619,7 @@ function circulateMeasure(p) {
                    
                   // document.getElementById("content").innerHTML = "threecount:"+threecount+"isDetecting:"+isDetecting;
 
-                document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio;
+
 
 
                 if (moveTimer == null) {
