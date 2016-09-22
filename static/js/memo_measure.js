@@ -393,7 +393,7 @@ function changeImage(side, step) {
   //     }
 
   // }
-        document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio;
+        // document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio;
 
 
       // window.setTimeout(drawScreen, 200);
@@ -470,7 +470,7 @@ function moveDown(){
           // x = x + 2;
      update(previous_touches);
      drawScreen();
-      document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio
+      // document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio
 
     // window.setTimeout(drawScreen, 200);
 }
@@ -618,7 +618,7 @@ function circulateMeasure(p) {
                    
                   // document.getElementById("content").innerHTML = "threecount:"+threecount+"isDetecting:"+isDetecting;
 
-
+                document.getElementById("contentE").innerHTML = "ppi:"+ myPPI+" Ratio:"+window.devicePixelRatio;
 
 
                 if (moveTimer == null) {
