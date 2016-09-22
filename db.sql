@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS meomo.User (
 
      putao_token_uid VARCHAR(100),
      putao_name VARCHAR(100),
-     putao_sex boolean not null default 0,
+
      putao_birthday datetime,
 
      authtype int,
@@ -66,9 +66,9 @@ CREATE TABLE IF NOT EXISTS meomo.MeasureBaseline   (
 
 /* 
 insert test data:
-INSERT INTO User(`roleid`,`putao_token_uid`,`putao_name`,`putao_sex`,`putao_birthday`,`authtype`,`createdate`) 
-VALUES(1,'0870111b0ea9f317465b209071305916e3080cce','putao_abel',0,now(),1,now());
-   
+INSERT INTO User(`roleid`,`putao_token_uid`,`putao_name`,`putao_birthday`,`authtype`,`createdate`) 
+VALUES(1,'0870111b0ea9f317465b209071305916e3080cce','putao_abel',now(),1,now());
+
 insert Measure(rawdataid, data, deviceid,createdate) values(0,'250,151,152,153','88DAC8E9-08E5-81E5-D7AB-182B79D30698', now());
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('250,151,152,153',0, false, now());
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('251,151,152,153',0, true, now());

@@ -7,7 +7,7 @@ from termcolor import colored,cprint
 import requests
 import json
 import datetime 
-
+from dbhelper import DBHelper
 app_key = 'a9973799e0dbfbb338ea573d5d76dcbd'
 
 secret_key = '900ced36ff5fb92abc4a37c95c823b1e'
@@ -66,8 +66,9 @@ def user_by_openid(openid,access_token,service_id):
     # response = requests.get(user_url)
     data = {"access_token":access_token,"open_id":openid,"service_id":service_id}
     response = requests.post(user_url, data=data)
-
-    print('2:### user_by_openid end=',response.text)
+    d = json.loads(response.text)
+    return d
+    # print('2:### user_by_openid end=',d)
 
 def child_by_openid(openid,access_token,service_id):
     child_url = 'http://api-weidu-test.ptdev.cn/server/get/child'
@@ -78,6 +79,7 @@ def child_by_openid(openid,access_token,service_id):
     d = json.loads(response.text)
 
     print('3:### child_by_openid end=',response.text)
+
     return d
 
 def save_child_data(name,sex,birthday,imgurl,userid):
@@ -88,10 +90,10 @@ def save_child_data(name,sex,birthday,imgurl,userid):
     args = {'name': name, 'sex': sex, 'birthday': birthday,'picture':''}
 
     args['picture'] = photo
-    from dbhelper import DBHelper
+
     DB = DBHelper()
     lastid = DB.add_children(args)
-    DB.add_patientuser({'patientid':lastid,'userid':0})
+    DB.add_patientuser({'patientid':lastid,'userid':userid})
     print('lastid=',lastid)
     # print('#=',photo)
 
@@ -124,7 +126,12 @@ def get_access_token(url):
 
 def fetch_user(openid):
     access_token = get_access_token(access_token_url) 
-    user_by_openid(openid, access_token,service_id)
+    user_dic = user_by_openid(openid, access_token,service_id)
+    args = {'putao_token_uid': openid, 'putao_name': user_dic['data']['nick_name']}
+    DB = DBHelper()
+    newuserid = DB.add_user(args)
+    print('newuserid=',newuserid)
+    return newuserid
 
 def fetch_child(openid,userid):
     access_token = get_access_token(access_token_url)
@@ -140,10 +147,15 @@ def fetch_child(openid,userid):
         save_child_data(val['child_nickname'],val['child_gender'],
             birthday,dev_pre_picture_url+val['child_avatar'],userid)
 
-if __name__ == "__main__":
-    fetch_child(openid,0)
+def fetch_user_and_child(openid):
+    userid = fetch_user(openid)
     print(colored('-' * 10,'red'))
-    fetch_user(openid)
+    fetch_child(openid,userid)
+
+if __name__ == "__main__":
+    fetch_user_and_child(openid)
+
+
     # print('type:',type(data))
 
 

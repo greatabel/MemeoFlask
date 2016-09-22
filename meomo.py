@@ -60,9 +60,8 @@ api = Api(app)
 
 
 Userids = {
-    0,
     1,
-    2
+    
 }
 
 Patientids = {
@@ -194,6 +193,16 @@ class ChildBaseline(Resource):
             abort_if_patient_doesnt_exist(patientid)
             return 201
 
+class UserAPI(Resource):
+        def get(self, userid):
+            data = DB.get_user(str(userid))
+            print('# in UserAPI:',data)
+            abort_if_todo_doesnt_exist(userid)
+            raw_data = {'putao_name': data[0][0]}
+            
+            return raw_data  
+
+api.add_resource(UserAPI,'/api/user/<int:userid>')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
 api.add_resource(ChildMeasure,'/api/childmeasure/<int:patientid>')
 api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')

@@ -10,6 +10,32 @@ class DBHelper:
                                passwd=dbconfig.db_password,
                                db=database)
 
+    def add_user(self, args):
+        connection = self.connect()
+        try:
+            query = "INSERT INTO User(`roleid`,`putao_token_uid`,`putao_name`,`authtype`,`createdate`) "\
+                    "values(1,%s,%s,1, now() );"
+            with connection.cursor() as cursor:
+                cursor.execute(query, ( args['putao_token_uid'], args['putao_name'] ))
+                connection.commit()
+                # print('#cursor.lastrowid=',cursor.lastrowid)
+                return cursor.lastrowid
+        finally:
+            connection.close()
+
+    def get_user(self, userid):
+        connection = self.connect()
+        try:
+            query = "SELECT putao_name FROM meomo.User;"
+            if userid is not None:
+                query = "SELECT putao_name FROM meomo.User where userid = " + userid+";"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
+
+
     def get_childrenPicture(self, patientid):
         connection = self.connect()
         try:
