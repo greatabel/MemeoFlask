@@ -36,11 +36,11 @@ if sys.platform == 'linux':
         code = compile(f.read(), activate_env, 'exec')
         exec(code, dict(__file__=activate_env))
 
-    logger = app.logger
-    logger.addHandler(fh)
-else:
-    logger = logging.getLogger('luminagic')
-    logger.addHandler(fh)
+#     logger = app.logger
+#     logger.addHandler(fh)
+# else:
+#     logger = logging.getLogger('luminagic')
+#     logger.addHandler(fh)
 
 
 
@@ -301,7 +301,8 @@ def home():
 if __name__ == '__main__':
     # create logger with 'spam_application'
     print('app.debug=',app.debug)
-
+    logger = logging.getLogger('luminagic')
+    logger.addHandler(fh)
     logger.setLevel(logging.DEBUG)
     # create file handler which logs even debug messages
 
