@@ -117,7 +117,7 @@ class ChildMeasure(Resource):
             app.logger.info('#',args)
             app.logger.info(args['patientid'],'@@',args['rawdata'],'@@',args['whicheye'],'#',args)
             DB.add_rawmeasure(args)
-            abort_if_todo_doesnt_exist(userid)
+            abort_if_patient_doesnt_exist(patientid)
             return 201
 
         # def put(self, userid):
