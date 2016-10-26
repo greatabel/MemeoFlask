@@ -174,17 +174,16 @@ class ChildBaseline(Resource):
             data = DB.get_measurebaseline(str(patientid))
             app.logger.info('ChildBaseline::',data)
             print('#data:',data)
-            res = []
+            left = -1
+            right = -1
             for m in data:
-                d =  {
-                    'whicheye': m[0],
-                    'num': m[1],
-                   
-                }
-                res.append(d) 
-            myresult = jsonify(res)            
-            app.logger.info('abel##:',myresult)
-            return myresult
+                if m[0] == 0:
+                    left = m[1]
+                if m[0] == 1:
+                    right = m[1] 
+            raw_data = {'left': left, 'right':right}         
+            app.logger.info('abel##:',raw_data)
+            return raw_data
 
 
         def post(self, patientid):
