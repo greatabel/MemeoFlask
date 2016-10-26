@@ -176,10 +176,10 @@ class ChildBaseline(Resource):
             res = []
             for m in data:
                 d =  {
-                    'baselineid': data[0][0],
-                    'patientid': data[0][1],
-                    'data': data[0][2],
-                    'createdate': str(data[0][3])
+                    'baselineid': m[0],
+                    'patientid': m[1],
+                    'data': m[2],
+                    'createdate': str(m[3])
                 }
                 res.append(d) 
             myresult = jsonify(res)            
