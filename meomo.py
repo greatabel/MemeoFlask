@@ -106,7 +106,7 @@ class ChildMeasure(Resource):
                     'rawdata': m[1],
                     'patientid': m[2],
                     'whicheye': str(m[3]),
-                    'createdate': str(m[4])
+                    'createdate': str(m[5])
                 }
                 res.append(d)
             myresult = jsonify(res)            
