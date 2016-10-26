@@ -128,9 +128,9 @@ class DBHelper:
     def add_measurebaseline(self, args):
         connection = self.connect()
         try:
-            query = "insert MeasureBaseline( patientid, data, createdate) values(%s, %s, now());"
+            query = "insert MeasureBaseline( patientid, data, whicheye, createdate) values(%s, %s, %s,now());"
             with connection.cursor() as cursor:
-                cursor.execute(query, ( args['patientid'], args['data']))
+                cursor.execute(query, ( args['patientid'], args['data'],args['whicheye']))
                 connection.commit()
         finally:
             connection.close()
