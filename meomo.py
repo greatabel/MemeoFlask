@@ -176,8 +176,8 @@ class ChildBaseline(Resource):
             data = DB.get_measurebaseline(str(patientid))
             app.logger.info('ChildBaseline::',data)
             print('#data:',data)
-            left = -1
-            right = -1
+            left = None
+            right = None
             for m in data:
                 if m[0] == 0:
                     left = m[1]
