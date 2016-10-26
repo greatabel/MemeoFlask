@@ -173,13 +173,16 @@ class ChildBaseline(Resource):
             # app.logger.info('ChildBaseline:#patientid=',patientid)
             data = DB.get_measurebaseline(str(patientid))
             app.logger.info('ChildBaseline::',data)
-            d =  {
-                'baselineid': data[0][0],
-                'patientid': data[0][1],
-                'data': data[0][2],
-                'createdate': str(data[0][3])
-            }  
-            myresult = jsonify(d)            
+            res = []
+            for m in data:
+                d =  {
+                    'baselineid': data[0][0],
+                    'patientid': data[0][1],
+                    'data': data[0][2],
+                    'createdate': str(data[0][3])
+                }
+                res.append(d) 
+            myresult = jsonify(res)            
             app.logger.info('abel##:',myresult)
             return myresult
 

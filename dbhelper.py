@@ -4,7 +4,7 @@ import dbconfig
 
 class DBHelper:
 
-    def connect(self, database="meomo"):
+    def connect(self, database="sharingan_ali"):
         return pymysql.connect(host='localhost',
                                user=dbconfig.db_user,
                                passwd=dbconfig.db_password,
@@ -26,9 +26,9 @@ class DBHelper:
     def get_user(self, userid):
         connection = self.connect()
         try:
-            query = "SELECT putao_name FROM meomo.User;"
+            query = "SELECT putao_name FROM User;"
             if userid is not None:
-                query = "SELECT putao_name FROM meomo.User where userid = " + userid+";"
+                query = "SELECT putao_name FROM User where userid = " + userid+";"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()
@@ -39,9 +39,9 @@ class DBHelper:
     def get_childrenPicture(self, patientid):
         connection = self.connect()
         try:
-            query = "SELECT picture FROM meomo.Patient;"
+            query = "SELECT picture FROM Patient;"
             if patientid is not None:
-                query = "SELECT picture FROM meomo.Patient where patientid=" + patientid+";"
+                query = "SELECT picture FROM Patient where patientid=" + patientid+";"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()
@@ -88,7 +88,7 @@ class DBHelper:
         try:
             query = "SELECT * FROM MeasureRaw;"
             if patientid is not None:
-                query = "SELECT * FROM meomo.MeasureRaw where patientid = " + patientid + " order by createdate desc limit 100 ;"
+                query = "SELECT * FROM MeasureRaw where patientid = " + patientid + " order by createdate desc limit 100 ;"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()
@@ -141,7 +141,7 @@ class DBHelper:
         try:
             query = "SELECT * FROM MeasureBaseline;"
             if patientid is not None:
-                query = "SELECT * FROM meomo.MeasureBaseline where patientid = " + patientid + " order by createdate desc limit 1 ;"
+                query = "SELECT * FROM MeasureBaseline where patientid = " + patientid + " order by createdate desc ;"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()

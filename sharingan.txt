@@ -1,0 +1,7 @@
+create database  sharingan;
+use  sharingan;
+INSERT INTO users(`putao_token_uid`,`name`,`birthday`,`authtype`,`createdate`) VALUES('0870111b0ea9f317465b209071305916e3080cce','putao_abel',now(),1,now());
+insert patients(name,sex,birthday,createdate) values('小明',0,now(),(now() - INTERVAL 2 YEAR)  );
+insert patients(name,sex,birthday,createdate) values('小红',1,now(),(now() - INTERVAL 2 YEAR)  );
+insert patient_users(patient_id, user_id) values(1,1);
+insert patient_users(patient_id, user_id) values(2,1);
