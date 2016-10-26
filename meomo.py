@@ -87,6 +87,8 @@ parser.add_argument('patientid')
 parser_baseline = reqparse.RequestParser()
 parser_baseline.add_argument('data')
 parser_baseline.add_argument('patientid')
+parser_baseline.add_argument('whicheye')
+
 
 
 class ChildMeasure(Resource):
