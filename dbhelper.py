@@ -139,9 +139,9 @@ class DBHelper:
     def get_measurebaseline(self, patientid):
         connection = self.connect()
         try:
-            query = "SELECT * FROM MeasureBaseline;"
+            query = "SELECT whicheye,count(*) as num FROM sharingan_ali.MeasureBaseline ;"
             if patientid is not None:
-                query = "SELECT * FROM MeasureBaseline where patientid = " + patientid + " order by createdate desc ;"
+                query = "SELECT whicheye, count(*) as num FROM sharingan_ali.MeasureBaseline where  patientid = " + patientid + " group by whicheye;"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()

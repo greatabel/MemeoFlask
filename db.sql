@@ -1,5 +1,5 @@
 use sharingan_ali;
-/*
+
 CREATE TABLE IF NOT EXISTS User (
      userid int NOT NULL AUTO_INCREMENT,
      name VARCHAR(100),
@@ -60,10 +60,11 @@ CREATE TABLE IF NOT EXISTS MeasureBaseline   (
      baselineid int NOT NULL AUTO_INCREMENT,
      patientid int,
      data VARCHAR(100),
+     whicheye  boolean not null default 0,
      createdate TIMESTAMP,
      PRIMARY KEY (baselineid)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-*/
+
 
 #insert test data:
 INSERT INTO User(`roleid`,`putao_token_uid`,`putao_name`,`putao_birthday`,`authtype`,`createdate`) 
@@ -79,10 +80,11 @@ insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('255,151,152,1
 insert Patient_User(patientid, userid, createdate) values(1,0,now());
 insert Patient_User(patientid, userid, createdate) values(2,0,now());
 insert Patient_User(patientid, userid, createdate) values(3,0,now());
-insert Patient(name,sex,birthday, picture,createdate) values('小明',0,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 2 YEAR)  );
-insert Patient(name,sex,birthday, picture,createdate) values('小红',1,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 3 YEAR)  );
-insert MeasureBaseline(patientid, data, createdate) values(1,150,now());
-insert MeasureBaseline(patientid, data, createdate) values(1,151,now());
+insert Patient(name,sex,birthday, picture,createdate) values('abel1',0,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 2 YEAR)  );
+insert Patient(name,sex,birthday, picture,createdate) values('abel2',1,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 3 YEAR)  );
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,150,0,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,151,0,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,151,1,now());
 
 
 
