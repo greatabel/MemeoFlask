@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS MeasureBaseline   (
      PRIMARY KEY (baselineid)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
+/*
 #insert test data:
 INSERT INTO User(`roleid`,`putao_token_uid`,`putao_name`,`putao_birthday`,`authtype`,`createdate`) 
 VALUES(1,'0870111b0ea9f317465b209071305916e3080cce','putao_abel',now(),1,now());
@@ -87,5 +87,5 @@ insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,151,0,now()
 insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,151,1,now());
 
 
-
+*/
 
