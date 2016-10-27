@@ -8,17 +8,8 @@ import requests
 import json
 import datetime 
 from dbhelper import DBHelper
-app_key = 'a9973799e0dbfbb338ea573d5d76dcbd'
 
-secret_key = '900ced36ff5fb92abc4a37c95c823b1e'
-service_id =  50044
-openid = '0870111b0ea9f317465b209071305916e3080cce'
-
-
-
-access_token_url = 'http://api-weidu-test.ptdev.cn/server/get/access/token'
-dev_pre_picture_url = 'http://weidu.file.dev.putaocloud.com/file/'
-pro_pre_picture_url = 'http://weidu.file.putaocdn.com/'
+import putao_config
 
 def recursive_urlencode(d):
     """URL-encode a multidimensional dictionary.
@@ -54,28 +45,28 @@ def create_sign(data):
     e = recursive_urlencode(data)
     print('urllib.unquote(e)=',urllib.parse.unquote(e))
     m = hashlib.md5()
-    print(colored('e+secret_key=','red'),(e+secret_key))
-    m.update((e+secret_key).encode('utf-8') )
+    print(colored('e+secret_key=','red'),(e+putao_config.secret_key))
+    m.update((e+putao_config.secret_key).encode('utf-8') )
     print(colored('m.hexdigest()=','red'),m.hexdigest())
     return m.hexdigest()
 
 def user_by_openid(openid,access_token,service_id):
     # user_url = 'http://api-weidu-test.ptdev.cn/server/userinfo/get?access_token='+access_token+'&open_id='+openid+'&service_id=50044'
-    user_url = 'http://api-weidu-test.ptdev.cn/server/userinfo/get'
-    print("\nuser_url=",user_url)
+
+    print("\nuser_url=",putao_config.user_url)
     # response = requests.get(user_url)
     data = {"access_token":access_token,"open_id":openid,"service_id":service_id}
-    response = requests.post(user_url, data=data)
+    response = requests.post(putao_config.user_url, data=data)
     d = json.loads(response.text)
     return d
     # print('2:### user_by_openid end=',d)
 
 def child_by_openid(openid,access_token,service_id):
-    child_url = 'http://api-weidu-test.ptdev.cn/server/get/child'
-    print("\child_url=",child_url)
+
+    print("\patient_url=",putao_config.patient_url)
     # response = requests.get(user_url)
     data = {"access_token":access_token,"open_id":openid,"service_id":service_id}
-    response = requests.post(child_url, data=data)
+    response = requests.post(putao_config.patient_url, data=data)
     d = json.loads(response.text)
 
     print('3:### child_by_openid end=',response.text)
@@ -98,7 +89,7 @@ def save_child_data(name,sex,birthday,imgurl,userid):
     # print('#=',photo)
 
 def get_access_token(url):
-    data = {"app_key": app_key}
+    data = {"app_key": putao_config.app_key}
     data["time"] = str(int(time.time())+180000)
     sign = create_sign(data)
     # ts = str(int(time.time())+180000)
@@ -125,8 +116,8 @@ def get_access_token(url):
     return access_token
 
 def fetch_user(openid):
-    access_token = get_access_token(access_token_url) 
-    user_dic = user_by_openid(openid, access_token,service_id)
+    access_token = get_access_token(putao_config.access_token_url) 
+    user_dic = user_by_openid(openid, access_token,putao_config.service_id)
     args = {'putao_token_uid': openid, 'putao_name': user_dic['data']['nick_name']}
     DB = DBHelper()
     newuserid = DB.add_user(args)
@@ -134,18 +125,18 @@ def fetch_user(openid):
     return newuserid
 
 def fetch_child(openid,userid):
-    access_token = get_access_token(access_token_url)
+    access_token = get_access_token(putao_config.access_token_url)
     print('*'*10,access_token)
 
     # user_by_openid(openid, access_token,service_id)
-    child_dic = child_by_openid(openid, access_token,service_id)
+    child_dic = child_by_openid(openid,access_token,putao_config.service_id)
     print('child_dic=',child_dic)
     for i,val in enumerate(child_dic['data']):
         birthday = val['child_birthday']      
         if '-' not in val['child_birthday']:
             birthday = datetime.datetime.fromtimestamp(    int(val['child_birthday'])  ).strftime('%Y-%m-%d %H:%M:%S')
         save_child_data(val['child_nickname'],val['child_gender'],
-            birthday,dev_pre_picture_url+val['child_avatar'],userid)
+            birthday,putao_config.dev_pre_picture_url+val['child_avatar'],userid)
 
 def fetch_user_and_child(openid):
     userid = fetch_user(openid)
@@ -153,7 +144,7 @@ def fetch_user_and_child(openid):
     fetch_child(openid,userid)
 
 if __name__ == "__main__":
-    fetch_user_and_child(openid)
+    fetch_user_and_child(putao_config.openid)
 
 
     # print('type:',type(data))
