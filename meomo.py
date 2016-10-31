@@ -213,11 +213,13 @@ class UserAPI(Resource):
 class CalculateMeasure(Resource):
         def get(self):
                     # from flask import jsonify
+
             args = parser_measure.parse_args()
-            if not args['step'] and not args['ppi']:
+            if  args['step'] is not None and  args['ppi'] is not None:
+                app.logger.info('CalculateMeasure #args:',args)
                 step = float(args['step'])
                 ppi = float(args['ppi'])
-                app.logger.info('CalculateMeasure #args:',args)
+
                 print('*'*20, step ,ppi)
                 return_value = 165 + 25 * step * 461 / ppi 
                 floating_pointpart = (return_value / 25 ) % 1
