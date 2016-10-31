@@ -214,19 +214,21 @@ class CalculateMeasure(Resource):
         def get(self):
                     # from flask import jsonify
             args = parser_measure.parse_args()
-
-            step = int(args['step'])
-            ppi = float(args['ppi'])
-            app.logger.info('CalculateMeasure #args:',args)
-            print('*'*20, step ,ppi)
-            return_value = 165 + 25 * step * 461 / ppi 
-            floating_pointpart = (return_value / 25 ) % 1
-            integer_part = math.floor(return_value / 25)
-            if floating_pointpart >= 0.5:
-                integer_part += 1
-            return_value = 25 * integer_part
-            raw_data = {'result': return_value}
-            return raw_data
+            if not args['step'] and not args['ppi']:
+                step = float(args['step'])
+                ppi = float(args['ppi'])
+                app.logger.info('CalculateMeasure #args:',args)
+                print('*'*20, step ,ppi)
+                return_value = 165 + 25 * step * 461 / ppi 
+                floating_pointpart = (return_value / 25 ) % 1
+                integer_part = math.floor(return_value / 25)
+                if floating_pointpart >= 0.5:
+                    integer_part += 1
+                return_value = 25 * integer_part
+                raw_data = {'result': return_value}
+                return raw_data
+            else:
+                return abort(404, message="CalculateMeasure empty parameter")
 
 api.add_resource(UserAPI,'/api/user/<int:userid>')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
