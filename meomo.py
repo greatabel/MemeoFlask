@@ -300,8 +300,8 @@ def receive_putao_user():
         return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
 
 
-@app.route("/circulate_measure", methods=["GET","POST"])
-def circulate_measure():
+@app.route("/calculate_measure", methods=["GET","POST"])
+def calculate_measure():
     if request.method == "POST":
         # from flask import jsonify
         args = parser_measure.parse_args()
