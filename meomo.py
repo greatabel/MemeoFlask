@@ -211,7 +211,7 @@ class UserAPI(Resource):
             return raw_data  
 
 class CalculateMeasure(Resource):
-        def get(self):
+        def post(self):
                     # from flask import jsonify
 
             args = parser_measure.parse_args()
