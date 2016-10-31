@@ -237,29 +237,7 @@ class CalculateMeasure(Resource):
 
 class ChildBaselineSummary(Resource):
         def get(self,patientid):
-                    # from flask import jsonify
-
-            data = DB.get_measurebaseline_summary(str(patientid))
-            app.logger.info('ChildBaselineSummary::'+str(data))
-            print('#data:',data)
-            left =  0
-            leftcount = 0
-            right = 0
-            rightcount = 0
-            for m in data:
-                print('m=',m)
-                if m[0] == 0:
-                    left += int(m[1])
-                    leftcount += 1
-                if m[0] == 1:
-                    right += int(m[1] )
-                    rightcount += 1
-            if data is not None and data.count != 0:
-                if leftcount != 0:
-                    left = left / leftcount
-                if rightcount != 0:
-                    right = right / rightcount
-            raw_data = {'left': left, 'right':right}         
+            raw_data = get_baseline_summary(patientid)       
             app.logger.info('abel##:',raw_data)
             return raw_data
 
