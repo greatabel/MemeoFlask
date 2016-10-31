@@ -21,7 +21,7 @@ def recursive_urlencode(d):
     def recursion(d, base=[]):
         pairs = []
         od = collections.OrderedDict(sorted(d.items()))
-        for key, value in od.items():
+        for key, value in sorted(d.items()):
             new_base = base + [key]
             if hasattr(value, 'values'):
                 pairs += recursion(value, new_base)

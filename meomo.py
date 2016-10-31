@@ -17,6 +17,7 @@ import site
 import datetime
 import logging
 from base64 import b64encode
+import math
 
 
 
@@ -89,6 +90,9 @@ parser_baseline.add_argument('data')
 parser_baseline.add_argument('patientid')
 parser_baseline.add_argument('whicheye')
 
+parser_measure = reqparse.RequestParser()
+parser_measure.add_argument('step')
+parser_measure.add_argument('ppi')
 
 
 class ChildMeasure(Resource):
@@ -225,7 +229,9 @@ def clear():
 
 DEFAULTS = {'email': 'abel',
             'password': 'test1024',
-            'receive_putao_user':''
+            'receive_putao_user':'',
+            'step': '',
+            'ppi': ''
             }
 
 def get_value_with_fallback(key):
@@ -293,6 +299,28 @@ def receive_putao_user():
         app.logger.info('#in get:',request.values )
         return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
 
+
+@app.route("/circulate_measure", methods=["GET","POST"])
+def circulate_measure():
+    if request.method == "POST":
+        # from flask import jsonify
+        args = parser_measure.parse_args()
+
+        step = int(args['step'])
+        ppi = float(args['ppi'])
+        
+        print('*'*20, step ,ppi)
+        return_value = 165 + 25 * step * 461 / ppi 
+        floating_pointpart = (return_value / 25 ) % 1
+        integer_part = math.floor(return_value / 25)
+        if floating_pointpart >= 0.5:
+            integer_part += 1
+        return_value = 25 * integer_part
+        status_dict  = {'http_code': 200,
+            'msg': 'ok',
+            'result':return_value
+            }
+        return jsonify(status_dict), 200
 
 
 
