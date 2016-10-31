@@ -210,11 +210,30 @@ class UserAPI(Resource):
             
             return raw_data  
 
+class CalculateMeasure(Resource):
+        def get(self):
+                    # from flask import jsonify
+            args = parser_measure.parse_args()
+
+            step = int(args['step'])
+            ppi = float(args['ppi'])
+            
+            print('*'*20, step ,ppi)
+            return_value = 165 + 25 * step * 461 / ppi 
+            floating_pointpart = (return_value / 25 ) % 1
+            integer_part = math.floor(return_value / 25)
+            if floating_pointpart >= 0.5:
+                integer_part += 1
+            return_value = 25 * integer_part
+            raw_data = {'result': return_value}
+            return raw_data
+
 api.add_resource(UserAPI,'/api/user/<int:userid>')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
 api.add_resource(ChildMeasure,'/api/childmeasure/<int:patientid>')
 api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')
 api.add_resource(ChildPicture,'/api/childpicture/<int:patientid>')
+api.add_resource(CalculateMeasure,'/api/calculate_measure')
 
 
 @app.route("/clear")
@@ -300,24 +319,24 @@ def receive_putao_user():
         return str(request.values )+' #show:'+  DEFAULTS['receive_putao_user']
 
 
-@app.route("/api/calculate_measure", methods=["GET","POST"])
-def calculate_measure():
-    if request.method == "GET":
-        # from flask import jsonify
-        args = parser_measure.parse_args()
+# @app.route("/api/calculate_measure", methods=["GET","POST"])
+# def calculate_measure():
+#     if request.method == "GET":
+#         # from flask import jsonify
+#         args = parser_measure.parse_args()
 
-        step = int(args['step'])
-        ppi = float(args['ppi'])
+#         step = int(args['step'])
+#         ppi = float(args['ppi'])
         
-        print('*'*20, step ,ppi)
-        return_value = 165 + 25 * step * 461 / ppi 
-        floating_pointpart = (return_value / 25 ) % 1
-        integer_part = math.floor(return_value / 25)
-        if floating_pointpart >= 0.5:
-            integer_part += 1
-        return_value = 25 * integer_part
-        raw_data = {'result': return_value}
-        return jsonify(raw_data)
+#         print('*'*20, step ,ppi)
+#         return_value = 165 + 25 * step * 461 / ppi 
+#         floating_pointpart = (return_value / 25 ) % 1
+#         integer_part = math.floor(return_value / 25)
+#         if floating_pointpart >= 0.5:
+#             integer_part += 1
+#         return_value = 25 * integer_part
+#         raw_data = {'result': return_value}
+#         return jsonify(raw_data)
  
 
 
