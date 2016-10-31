@@ -216,8 +216,9 @@ class CalculateMeasure(Resource):
 
             args = parser_measure.parse_args()
             if  args['step'] is not None and  args['ppi'] is not None:
-                app.logger.info('CalculateMeasure #args:',args)
-                app.logger.info('CalculateMeasure #args A:',args['step'],args['ppi'])
+                # app.logger.info('CalculateMeasure #args:',args)
+                app.logger.info('CalculateMeasure #args:'+str(args))
+
                 step = float(args['step'])
                 ppi = float(args['ppi'])
 
