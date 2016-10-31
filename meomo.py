@@ -254,8 +254,10 @@ class ChildBaselineSummary(Resource):
                     right += int(m[1] )
                     rightcount += 1
             if data is not None and data.count != 0:
-                left = left / leftcount
-                right = right / rightcount
+                if leftcount != 0:
+                    left = left / leftcount
+                if rightcount != 0:
+                    right = right / rightcount
             raw_data = {'left': left, 'right':right}         
             app.logger.info('abel##:',raw_data)
             return raw_data
