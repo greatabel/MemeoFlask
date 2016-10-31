@@ -217,7 +217,7 @@ class CalculateMeasure(Resource):
 
             step = int(args['step'])
             ppi = float(args['ppi'])
-            
+            app.logger.info('CalculateMeasure #args:',args)
             print('*'*20, step ,ppi)
             return_value = 165 + 25 * step * 461 / ppi 
             floating_pointpart = (return_value / 25 ) % 1
