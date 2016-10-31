@@ -320,7 +320,7 @@ def calculate_measure():
             'msg': 'ok',
             'result':return_value
             }
-        return jsonify(status_dict), 200
+        return jsonify(status_dict)
 
 
 
