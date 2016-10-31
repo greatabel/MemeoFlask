@@ -13,7 +13,6 @@ import putao_config
 
 def recursive_urlencode(d):
     """URL-encode a multidimensional dictionary.
-
     >>> data = {'a': 'b&c', 'd': {'e': {'f&g': 'h*i'}}, 'j': 'k'}
     >>> recursive_urlencode(data)
     u'a=b%26c&j=k&d[e][f%26g]=h%2Ai'
@@ -21,7 +20,7 @@ def recursive_urlencode(d):
     def recursion(d, base=[]):
         pairs = []
         od = collections.OrderedDict(sorted(d.items()))
-        for key, value in sorted(d.items()):
+        for key, value in od.items():
             new_base = base + [key]
             if hasattr(value, 'values'):
                 pairs += recursion(value, new_base)
@@ -37,6 +36,33 @@ def recursive_urlencode(d):
         return pairs
 
     return '&'.join(recursion(d))
+    
+# def recursive_urlencode(d):
+#     """URL-encode a multidimensional dictionary.
+
+#     >>> data = {'a': 'b&c', 'd': {'e': {'f&g': 'h*i'}}, 'j': 'k'}
+#     >>> recursive_urlencode(data)
+#     u'a=b%26c&j=k&d[e][f%26g]=h%2Ai'
+#     """
+#     def recursion(d, base=[]):
+#         pairs = []
+#         od = collections.OrderedDict(sorted(d.items()))
+#         for key, value in sorted(d.items()):
+#             new_base = base + [key]
+#             if hasattr(value, 'values'):
+#                 pairs += recursion(value, new_base)
+#             else:
+#                 new_pair = None
+#                 if len(new_base) > 1:
+#                     first = urllib.parse.quote(new_base.pop(0))
+#                     rest = map(lambda x: urllib.parse.quote(x), new_base)
+#                     new_pair = "%s[%s]=%s" % (first, ']['.join(rest), urllib.parse.quote(str(value)))
+#                 else:
+#                     new_pair = "%s=%s" % (urllib.parse.quote(str(key)), urllib.parse.quote(str(value)))
+#                 pairs.append(new_pair)
+#         return pairs
+
+#     return '&'.join(recursion(d))
 
 
 
@@ -90,8 +116,10 @@ def save_child_data(name,sex,birthday,imgurl,userid):
 
 def get_access_token(url):
     data = {"app_key": putao_config.app_key}
+    # 防止时间超过葡萄服务器时间，所以打提前量3分钟
     data["time"] = str(int(time.time())+180000)
     sign = create_sign(data)
+    print('data before:',data)
     # ts = str(int(time.time())+180000)
     # print('current time=', ts)
 
@@ -145,8 +173,8 @@ def fetch_user_and_child(openid):
 
 if __name__ == "__main__":
     fetch_user_and_child(putao_config.openid)
-
-
+    # data = {'a': {'b': 'c', 'd': {'e': 'f', 'g': 'h'}}}
+    # print(recursive_urlencode(data))
     # print('type:',type(data))
 
 
