@@ -124,6 +124,7 @@ class ChildMeasure(Resource):
             app.logger.info(args['patientid'],'@@',args['rawdata'],'@@',args['whicheye'],'#',args)
             DB.add_rawmeasure(args)
             abort_if_patient_doesnt_exist(patientid)
+
             return 201
 
         # def put(self, userid):
@@ -239,7 +240,7 @@ class ChildBaselineSummary(Resource):
                     # from flask import jsonify
 
             data = DB.get_measurebaseline_summary(str(patientid))
-            app.logger.info('ChildBaselineSummary::',data)
+            app.logger.info('ChildBaselineSummary::'+str(data))
             print('#data:',data)
             left =  0
             leftcount = 0
@@ -262,6 +263,31 @@ class ChildBaselineSummary(Resource):
             app.logger.info('abel##:',raw_data)
             return raw_data
 
+class ChildBaselineNormality(Resource):
+        def get(self, patientid):
+            args = parser_baseline.parse_args()
+            if not args['patientid']:
+                args['patientid'] = patientid
+            app.logger.info('ChildBaseline #args:'+str(args))
+            print('#@@@@@@ ChildBaseline #args:'+str(args))
+            # DB.add_measurebaseline(args)
+            abort_if_patient_doesnt_exist(patientid)
+            result_dic = get_baseline_summary(patientid)
+            print('#'*20,result_dic)
+            level = None
+            if args['whicheye'] == '0':
+                if abs(result_dic['left'] - float(args['data']))/ result_dic['left'] < 0.5:
+                    level = 1
+                else:
+                    level = 2
+            if args['whicheye'] == '1':
+                if abs(result_dic['right'] - float(args['data']))/ result_dic['right'] < 0.5:
+                    level = 1
+                else:
+                    level = 2            
+            raw_data = {'level': level,'msg:': '1 is good , 2 is bad'} 
+            return raw_data,201
+
 api.add_resource(UserAPI,'/api/user/<int:userid>')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
 api.add_resource(ChildMeasure,'/api/childmeasure/<int:patientid>')
@@ -269,6 +295,7 @@ api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')
 api.add_resource(ChildPicture,'/api/childpicture/<int:patientid>')
 api.add_resource(CalculateMeasure,'/api/calculate_measure')
 api.add_resource(ChildBaselineSummary,'/api/childbaselinesummary/<int:patientid>')
+api.add_resource(ChildBaselineNormality,'/api/ChildBaselinenormality/<int:patientid>')
 
 
 @app.route("/clear")
@@ -280,6 +307,29 @@ def clear():
     return home()
 
 # --------------website-----------------
+def get_baseline_summary(patientid):
+    data = DB.get_measurebaseline_summary(str(patientid))
+    app.logger.info('ChildBaselineSummary::'+str(data))
+    print('#data:',data)
+    left =  0
+    leftcount = 0
+    right = 0
+    rightcount = 0
+    for m in data:
+        print('m=',m)
+        if m[0] == 0:
+            left += int(m[1])
+            leftcount += 1
+        if m[0] == 1:
+            right += int(m[1] )
+            rightcount += 1
+    if data is not None and data.count != 0:
+        if leftcount != 0:
+            left = left / leftcount
+        if rightcount != 0:
+            right = right / rightcount
+    raw_data = {'left': left, 'right':right}
+    return raw_data
 
 DEFAULTS = {'email': 'abel',
             'password': 'test1024',
