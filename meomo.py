@@ -234,12 +234,39 @@ class CalculateMeasure(Resource):
             else:
                 return abort(404, message="CalculateMeasure empty parameter")
 
+class ChildBaselineSummary(Resource):
+        def get(self,patientid):
+                    # from flask import jsonify
+
+            data = DB.get_measurebaseline_summary(str(patientid))
+            app.logger.info('ChildBaselineSummary::',data)
+            print('#data:',data)
+            left =  0
+            leftcount = 0
+            right = 0
+            rightcount = 0
+            for m in data:
+                print('m=',m)
+                if m[0] == 0:
+                    left += int(m[1])
+                    leftcount += 1
+                if m[0] == 1:
+                    right += int(m[1] )
+                    rightcount += 1
+            if data is not None and data.count != 0:
+                left = left / leftcount
+                right = right / rightcount
+            raw_data = {'left': left, 'right':right}         
+            app.logger.info('abel##:',raw_data)
+            return raw_data
+
 api.add_resource(UserAPI,'/api/user/<int:userid>')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
 api.add_resource(ChildMeasure,'/api/childmeasure/<int:patientid>')
 api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')
 api.add_resource(ChildPicture,'/api/childpicture/<int:patientid>')
 api.add_resource(CalculateMeasure,'/api/calculate_measure')
+api.add_resource(ChildBaselineSummary,'/api/childbaselinesummary/<int:patientid>')
 
 
 @app.route("/clear")

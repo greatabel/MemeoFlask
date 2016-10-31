@@ -148,6 +148,18 @@ class DBHelper:
         finally:
             connection.close()
 
+    def get_measurebaseline_summary(self, patientid):
+        connection = self.connect()
+        try:
+            query = "SELECT whicheye, data  FROM sharingan_ali.MeasureBaseline;"
+            if patientid is not None:
+                query = "SELECT whicheye, data  as num FROM sharingan_ali.MeasureBaseline where  patientid = " + patientid + " ;"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
+
     def add_input(self, data):
         connection = self.connect()
         try:
