@@ -135,6 +135,15 @@ class DBHelper:
         finally:
             connection.close()
 
+    def delete_measurebaseline(self, patientid):
+        connection = self.connect()
+        try:
+            query = "delete FROM MeasureBaseline where patientid = " + patientid +";"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+                connection.commit()
+        finally:
+            connection.close()
 
     def get_measurebaseline(self, patientid):
         connection = self.connect()

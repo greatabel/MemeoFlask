@@ -266,23 +266,33 @@ class ChildBaselineNormality(Resource):
             raw_data = {'level': level,'msg:': '1 is good , 2 is bad'} 
             return raw_data,201
 
+
 api.add_resource(UserAPI,'/api/user/<int:userid>')
 api.add_resource(UserChildApi,'/api/userchild/<int:userid>')
 api.add_resource(ChildMeasure,'/api/childmeasure/<int:patientid>')
 api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')
+
 api.add_resource(ChildPicture,'/api/childpicture/<int:patientid>')
 api.add_resource(CalculateMeasure,'/api/calculate_measure')
 api.add_resource(ChildBaselineSummary,'/api/childbaselinesummary/<int:patientid>')
 api.add_resource(ChildBaselineNormality,'/api/ChildBaselinenormality/<int:patientid>')
 
 
-@app.route("/clear")
-def clear():
-    try:
-        DB.clear_all()
-    except Exception as e:
-        app.logger.info(e)
-    return home()
+# @app.route("/clear")
+# def clear(patientid):
+#     try:
+#         DB.delete_measurebaseline(patientid)
+#     except Exception as e:
+#         app.logger.info(e)
+#     return home()
+
+@app.route("/delete_childbaseline/<int:patientid>")
+def delete_childbaseline(patientid):
+    # try:
+    DB.delete_measurebaseline(str(patientid))
+    # except Exception as e:
+    #     app.logger.info(e)
+    return "delete_childbaseline"
 
 # --------------website-----------------
 def get_baseline_summary(patientid):
@@ -308,6 +318,8 @@ def get_baseline_summary(patientid):
             right = right / rightcount
     raw_data = {'left': left, 'right':right}
     return raw_data
+
+
 
 DEFAULTS = {'email': 'abel',
             'password': 'test1024',
