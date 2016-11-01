@@ -212,17 +212,18 @@ class UserAPI(Resource):
             return raw_data  
 
 class CalculateMeasure(Resource):
-        def post(self):
+        def get(self):
                     # from flask import jsonify
 
             args = parser_measure.parse_args()
+            print('#'*10,args)
             if  args['step'] is not None and  args['ppi'] is not None:
                 # app.logger.info('CalculateMeasure #args:',args)
                 app.logger.info('CalculateMeasure #args:'+str(args))
 
                 step = float(args['step'])
                 ppi = float(args['ppi'])
-
+                # print('test')
                 print('*'*20, step ,ppi)
                 return_value = 165 + 25 * step * 461 / ppi 
                 floating_pointpart = (return_value / 25 ) % 1
@@ -231,6 +232,7 @@ class CalculateMeasure(Resource):
                     integer_part += 1
                 return_value = 25 * integer_part
                 raw_data = {'result': return_value}
+                print('test 1',return_value)
                 return raw_data
             else:
                 return abort(404, message="CalculateMeasure empty parameter")
@@ -273,7 +275,7 @@ api.add_resource(ChildMeasure,'/api/childmeasure/<int:patientid>')
 api.add_resource(ChildBaseline,'/api/childbaseline/<int:patientid>')
 
 api.add_resource(ChildPicture,'/api/childpicture/<int:patientid>')
-api.add_resource(CalculateMeasure,'/api/calculate_measure')
+api.add_resource(CalculateMeasure,'/api/sightcalculator')
 api.add_resource(ChildBaselineSummary,'/api/childbaselinesummary/<int:patientid>')
 api.add_resource(ChildBaselineNormality,'/api/ChildBaselinenormality/<int:patientid>')
 
