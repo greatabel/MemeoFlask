@@ -11,4 +11,4 @@ use sharingan_ali;
 insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,150,0,now());
 insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,151,0,now());
 insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,152,1,now());
-     
+   
