@@ -17,12 +17,19 @@ def recursive_urlencode(d):
     >>> recursive_urlencode(data)
     u'a=b%26c&j=k&d[e][f%26g]=h%2Ai'
     """
-    def recursion(d, base=[]):
+    def recursion(d, base=None):
+        if base is None:
+            base = []
+        
         pairs = []
         od = collections.OrderedDict(sorted(d.items()))
         for key, value in od.items():
             new_base = base + [key]
-            if hasattr(value, 'values'):
+            print('>'*10,hasattr(value, 'values'),type(value))
+            # if hasattr(value, 'values'):
+            if type(value) is dict:
+
+                print('#'*10,value,'*',value.values)
                 pairs += recursion(value, new_base)
             else:
                 new_pair = None
@@ -69,7 +76,7 @@ def recursive_urlencode(d):
 
 def create_sign(data):
     e = recursive_urlencode(data)
-    print('urllib.unquote(e)=',urllib.parse.unquote(e))
+    print(e,' urllib.unquote(e)=',urllib.parse.unquote(e),' e=',e)
     m = hashlib.md5()
     print(colored('e+secret_key=','red'),(e+putao_config.secret_key))
     m.update((e+putao_config.secret_key).encode('utf-8') )
@@ -172,9 +179,10 @@ def fetch_user_and_child(openid):
     fetch_child(openid,userid)
 
 if __name__ == "__main__":
-    fetch_user_and_child(putao_config.openid)
-    # data = {'a': {'b': 'c', 'd': {'e': 'f', 'g': 'h'}}}
-    # print(recursive_urlencode(data))
+    # fetch_user_and_child(putao_config.openid)
+    data = {'a': 'b&c', 'd': {'e': {'f&g': 'h*i'}}, 'j': 'k'}
+    # target = "a=b%26c&d[e][f%26g]=h%2Ai&j=k"
+    print(recursive_urlencode(data))
     # print('type:',type(data))
 
 
