@@ -148,20 +148,20 @@ class UserChildApi(Resource):
             # app.logger.info(('abel child::',type(data[0][4])))
             res = []
             for m in data:
-                isGotoMeasureBaseline = False
-                raw_datas = DB.get_rawmeasure(str(m[0]))
-                baselines = DB.get_measurebaseline(str(m[0]))
-                if baselines is not None and len(baselines) > 0 and baselines[0][0] is not None and baselines[0][1] is not None and raw_datas is not None :
-                    if len(raw_datas) > 20 and baselines[0][0] < 5 and baselines[0][1] < 5:
-                        isGotoMeasureBaseline = True
-                        # print( raw_datas,'$'*10,baselines, '#',baselines[0][0], baselines[0][1])
+                # isGotoMeasureBaseline = False
+                # raw_datas = DB.get_rawmeasure(str(m[0]))
+                # baselines = DB.get_measurebaseline(str(m[0]))
+                # if baselines is not None and len(baselines) > 0 and baselines[0][0] is not None and baselines[0][1] is not None and raw_datas is not None :
+                #     if len(raw_datas) > 20 and baselines[0][0] < 5 and baselines[0][1] < 5:
+                #         isGotoMeasureBaseline = True
+                #         # print( raw_datas,'$'*10,baselines, '#',baselines[0][0], baselines[0][1])
 
                 d =  {
                     'patientid': m[0],
                     'name': m[1],
                     'sex': m[2],
                     'birthday': str(m[3]),
-                    'isGotoMeasureBaseline': isGotoMeasureBaseline,
+                    # 'isGotoMeasureBaseline': isGotoMeasureBaseline,
                     'createdate': str(m[5])
                 }
                 res.append(d)
