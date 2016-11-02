@@ -149,11 +149,13 @@ class UserChildApi(Resource):
             res = []
             for m in data:
                 isGotoMeasureBaseline = False
-                raw_datas = DB.get_rawmeasure(str(m[0]))
+                raw_data_count = DB.get_rawmeasure_count(str(m[0]))
                 baselines = DB.get_measurebaseline(str(m[0]))
-                if baselines is not None and len(baselines) > 0 and baselines[0][0] is not None and baselines[0][1] is not None and raw_datas is not None :
-                    if len(raw_datas) > 20 and baselines[0][0] < 5 and baselines[0][1] < 5:
+                if baselines is not None and len(baselines) > 0 and baselines[0][0] is not None and baselines[0][1] is not None and raw_data_count is not None :
+                    print('raw_data_count[0][0]=',raw_data_count[0][0])
+                    if raw_data_count[0][0] > 20 and baselines[0][0] < 5 and baselines[0][1] < 5:
                         isGotoMeasureBaseline = True
+
                         # print( raw_datas,'$'*10,baselines, '#',baselines[0][0], baselines[0][1])
 
                 d =  {
@@ -161,7 +163,7 @@ class UserChildApi(Resource):
                     'name': m[1],
                     'sex': m[2],
                     'birthday': str(m[3]),
-                    'isGotoMeasureBaseline': isGotoMeasureBaseline,
+                    'enterbasemeasure': isGotoMeasureBaseline,
                     'createdate': str(m[5])
                 }
                 res.append(d)

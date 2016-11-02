@@ -83,6 +83,18 @@ class DBHelper:
         finally:
             connection.close()
 
+    def get_rawmeasure_count(self, patientid):
+        connection = self.connect()
+        try:
+            query = "SELECT count(*) FROM MeasureRaw;"
+            if patientid is not None:
+                query = "SELECT count(*) FROM MeasureRaw where patientid = " + patientid + ";"
+            with connection.cursor() as cursor:
+                cursor.execute(query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
+
     def get_rawmeasure(self, patientid):
         connection = self.connect()
         try:
