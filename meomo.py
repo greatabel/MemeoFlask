@@ -122,7 +122,10 @@ class ChildMeasure(Resource):
             args = parser.parse_args()
             app.logger.info('#',args)
             app.logger.info(args['patientid'],'@@',args['rawdata'],'@@',args['whicheye'],'#',args)
-            DB.add_rawmeasure(args)
+            if args["rawdata"] is not None and args['whicheye'] is not None:
+                DB.add_rawmeasure(args)
+            else:
+                abort(404, message="user's data {} some parameter is emtpy".format(patientid))
             abort_if_patient_doesnt_exist(patientid)
 
             return 201
@@ -198,7 +201,10 @@ class ChildBaseline(Resource):
             if not args['patientid']:
                 args['patientid'] = patientid
             app.logger.info('ChildBaseline #args:',args)
-            DB.add_measurebaseline(args)
+            if args['data'] is not None and args['whicheye'] is not None:
+                DB.add_measurebaseline(args)
+            else:
+                abort(404, message="user's data {} some parameter is emtpy".format(patientid))
             abort_if_patient_doesnt_exist(patientid)
             return 201
 
@@ -318,7 +324,7 @@ def get_baseline_summary(patientid):
             left = left / leftcount
         if rightcount != 0:
             right = right / rightcount
-    raw_data = {'left': left, 'right':right}
+    raw_data = {'left': int(left), 'right':int(right)}
     return raw_data
 
 
