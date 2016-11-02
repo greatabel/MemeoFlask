@@ -11,39 +11,50 @@ from dbhelper import DBHelper
 
 import putao_config
 
+import collections
 def recursive_urlencode(d):
-    """URL-encode a multidimensional dictionary.
-    >>> data = {'a': 'b&c', 'd': {'e': {'f&g': 'h*i'}}, 'j': 'k'}
-    >>> recursive_urlencode(data)
-    u'a=b%26c&j=k&d[e][f%26g]=h%2Ai'
-    """
-    def recursion(d, base=None):
-        if base is None:
-            base = []
-        
-        pairs = []
-        od = collections.OrderedDict(sorted(d.items()))
-        for key, value in od.items():
-            new_base = base + [key]
-            print('>'*10,hasattr(value, 'values'),type(value))
-            # if hasattr(value, 'values'):
-            if type(value) is dict:
 
-                print('#'*10,value,'*',value.values)
-                pairs += recursion(value, new_base)
+    def leaves(d, path=()):
+        for k, v in d.items():
+            if isinstance(v, collections.Mapping):
+                yield from leaves(v, path + (k,))
             else:
-                new_pair = None
-                if len(new_base) > 1:
-                    first = urllib.parse.quote(new_base.pop(0))
-                    rest = map(lambda x: urllib.parse.quote(x), new_base)
-                    new_pair = "%s[%s]=%s" % (first, ']['.join(rest), urllib.parse.quote(str(value)))
-                else:
-                    new_pair = "%s=%s" % (urllib.parse.quote(str(key)), urllib.parse.quote(str(value)))
-                pairs.append(new_pair)
-        return pairs
+                yield path + (k,), v
+    return "&".join(k[0] + "".join("[" + i + "]" for i in k[1:]) + "=" + v for k, v in sorted(leaves(d)))
+# def recursive_urlencode(d):
+#     """URL-encode a multidimensional dictionary.
+#     >>> data = {'a': 'b&c', 'd': {'e': {'f&g': 'h*i'}}, 'j': 'k'}
+#     >>> recursive_urlencode(data)
+#     u'a=b%26c&j=k&d[e][f%26g]=h%2Ai'
+#     """
+#     def recursion(d, base=None):
+#         if base is None:
+#             base = []
+        
+#         pairs = []
+#         od = collections.OrderedDict(sorted(d.items()))
+#         for key, value in od.items():
+#             new_base = base + [key]
+#             print('>'*10,hasattr(value, 'values'),type(value))
+#             # if hasattr(value, 'values'):
+#             if type(value) is dict:
 
-    return '&'.join(recursion(d))
+#                 print('#'*10,value,'*',value.values)
+#                 pairs += recursion(value, new_base)
+#             else:
+#                 new_pair = None
+#                 if len(new_base) > 1:
+#                     first = urllib.parse.quote(new_base.pop(0))
+#                     rest = map(lambda x: urllib.parse.quote(x), new_base)
+#                     new_pair = "%s[%s]=%s" % (first, ']['.join(rest), urllib.parse.quote(str(value)))
+#                 else:
+#                     new_pair = "%s=%s" % (urllib.parse.quote(str(key)), urllib.parse.quote(str(value)))
+#                 pairs.append(new_pair)
+#         return pairs
+
+#     return '&'.join(recursion(d))
     
+
 # def recursive_urlencode(d):
 #     """URL-encode a multidimensional dictionary.
 
@@ -179,11 +190,13 @@ def fetch_user_and_child(openid):
     fetch_child(openid,userid)
 
 if __name__ == "__main__":
-    # fetch_user_and_child(putao_config.openid)
+    fetch_user_and_child(putao_config.openid)
     data = {'a': 'b&c', 'd': {'e': {'f&g': 'h*i'}}, 'j': 'k'}
     # target = "a=b%26c&d[e][f%26g]=h%2Ai&j=k"
-    print(recursive_urlencode(data))
+    # print(recursive_urlencode(data))
     # print('type:',type(data))
+    # d = {'a': {'b': 'c', 'd': {'e': 'f', 'g': 'h'}}, 'i': 'j'}
+    # print("&".join(k[0] + "".join("[" + i + "]" for i in k[1:]) + "=" + v for k, v in sorted(leaves(data))))
 
 
 

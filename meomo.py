@@ -232,7 +232,7 @@ class CalculateMeasure(Resource):
                     integer_part += 1
                 return_value = 25 * integer_part
                 raw_data = {'result': return_value}
-                print('test 1',return_value)
+                # print('test 1',return_value)
                 return raw_data
             else:
                 return abort(404, message="CalculateMeasure empty parameter")
