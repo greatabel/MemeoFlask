@@ -20,8 +20,6 @@ from base64 import b64encode
 import math
 
 
-
-
 # if is on ecs server 
 if sys.platform == 'linux':
     # Add the site-packages of the chosen virtualenv to work with
@@ -40,7 +38,6 @@ if sys.platform == 'linux':
 
 
 #----------------------
-
 
 app = Flask(__name__)
 
