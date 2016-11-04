@@ -150,13 +150,14 @@ class UserChildApi(Resource):
             for m in data:
                 isGotoMeasureBaseline = False
                 raw_data_count = DB.get_rawmeasure_count(str(m[0]))
-                print('raw_data_count')
+
                 baselines = DB.get_measurebaseline(str(m[0]))
-                if ((baselines is not None and len(baselines) > 0 and baselines[0][0] is not None and baselines[0][1] is not None) or (baselines is None) )and raw_data_count is not None :
+                print('raw_data_count',baselines == ())
+                if ((baselines != () and len(baselines) > 0 and baselines[0][0] is not None and baselines[0][1] is not None) or (baselines == ()) )and raw_data_count is not None :
                     print('raw_data_count[0][0]=',raw_data_count[0][0])
 
                     if raw_data_count[0][0] > 20 :
-                        if baselines is None or (baselines[0][0] < 5 and baselines[0][1] < 5):
+                        if baselines == () or (baselines[0][0] < 5 and baselines[0][1] < 5):
                             isGotoMeasureBaseline = True
 
                         # print( raw_datas,'$'*10,baselines, '#',baselines[0][0], baselines[0][1])
