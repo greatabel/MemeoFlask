@@ -283,7 +283,7 @@ class ChildBaselineNormality(Resource):
                 else:
                     level = 2            
             raw_data = {'level': level,'msg:': '1 is good , 2 is bad'} 
-            return raw_data,201
+            return raw_data
 
 
 api.add_resource(UserAPI,'/api/user/<int:userid>')
