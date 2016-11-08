@@ -125,7 +125,7 @@ class ChildMeasure(Resource):
                 abort(404, message="user's data {} some parameter is emtpy".format(patientid))
             abort_if_patient_doesnt_exist(patientid)
 
-            return 201
+            return  {'result':'ok'}, 201
 
         # def put(self, userid):
         #    # Update the product with given id
