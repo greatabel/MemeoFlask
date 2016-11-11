@@ -150,7 +150,8 @@ class UserChildApi(Resource):
 
                 baselines = DB.get_measurebaseline(str(m[0]))
                 print('raw_data_count',baselines == ())
-                if ((baselines != () and len(baselines) > 0 and baselines[0][0] is not None and baselines[0][1] is not None) or (baselines == ()) )and raw_data_count is not None :
+                if ((baselines != () and len(baselines) > 0 and baselines[0][0] is not None \
+                    and baselines[0][1] is not None) or (baselines == ()) )and raw_data_count is not None :
                     print('raw_data_count[0][0]=',raw_data_count[0][0])
 
                     if raw_data_count[0][0] > 20 :
@@ -272,17 +273,23 @@ class ChildBaselineNormality(Resource):
             result_dic = get_baseline_summary(patientid)
             print('#'*20,result_dic)
             level = None
-            if args['whicheye'] == '0':
-                if abs(result_dic['left'] - float(args['data']))/ result_dic['left'] < 0.5:
+
+            if args['whicheye'] == '0' and result_dic['left']!= 0:
+                if (result_dic['left'] - float(args['data']) > 0 and result_dic['left'] - float(args['data']) < 50 ):
                     level = 1
-                else:
+                elif abs(result_dic['left'] - float(args['data']))/ result_dic['left'] < 0.5:
                     level = 2
-            if args['whicheye'] == '1':
-                if abs(result_dic['right'] - float(args['data']))/ result_dic['right'] < 0.5:
-                    level = 1
                 else:
-                    level = 2            
-            raw_data = {'level': level,'msg:': '1 is good , 2 is bad'} 
+                    level = 3
+
+            if args['whicheye'] == '1' and result_dic['right']!=0:
+                if result_dic['right'] - float(args['data']) > 0 and result_dic['right'] - float(args['data']) < 50:
+                    level = 1
+                elif abs(result_dic['right'] - float(args['data']))/ result_dic['right'] < 0.5:
+                    level = 2
+                else:
+                    level = 3            
+            raw_data = {'level': level,'msg:': 'null means your baseline is not finished,0 is good, 2 is tired , 3 is bad'} 
             return raw_data
 
 
