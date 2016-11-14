@@ -100,7 +100,9 @@ class ChildMeasure(Resource):
 
             data = DB.get_rawmeasure(str(patientid))
             app.logger.info(('abel::',data))
-            res = []
+
+            lefts = []
+            rights = []
             for m in data:
                 d =  {
                     'orderid': m[0],
@@ -109,10 +111,14 @@ class ChildMeasure(Resource):
                     'whicheye': str(m[3]),
                     'createdate': str(m[5])
                 }
-                res.append(d)
-            myresult = jsonify(res)            
-            app.logger.info('abel##:',myresult)
-            return myresult
+                if m[3] == 0:
+                    lefts.append(d)
+                if m[3] == 1:
+                    rights.append(d)
+
+            raw_data = {'left': lefts,'right': rights }            
+            # app.logger.info('abel##:',myresult)
+            return raw_data
 
         def post(self, patientid):
            # Create a new product

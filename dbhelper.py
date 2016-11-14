@@ -100,7 +100,9 @@ class DBHelper:
         try:
             query = "SELECT * FROM MeasureRaw;"
             if patientid is not None:
-                query = "SELECT * FROM MeasureRaw where patientid = " + patientid + " order by createdate desc limit 100 ;"
+                query = "(SELECT * FROM MeasureRaw where patientid = " + patientid + " and whicheye=1 order by createdate desc limit 30)\
+union\
+(SELECT * FROM MeasureRaw where patientid =  " + patientid + " and whicheye=0 order by createdate desc limit 30)"
             with connection.cursor() as cursor:
                 cursor.execute(query)
             return cursor.fetchall()
