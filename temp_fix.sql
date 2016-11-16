@@ -8,7 +8,40 @@ use sharingan_ali;
 --      createdate TIMESTAMP,
 --      PRIMARY KEY (baselineid)
 --      )
-insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,150,0,now());
-insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,151,0,now());
-insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,152,1,now());
-   
+delete from MeasureBaseline;
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,300,0,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,301,0,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,302,0,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,303,0,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,304,0,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,255,1,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,256,1,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,257,1,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,258,1,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,279,1,now());
+delete from MeasureRaw;
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('250',1, false, now());
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('260',1, false, now() - interval 1 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('270',1, false, now() - interval 2 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('265',1, false, now() - interval 3 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('275',1, false, now() - interval 4 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('275',1, false, now() - interval 5 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('251',1, false, now() - interval 6 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('262',1, false, now() - interval 7 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('273',1, false, now() - interval 8 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('265',1, false, now() - interval 9 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('276',1, false, now() - interval 10 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('277',1, false, now() - interval 11 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('310',0, false, now() - interval 1 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('305',0, false, now() - interval 2 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('285',0, false, now() - interval 3 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('315',0, false, now() - interval 4 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('325',0, false, now() - interval 5 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('305',0, false, now() - interval 6 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('311',0, false, now() - interval 7 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('302',0, false, now() - interval 8 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('283',0, false, now() - interval 9 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('314',0, false, now() - interval 10 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('325',0, false, now() - interval 11 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('306',0, false, now() - interval 12 day);
+
