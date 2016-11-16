@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS Patient  (
      picture  BLOB, 
      createdate TIMESTAMP,
      PRIMARY KEY (patientid)
-     );
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 CREATE TABLE IF NOT EXISTS Patient_User   (
      patientid int ,
@@ -80,8 +80,8 @@ insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('255,151,152,1
 insert Patient_User(patientid, userid, createdate) values(1,0,now());
 insert Patient_User(patientid, userid, createdate) values(2,0,now());
 insert Patient_User(patientid, userid, createdate) values(3,0,now());
-insert Patient(name,sex,birthday, picture,createdate) values('abel1',0,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 2 YEAR)  );
-insert Patient(name,sex,birthday, picture,createdate) values('abel2',1,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 3 YEAR)  );
+insert Patient(name,sex,birthday, picture,createdate) values('小红',0,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 2 YEAR)  );
+insert Patient(name,sex,birthday, picture,createdate) values('小明',1,now(),LOAD_FILE('/Users/wanchang/Downloads/AbelProject/MeomoFlask/Abc.jpg'), (now() - INTERVAL 3 YEAR)  );
 insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,150,0,now());
 insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,151,0,now());
 insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,151,1,now());
