@@ -1,0 +1,10 @@
+SET FOREIGN_KEY_CHECKS = 0; 
+truncate table  patient_users;
+truncate table  patients;
+truncate table  users;
+SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO users(`birthday`,`name`,`sex`,`createdate`) values(now(),'putao_abel',1,now());
+insert patients(name,sex,birthday,createdate) values('nancy',0,'2010-10-1',now());
+insert patients(name,sex,birthday,createdate) values('stone',1,'2010-10-1',now());
+insert patient_users(patient_id, user_id) values(1,1);
+insert patient_users(patient_id, user_id) values(2,1);
