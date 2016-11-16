@@ -14,6 +14,7 @@ insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,-51,1,now()
 insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,-52,1,now());
 insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,-53,1,now());
 insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,-54,1,now());
+
 insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,-105,0,now());
 insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,-106,0,now());
 insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,-107,0,now());
@@ -31,11 +32,12 @@ insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-110',1, fals
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-120',1, false, now() - interval 8 day);
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-130',1, false, now() - interval 9 day);
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-140',1, false, now() - interval 10 day);
-insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-150',1, false, now() - interval 11 day);
-insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-160',1, true, now() - interval 1 day);
-insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-142',1, true, now() - interval 2 day);
-insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-143',1, true, now() - interval 3 day);
-insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-100',1, true, now() - interval 4 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-130',1, false, now() - interval 11 day);
+
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-20',1, true, now() - interval 1 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-30',1, true, now() - interval 2 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-40',1, true, now() - interval 3 day);
+insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-90',1, true, now() - interval 4 day);
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('3',1, true, now() - interval 5 day);
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-10',1, true, now() - interval 6 day);
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('-30',1, true, now() - interval 7 day);
