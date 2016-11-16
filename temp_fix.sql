@@ -9,16 +9,16 @@ use sharingan_ali;
 --      PRIMARY KEY (baselineid)
 --      )
 delete from MeasureBaseline;
-insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,300,0,now());
-insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,301,0,now());
-insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,302,0,now());
-insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,303,0,now());
-insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,304,0,now());
-insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,255,1,now());
-insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,256,1,now());
-insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,257,1,now());
-insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,258,1,now());
-insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,279,1,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,300,1,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,301,1,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,302,1,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,303,1,now());
+insert MeasureBaseline(patientid, data,whicheye,createdate) values(1,304,1,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,255,0,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,256,0,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,257,0,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,258,0,now());
+insert MeasureBaseline(patientid, data, whicheye, createdate) values(1,279,0,now());
 delete from MeasureRaw;
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('250',1, false, now());
 insert MeasureRaw(rawdata, patientid, whicheye,createdate) values('260',1, false, now() - interval 1 day);
