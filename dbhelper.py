@@ -8,7 +8,7 @@ class DBHelper:
         return pymysql.connect(host='localhost',
                                user=dbconfig.db_user,
                                passwd=dbconfig.db_password,
-                               db=database)
+                               db=database, charset='utf8')
 
     def add_user(self, args):
         connection = self.connect()
