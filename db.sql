@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS MeasureRaw  (
      isbaseline  boolean not null default 0,
      createdate TIMESTAMP,
      PRIMARY KEY (rawdataid)
-     );
+     )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 CREATE TABLE IF NOT EXISTS Patient  (
      patientid int NOT NULL AUTO_INCREMENT,
