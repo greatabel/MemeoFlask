@@ -14,7 +14,7 @@ document.getElementById("content").innerHTML= window.location.href + '<br/>'+nav
 
 $.getJSON( url+ '/api/childpicture/1', function(data) {
     console.log('here')
-document.getElementById("ItemPreview").src = "data:image/png;base64," + data['IMAGE_DATA'];
+document.getElementById("ItemPreview").src = "data:;base64," + data['IMAGE_DATA'];
 
 });
 

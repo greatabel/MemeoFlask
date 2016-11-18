@@ -9,7 +9,7 @@ from flask import jsonify
 from flask_restful import Api
 from flask_restful import Resource, reqparse, abort
 from flask_cors import CORS, cross_origin
-
+from flask import send_file
 import json
 import sys
 import os
@@ -18,6 +18,7 @@ import datetime
 import logging
 from base64 import b64encode
 import math
+import io
 
 
 # if is on ecs server 
@@ -192,7 +193,7 @@ class ChildPicture(Resource):
             ENCODING = 'utf-8'
             base64_bytes = b64encode(data[0][0])
             base64_string = base64_bytes.decode(ENCODING)
-            raw_data = {'IMAGE_DATA': base64_string}
+            raw_data = {'IMAGE_DATA': base64_bytes}
             return raw_data  
 
 
@@ -325,6 +326,19 @@ def delete_childbaseline(patientid):
     # except Exception as e:
     #     app.logger.info(e)
     return "delete_childbaseline"
+
+@app.route("/patientpicturetest/<int:patientid>")
+def patientpicturetest(patientid):
+    data = DB.get_childrenPicture(str(patientid))
+    print('# in picture:',data)
+
+    ENCODING = 'utf-8'
+    base64_bytes = b64encode(data[0][0])
+    # base64_string = base64_bytes.decode(ENCODING)
+    raw_data = {'IMAGE_DATA': base64_bytes}
+
+    return send_file(io.BytesIO(base64_bytes), attachment_filename='logo.png',
+                     mimetype='image/png')
 
 # --------------website-----------------
 def get_baseline_summary(patientid):
