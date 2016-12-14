@@ -19,7 +19,7 @@ import logging
 from base64 import b64encode
 import math
 import io
-
+# http://jsfiddle.net/hpP45/
 
 # if is on ecs server 
 if sys.platform == 'linux':

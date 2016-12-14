@@ -7,6 +7,10 @@ function getUrlVars() {
     return vars;
   }
 
+$.getJSON('http://dev.meomo.cn:50001/childrenlist',function(data){
+console.log('here')
+console.log(data);
+});
 
 var url = "http://139.224.73.50"
 url = "http://127.0.0.1:5000"
@@ -22,3 +26,5 @@ document.getElementById("ItemPreview").src = "data:;base64," + data['IMAGE_DATA'
 $.getJSON( url + '/api/userchild/0', function(data) {
 console.log(data);
 });
+
+
