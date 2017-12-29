@@ -500,5 +500,7 @@ if __name__ == '__main__':
 
 
     app.run(port=5000, debug=True)
+    # 打开squidman 使用80端口可以在ios调试
+    # app.run(host="0.0.0.0", port=80)
 
 
